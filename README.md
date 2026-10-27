@@ -9,7 +9,7 @@ O objetivo é permitir que cada grupo crie sua empresa fictícia, registre seus 
 ## 🚀 Tecnologias Utilizadas
 
 - **Frontend:** [React 19](https://react.dev/) + [Vite](https://vitejs.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- **Estilização:** [Tailwind CSS v4](https://tailwindcss.com/) com design system customizado (/impeccable standards)
+- **Estilização:** [Tailwind CSS v4](https://tailwindcss.com/) com design system refinado (/impeccable standards)
 - **Ícones:** [Lucide React](https://lucide.dev/)
 - **Animações e Efeitos:** [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti)
 - **Backend & Banco de Dados:** [Supabase](https://supabase.com/)
@@ -29,14 +29,13 @@ O objetivo é permitir que cada grupo crie sua empresa fictícia, registre seus 
 │   │   ├── AuthScreen.tsx        # Telas de Criar Empresa e Entrar
 │   │   ├── Dashboard.tsx         # Painel do Grupo (perfil, etapa e status)
 │   │   ├── EditCompanyModal.tsx  # Modal de edição dos dados da empresa
-│   │   ├── Header.tsx            # Barra superior com branding e status do Supabase
+│   │   ├── Header.tsx            # Barra superior com branding institucional
 │   │   ├── LearningPlan.tsx      # Seção "O que precisamos aprender?" com checklist
 │   │   ├── LogoGenerator.tsx     # Gerador de monograma com iniciais + upload de imagem
-│   │   ├── ProblemSelection.tsx  # Cartões dos 5 problemas e modal de confirmação
-│   │   ├── SupabaseConfigModal.tsx # Gerenciador de conexão e exportador de SQL
+│   │   ├── ProblemSelection.tsx  # Cartões dos problemas com planilhas e confirmação
 │   │   └── Toast.tsx             # Notificações flutuantes com auto-dismiss
 │   ├── data/
-│   │   └── problems.ts           # Conteúdo dos 5 problemas reais e ferramentas ONLYOFFICE
+│   │   └── problems.ts           # Conteúdo das 4 situações-problema de planilhas (ONLYOFFICE)
 │   ├── lib/
 │   │   └── supabase.ts           # Cliente Supabase, Auth, CRUD, Storage e fallback demo
 │   ├── types/
@@ -76,12 +75,12 @@ O Vite iniciará o projeto localmente em:
 
 ## 🗄️ Configuração do Supabase (Banco de Dados, Auth e Storage)
 
-A aplicação já conta com integração nativa com o Supabase. Você pode conectar seu projeto em 2 passos:
+A aplicação conta com integração com o Supabase via variáveis de ambiente seguras no arquivo `.env`.
 
 ### Passo 1: Executar o Script SQL no Supabase
 1. Acesse o seu painel do Supabase: [https://supabase.com/dashboard](https://supabase.com/dashboard)
 2. Abra seu projeto e navegue até **SQL Editor** > **New Query**.
-3. Copie todo o conteúdo do arquivo [`supabase/schema.sql`](file:///c:/Users/USER/Desktop/Educa%C3%A7%C3%A3o%20Digital/supabase/schema.sql) (ou clique em **"Supabase Demo" > "Copiar SQL"** na barra superior da própria aplicação).
+3. Copie todo o conteúdo do arquivo [`supabase/schema.sql`](file:///c:/Users/USER/Desktop/Educa%C3%A7%C3%A3o%20Digital/supabase/schema.sql).
 4. Cole no editor e clique no botão **Run**.
 
 O script irá criar:
@@ -96,36 +95,25 @@ Como os alunos criam empresas fictícias e não possuem caixas de entrada para v
 1. No painel do Supabase, vá em **Authentication** > **Providers** > **Email**.
 2. Desmarque a opção **"Confirm email"** (mude para desligado).
 3. Clique em **Save**.
-Isso garante que os alunos façam login instantaneamente assim que se cadastrarem, sem travas de e-mail e sem limites de envio do plano gratuito!
 
-### Passo 3: Configurar as Chaves de Acesso
-Você pode configurar as chaves de duas maneiras simples:
-
-**Opção A — Pelo arquivo `.env`:**
-No arquivo `.env` na raiz do projeto, insira sua URL e Anon Key:
+### Passo 3: Configurar as Chaves de Acesso no `.env`
+No arquivo `.env` na raiz do projeto (invisível para os alunos na interface), insira sua URL e Anon Key:
 ```env
 VITE_SUPABASE_URL=https://seu-projeto.supabase.co
 VITE_SUPABASE_ANON_KEY=sua-chave-anonima-publica
 ```
 
-**Opção B — Diretamente pela Interface da Aplicação:**
-1. Abra a aplicação no navegador em `http://localhost:5173/`.
-2. Clique no botão de status **"Supabase Demo"** no canto superior direito.
-3. Cole sua **Project URL** e sua **Anon Public Key**.
-4. Clique em **"Salvar e Conectar"**. A aplicação testará a conexão em tempo real e ativará a persistência em nuvem.
-
-> 💡 **Modo de Demonstração Interativo:** Se o Supabase ainda não estiver configurado, a aplicação opera perfeitamente com persistência demonstrativa local no navegador, permitindo testar todos os fluxos de cadastro, login, troca de problemas e marcação de objetivos sem qualquer travamento.
+> 💡 **Modo de Demonstração Silencioso:** Se o Supabase ainda não estiver configurado no `.env`, a aplicação opera com persistência demonstrativa local no navegador, permitindo testar todos os fluxos de cadastro, login, troca de problemas e marcação de objetivos de forma transparente.
 
 ---
 
 ## 🎯 Funcionalidades Implementadas
 
 1. **Tela Inicial — Criar Empresa e Entrar:**
-   - Alternância entre abas "Criar Empresa" e "Entrar".
+   - Alternância entre abas "Cadastrar Nova Empresa" e "Acessar Empresa Existente".
    - Validações de campos obrigatórios e igualdade de senhas.
    - Seleção de turma (`2º2` ou `2º3`) e lista de integrantes.
-   - Gerador de monograma visual por iniciais com paletas de gradiente OU upload de imagem para o logotipo.
-   - Mapeamento técnico de usuário para e-mail no Supabase Auth sem exigir servidor de e-mail externo.
+   - Gerador de monograma visual institucional OU upload de imagem para o logotipo.
 
 2. **Painel do Grupo (Dashboard):**
    - Exibição de logotipo, nome da empresa, turma e integrantes.
@@ -134,15 +122,16 @@ VITE_SUPABASE_ANON_KEY=sua-chave-anonima-publica
    - Badge dinâmico de status: *Não iniciada*, *Em andamento* ou *Concluída*.
    - Botões: "Continuar atividade", "Editar dados da empresa" e "Sair".
 
-3. **Educação Digital — Etapa 1 (Escolha do Problema):**
-   - Apresentação visual dos 5 problemas reais em cartões detalhados.
-   - Descrição da situação-problema e objetivo da solução digital.
-   - Listagem das ferramentas do **ONLYOFFICE** que serão aprendidas.
+3. **Educação Digital — Etapa 1 (Escolha da Situação-Problema):**
+   - Apresentação das 4 situações-problema com foco em **Planilhas (ONLYOFFICE)**.
+   - Descrição da situação real e objetivo da planilha.
+   - Listagem das habilidades de planilha trabalhadas em cada desafio.
    - Modal de confirmação antes de gravar a escolha.
-   - Possibilidade de alterar a escolha do problema a qualquer momento.
 
-4. **Plano de Aprendizagem ("O que precisamos aprender?"):**
-   - Checklist interativo dos objetivos de aprendizagem para o problema selecionado.
+4. **Plano de Metas ("Metas de Aprendizagem da Empresa"):**
+   - Checklist interativo dos objetivos na planilha.
+   - Barra de progresso de habilidades desenvolvidas.
+   - Compromisso pedagógico de aprendizagem do ano letivo.
    - Barra de progresso dinâmica em tempo real (% de habilidades dominadas).
    - Efeito visual de confete ao concluir todas as metas da Etapa 1.
    - Mensagem pedagógica orientadora do ano letivo.

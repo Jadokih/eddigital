@@ -13,18 +13,17 @@ assert.strictEqual(isValidEmail('@semusuario.com'), false);
 assert.strictEqual(isValidEmail('sem_dominio@'), false);
 console.log('✓ Validação de e-mail aprovada!');
 
-// 2. Teste da integridade dos 5 problemas e seus objetivos
-console.log('--- 2. Testando integridade dos problemas pedagógicos ---');
+// 2. Teste da integridade dos problemas pedagógicos focados em planilhas
+console.log('--- 2. Testando integridade das situações-problema com planilhas ---');
 const expectedProblems = [
   'Falta de organização financeira',
   'Dificuldade para controlar estoque',
   'Falta de organização de tarefas e prazos',
-  'Divulgação ineficiente de pequenos negócios',
   'Falta de organização de informações e cadastros'
 ];
 
-assert.strictEqual(expectedProblems.length, 5);
-console.log('✓ Todos os 5 problemas pedagógicos foram validados com sucesso!');
+assert.strictEqual(expectedProblems.length, 4);
+console.log('✓ Todas as 4 situações-problema com planilhas foram validadas com sucesso!');
 
 // 3. Teste de cálculo de status de conclusão
 function calculateActivityStatus(selectedProblemId, completedObjectivesCount, totalObjectivesCount) {

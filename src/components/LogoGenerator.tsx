@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Upload, Sparkles, Image as ImageIcon, Check } from 'lucide-react';
+import { Upload, Type, Image as ImageIcon, Check } from 'lucide-react';
 
 interface LogoGeneratorProps {
   companyName: string;
@@ -7,13 +7,13 @@ interface LogoGeneratorProps {
   onLogoChange: (file: File | null, dataUrl: string | null) => void;
 }
 
-const GRADIENTS = [
-  { id: 'indigo-purple', name: 'Índigo Real', class: 'from-indigo-600 to-purple-600', textClass: 'text-white' },
-  { id: 'blue-cyan', name: 'Oceano Digital', class: 'from-blue-600 to-cyan-500', textClass: 'text-white' },
-  { id: 'emerald-teal', name: 'Bio & Verde', class: 'from-emerald-600 to-teal-500', textClass: 'text-white' },
-  { id: 'amber-orange', name: 'Energia Solar', class: 'from-amber-500 to-orange-600', textClass: 'text-white' },
-  { id: 'rose-pink', name: 'Criativo & Coral', class: 'from-rose-500 to-pink-600', textClass: 'text-white' },
-  { id: 'slate-zinc', name: 'Minimalista Escuro', class: 'from-slate-800 to-slate-950', textClass: 'text-indigo-400' },
+const SOLID_COLORS = [
+  { id: 'slate-900', name: 'Grafite Escuro', hex: '#0f172a', bgClass: 'bg-slate-900', textClass: 'text-white' },
+  { id: 'indigo-800', name: 'Índigo Corporativo', hex: '#3730a3', bgClass: 'bg-indigo-800', textClass: 'text-white' },
+  { id: 'blue-800', name: 'Azul Institucional', hex: '#1e40af', bgClass: 'bg-blue-800', textClass: 'text-white' },
+  { id: 'emerald-800', name: 'Verde Floresta', hex: '#065f46', bgClass: 'bg-emerald-800', textClass: 'text-white' },
+  { id: 'amber-800', name: 'Âmbar Clássico', hex: '#92400e', bgClass: 'bg-amber-800', textClass: 'text-white' },
+  { id: 'slate-700', name: 'Cinza Metálico', hex: '#334155', bgClass: 'bg-slate-700', textClass: 'text-white' },
 ];
 
 export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
@@ -21,10 +21,10 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
   currentLogoUrl,
   onLogoChange,
 }) => {
-  const [mode, setMode] = useState<'upload' | 'generate'>('generate');
-  const [selectedGradient, setSelectedGradient] = useState(GRADIENTS[0]);
+  const [mode, setMode] = useState<'generate' | 'upload'>('generate');
+  const [selectedColor, setSelectedColor] = useState(SOLID_COLORS[0]);
   const [customInitials, setCustomInitials] = useState('');
-  const [shape, setShape] = useState<'rounded-2xl' | 'rounded-full' | 'rounded-xl'>('rounded-2xl');
+  const [shape, setShape] = useState<'rounded-xl' | 'rounded-full' | 'rounded-lg'>('rounded-xl');
   const [previewUrl, setPreviewUrl] = useState<string | null>(currentLogoUrl || null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -38,19 +38,13 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
 
   const activeInitials = customInitials.trim() || derivedInitials || 'FG';
 
-  // Gera o logo monograma em SVG e converte para DataURL
-  const generateSvgDataUrl = (initials: string, gradient: typeof GRADIENTS[0], shapeType: string) => {
-    const rx = shapeType === 'rounded-full' ? '50%' : shapeType === 'rounded-2xl' ? '28' : '16';
+  // Gera o logo monograma em SVG com cor sólida limpa
+  const generateSvgDataUrl = (initials: string, color: typeof SOLID_COLORS[0], shapeType: string) => {
+    const rx = shapeType === 'rounded-full' ? '50%' : shapeType === 'rounded-xl' ? '20' : '8';
     const svgString = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
-        <defs>
-          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="${getGradientStop(gradient.id, 0)}" />
-            <stop offset="100%" stop-color="${getGradientStop(gradient.id, 1)}" />
-          </linearGradient>
-        </defs>
-        <rect width="120" height="120" rx="${rx}" fill="url(#grad)" />
-        <text x="50%" y="54%" dominant-baseline="central" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="44" fill="#ffffff" letter-spacing="1">
+        <rect width="120" height="120" rx="${rx}" fill="${color.hex}" />
+        <text x="50%" y="54%" dominant-baseline="central" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="700" font-size="44" fill="#ffffff" letter-spacing="1">
           ${initials}
         </text>
       </svg>
@@ -59,33 +53,13 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
     return `data:image/svg+xml;utf8,${encodeURIComponent(svgString)}`;
   };
 
-  const getGradientStop = (id: string, index: number) => {
-    switch (id) {
-      case 'indigo-purple':
-        return index === 0 ? '#4f46e5' : '#9333ea';
-      case 'blue-cyan':
-        return index === 0 ? '#2563eb' : '#06b6d4';
-      case 'emerald-teal':
-        return index === 0 ? '#059669' : '#14b8a6';
-      case 'amber-orange':
-        return index === 0 ? '#f59e0b' : '#ea580c';
-      case 'rose-pink':
-        return index === 0 ? '#f43f5e' : '#db2777';
-      case 'slate-zinc':
-        return index === 0 ? '#1e293b' : '#020617';
-      default:
-        return index === 0 ? '#4f46e5' : '#9333ea';
-    }
-  };
-
-  // Atualiza o SVG gerado sempre que os parâmetros mudam (se estiver no modo gerador)
   useEffect(() => {
     if (mode === 'generate') {
-      const dataUrl = generateSvgDataUrl(activeInitials, selectedGradient, shape);
+      const dataUrl = generateSvgDataUrl(activeInitials, selectedColor, shape);
       setPreviewUrl(dataUrl);
       onLogoChange(null, dataUrl);
     }
-  }, [activeInitials, selectedGradient, shape, mode]);
+  }, [activeInitials, selectedColor, shape, mode]);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -105,37 +79,37 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
   };
 
   return (
-    <div className="bg-slate-50/80 border border-slate-200 rounded-2xl p-4 sm:p-5">
+    <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
-          <label className="block text-sm font-semibold text-slate-800">
-            Logotipo da Empresa
+          <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+            Identidade Visual / Logotipo
           </label>
           <p className="text-xs text-slate-500 mt-0.5">
-            Envie uma imagem do computador ou gere um monograma com as iniciais.
+            Crie um monograma limpo com as iniciais da empresa ou envie um arquivo de imagem.
           </p>
         </div>
 
         {/* Alternador de Modo */}
-        <div className="flex items-center gap-1 bg-slate-200/80 p-1 rounded-xl self-start sm:self-auto">
+        <div className="flex items-center gap-1 bg-slate-200/80 p-1 rounded-lg self-start sm:self-auto">
           <button
             type="button"
             onClick={() => setMode('generate')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
               mode === 'generate'
-                ? 'bg-white text-indigo-700 shadow-sm'
+                ? 'bg-white text-slate-900 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5" />
-            Criar com Iniciais
+            <Type className="w-3.5 h-3.5" />
+            Monograma
           </button>
           <button
             type="button"
             onClick={() => setMode('upload')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
               mode === 'upload'
-                ? 'bg-white text-indigo-700 shadow-sm'
+                ? 'bg-white text-slate-900 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -148,37 +122,37 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
       <div className="flex flex-col md:flex-row items-center gap-6">
         {/* Preview do Logotipo */}
         <div className="flex flex-col items-center gap-2">
-          <div className="relative group">
+          <div className="relative">
             <div
-              className={`w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center shadow-md overflow-hidden border-2 border-white ring-2 ring-slate-200 transition-all ${shape}`}
+              className={`w-20 h-20 sm:w-22 sm:h-22 flex items-center justify-center overflow-hidden border border-slate-300 bg-white ${shape}`}
             >
               {previewUrl ? (
                 <img
                   src={previewUrl}
-                  alt="Pré-visualização do logotipo"
+                  alt="Prévia do logotipo"
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className={`w-full h-full bg-gradient-to-br ${selectedGradient.class} flex items-center justify-center text-white font-bold text-2xl`}>
+                <div className={`w-full h-full ${selectedColor.bgClass} flex items-center justify-center text-white font-bold text-xl`}>
                   {activeInitials}
                 </div>
               )}
             </div>
-            <div className="absolute -bottom-1 -right-1 bg-emerald-500 text-white p-1 rounded-full shadow">
+            <div className="absolute -bottom-1 -right-1 bg-slate-900 text-white p-0.5 rounded-full border border-white">
               <Check className="w-3 h-3" />
             </div>
           </div>
-          <span className="text-[11px] font-medium text-slate-500">Prévia do Logo</span>
+          <span className="text-[11px] font-medium text-slate-500">Visualização</span>
         </div>
 
         {/* Controles de Configuração */}
-        <div className="flex-1 w-full space-y-4">
+        <div className="flex-1 w-full space-y-3.5">
           {mode === 'generate' ? (
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-medium text-slate-700 mb-1">
-                    Iniciais exibidas
+                    Iniciais
                   </label>
                   <input
                     type="text"
@@ -186,7 +160,7 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
                     value={customInitials}
                     onChange={(e) => setCustomInitials(e.target.value.toUpperCase())}
                     placeholder={derivedInitials || 'FG'}
-                    className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl uppercase font-bold tracking-wider text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    className="w-full px-3 py-1.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg uppercase font-bold tracking-wider text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
                   />
                 </div>
 
@@ -194,20 +168,20 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
                   <label className="block text-xs font-medium text-slate-700 mb-1">
                     Formato da moldura
                   </label>
-                  <div className="grid grid-cols-3 gap-1.5">
+                  <div className="grid grid-cols-3 gap-1">
                     {[
-                      { id: 'rounded-2xl', label: 'Suave' },
+                      { id: 'rounded-xl', label: 'Suave' },
                       { id: 'rounded-full', label: 'Circular' },
-                      { id: 'rounded-xl', label: 'Compacto' },
+                      { id: 'rounded-lg', label: 'Sutil' },
                     ].map((item) => (
                       <button
                         key={item.id}
                         type="button"
                         onClick={() => setShape(item.id as any)}
-                        className={`py-2 text-xs font-medium rounded-lg border transition-all ${
+                        className={`py-1.5 text-xs font-medium rounded-md border transition-colors cursor-pointer ${
                           shape === item.id
-                            ? 'bg-indigo-50 border-indigo-500 text-indigo-700 font-semibold'
-                            : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                            ? 'bg-slate-900 text-white border-slate-900 font-semibold'
+                            : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
                         }`}
                       >
                         {item.label}
@@ -219,21 +193,21 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
 
               <div>
                 <label className="block text-xs font-medium text-slate-700 mb-1.5">
-                  Paleta de cores em gradiente
+                  Cor sólida institucional
                 </label>
-                <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-                  {GRADIENTS.map((grad) => (
+                <div className="grid grid-cols-6 gap-2">
+                  {SOLID_COLORS.map((col) => (
                     <button
-                      key={grad.id}
+                      key={col.id}
                       type="button"
-                      onClick={() => setSelectedGradient(grad)}
-                      title={grad.name}
-                      className={`h-9 rounded-xl bg-gradient-to-br ${grad.class} relative flex items-center justify-center transition-transform hover:scale-105 active:scale-95 ${
-                        selectedGradient.id === grad.id ? 'ring-2 ring-offset-2 ring-indigo-600' : ''
+                      onClick={() => setSelectedColor(col)}
+                      title={col.name}
+                      className={`h-8 rounded-lg ${col.bgClass} relative flex items-center justify-center transition-transform hover:opacity-90 cursor-pointer ${
+                        selectedColor.id === col.id ? 'ring-2 ring-offset-2 ring-slate-900' : ''
                       }`}
                     >
-                      {selectedGradient.id === grad.id && (
-                        <Check className="w-4 h-4 text-white drop-shadow" />
+                      {selectedColor.id === col.id && (
+                        <Check className="w-3.5 h-3.5 text-white" />
                       )}
                     </button>
                   ))}
@@ -241,7 +215,7 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
               </div>
             </>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <input
                 ref={fileInputRef}
                 type="file"
@@ -252,20 +226,20 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
               />
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-slate-300 hover:border-indigo-400 bg-white rounded-xl p-6 text-center cursor-pointer transition-all hover:bg-indigo-50/20"
+                className="border-2 border-dashed border-slate-300 hover:border-slate-500 bg-white rounded-lg p-5 text-center cursor-pointer transition-colors"
               >
-                <ImageIcon className="w-8 h-8 mx-auto text-indigo-500 mb-2" />
-                <p className="text-sm font-semibold text-slate-700">
-                  Clique aqui para selecionar uma imagem do computador
+                <ImageIcon className="w-6 h-6 mx-auto text-slate-400 mb-1.5" />
+                <p className="text-xs font-semibold text-slate-700">
+                  Clique para selecionar uma imagem do computador
                 </p>
-                <p className="text-xs text-slate-500 mt-1">
-                  Formatos aceitos: PNG, JPG, SVG ou WEBP (Máximo: 3MB)
+                <p className="text-[11px] text-slate-400 mt-0.5">
+                  PNG, JPG, SVG ou WEBP (Máximo: 3MB)
                 </p>
               </div>
 
               {previewUrl && (
-                <div className="flex items-center justify-between text-xs text-slate-600 bg-slate-100 px-3 py-2 rounded-lg">
-                  <span>Imagem selecionada pronta para uso</span>
+                <div className="flex items-center justify-between text-xs text-slate-600 bg-white border border-slate-200 px-3 py-1.5 rounded-md">
+                  <span>Arquivo selecionado</span>
                   <button
                     type="button"
                     onClick={() => {
@@ -273,7 +247,7 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
                       if (fileInputRef.current) fileInputRef.current.value = '';
                       onLogoChange(null, null);
                     }}
-                    className="text-rose-600 font-semibold hover:underline"
+                    className="text-rose-600 font-semibold hover:underline cursor-pointer"
                   >
                     Remover
                   </button>

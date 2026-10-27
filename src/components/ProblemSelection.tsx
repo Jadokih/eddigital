@@ -5,13 +5,12 @@ import {
   BadgeDollarSign,
   Boxes,
   CalendarCheck2,
-  Megaphone,
   Database,
   CheckCircle2,
   ArrowRight,
-  Sparkles,
   FileSpreadsheet,
   X,
+  Compass,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -32,17 +31,15 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
   const getProblemIcon = (iconName: string) => {
     switch (iconName) {
       case 'BadgeDollarSign':
-        return <BadgeDollarSign className="w-6 h-6" />;
+        return <BadgeDollarSign className="w-5 h-5" />;
       case 'Boxes':
-        return <Boxes className="w-6 h-6" />;
+        return <Boxes className="w-5 h-5" />;
       case 'CalendarCheck2':
-        return <CalendarCheck2 className="w-6 h-6" />;
-      case 'Megaphone':
-        return <Megaphone className="w-6 h-6" />;
+        return <CalendarCheck2 className="w-5 h-5" />;
       case 'Database':
-        return <Database className="w-6 h-6" />;
+        return <Database className="w-5 h-5" />;
       default:
-        return <Sparkles className="w-6 h-6" />;
+        return <FileSpreadsheet className="w-5 h-5" />;
     }
   };
 
@@ -56,14 +53,14 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
     try {
       await onSelectProblem(modalProblem.id);
       confetti({
-        particleCount: 80,
-        spread: 60,
+        particleCount: 60,
+        spread: 55,
         origin: { y: 0.6 },
       });
       showToast(
         'success',
-        'Problema Definido com Sucesso!',
-        `Seu grupo selecionou: Problema ${modalProblem.number} — ${modalProblem.title}`
+        'Situação-Problema Definida',
+        `Seu grupo selecionou: Problema ${modalProblem.number} — ${modalProblem.shortTitle}`
       );
       setModalProblem(null);
     } catch (err: any) {
@@ -74,137 +71,133 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
   };
 
   return (
-    <div className="space-y-8" id="etapa-1-section">
-      {/* Cabeçalho da Etapa 1 */}
-      <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
-        {/* Glow de fundo */}
-        <div className="absolute -top-12 -right-12 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 mb-3 backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-300" />
-            Educação Digital — Etapa 1
+    <div className="space-y-6" id="etapa-1-section">
+      {/* Cabeçalho Institucional da Etapa 1 */}
+      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200">
+        <div className="max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200 mb-3">
+            <Compass className="w-3.5 h-3.5 text-slate-600" />
+            Educação Digital • Etapa 1
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
-            Qual problema sua empresa vai resolver?
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+            Definição da Situação-Problema
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-            Toda empresa nasce para atender a uma necessidade. Nesta primeira etapa, seu grupo deverá escolher um problema real que gostaria de resolver com sua empresa. Ao longo do ano letivo, vocês aprenderão a utilizar ferramentas digitais para desenvolver uma solução.
+          <p className="mt-2 text-sm text-slate-600 leading-relaxed font-normal">
+            Toda organização atua para solucionar uma necessidade real. Selecione abaixo qual desafio prático seu grupo irá resolver utilizando recursos avançados de <strong className="text-slate-800 font-semibold">Planilhas no ONLYOFFICE</strong> ao longo do projeto.
           </p>
         </div>
       </div>
 
-      {/* Grade com os 5 Problemas */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Grade com os 4 Problemas de Planilha */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {PROBLEMS_DATA.map((problem) => {
           const isSelected = selectedProblemId === problem.id;
 
           return (
             <div
               key={problem.id}
-              className={`bg-white rounded-3xl p-6 sm:p-7 border-2 transition-all flex flex-col justify-between relative shadow-sm hover:shadow-md ${
+              className={`bg-white rounded-2xl p-6 border transition-all flex flex-col justify-between relative ${
                 isSelected
-                  ? 'border-indigo-600 ring-4 ring-indigo-500/10'
-                  : 'border-slate-200/90 hover:border-slate-300'
+                  ? 'border-indigo-600 ring-2 ring-indigo-600/10'
+                  : 'border-slate-200 hover:border-slate-300'
               }`}
             >
-              {/* Header do Card */}
               <div>
+                {/* Cabeçalho do Card */}
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div className="flex items-center gap-3">
                     <div
-                      className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${problem.accentColor.bg} ${problem.accentColor.text}`}
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${problem.accentColor.bg} ${problem.accentColor.text} ${problem.accentColor.border}`}
                     >
                       {getProblemIcon(problem.icon)}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                        <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">
                           Problema {problem.number}
                         </span>
                         <span
-                          className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border ${problem.accentColor.badge}`}
+                          className={`text-[11px] font-semibold px-2 py-0.5 rounded-md border ${problem.accentColor.badge}`}
                         >
                           {problem.tag}
                         </span>
                       </div>
-                      <h3 className="text-lg font-bold text-slate-900 mt-0.5">
+                      <h3 className="text-base font-bold text-slate-900 mt-0.5">
                         {problem.title}
                       </h3>
                     </div>
                   </div>
 
                   {isSelected && (
-                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-sm">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold bg-indigo-600 text-white shrink-0">
                       <CheckCircle2 className="w-3.5 h-3.5" />
-                      Selecionado
+                      Ativo
                     </span>
                   )}
                 </div>
 
-                {/* Descrição */}
-                <div className="space-y-3 mb-6">
+                {/* Descrição e Objetivo */}
+                <div className="space-y-3 mb-5">
                   <div>
-                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                      Situação-Problema:
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">
+                      Cenário Real:
                     </span>
-                    <p className="text-sm text-slate-700 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
+                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-200">
                       {problem.description}
                     </p>
                   </div>
 
                   <div>
-                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                      Objetivo da Solução Digital:
+                    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">
+                      Solução com Planilha:
                     </span>
-                    <p className="text-sm text-slate-800 font-medium leading-relaxed bg-indigo-50/50 p-3 rounded-xl border border-indigo-100/70">
+                    <p className="text-xs sm:text-sm text-slate-800 font-medium leading-relaxed bg-slate-100/70 p-3 rounded-lg border border-slate-200">
                       {problem.objective}
                     </p>
                   </div>
                 </div>
 
                 {/* Ferramentas ONLYOFFICE */}
-                <div className="mb-6">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2 flex items-center gap-1.5">
-                    <FileSpreadsheet className="w-3.5 h-3.5 text-indigo-600" />
-                    O que poderão aprender no ONLYOFFICE:
+                <div className="mb-5">
+                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-2 flex items-center gap-1.5">
+                    <FileSpreadsheet className="w-3.5 h-3.5 text-slate-600" />
+                    Habilidades no ONLYOFFICE Planilhas:
                   </span>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     {problem.onlyofficeTools.slice(0, 4).map((tool, idx) => (
-                      <li
+                      <div
                         key={idx}
-                        className="bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-slate-700 flex flex-col gap-0.5"
+                        className="bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-slate-700 flex flex-col gap-0.5"
                       >
                         <strong className="text-slate-900 font-semibold">{tool.category}</strong>
-                        <span className="text-slate-500 text-[11px] leading-tight line-clamp-2">
+                        <span className="text-slate-600 text-[11px] leading-snug line-clamp-2">
                           {tool.details}
                         </span>
-                      </li>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
 
-              {/* Botão de Escolha */}
-              <div className="pt-4 border-t border-slate-100 mt-2">
+              {/* Ação */}
+              <div className="pt-4 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => handleOpenConfirmModal(problem)}
-                  className={`w-full py-3.5 px-4 rounded-2xl font-bold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                  className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer ${
                     isSelected
-                      ? 'bg-slate-100 text-indigo-700 hover:bg-slate-200 border border-slate-200'
-                      : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/20'
+                      ? 'bg-slate-100 text-slate-800 hover:bg-slate-200 border border-slate-300'
+                      : 'bg-slate-900 hover:bg-slate-800 text-white'
                   }`}
                 >
                   {isSelected ? (
                     <>
                       <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                      <span>Problema Escolhido (Clique para revisar ou alterar)</span>
+                      <span>Problema Selecionado (Clique para rever)</span>
                     </>
                   ) : (
                     <>
-                      <span>Escolher este problema</span>
+                      <span>Selecionar Este Problema</span>
                       <ArrowRight className="w-4 h-4" />
                     </>
                   )}
@@ -215,23 +208,23 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
         })}
       </div>
 
-      {/* Modal de Confirmação da Escolha */}
+      {/* Modal de Confirmação */}
       {modalProblem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 max-w-xl w-full p-6 sm:p-8 space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <div className="flex items-center gap-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
+          <div className="bg-white rounded-2xl border border-slate-200 max-w-lg w-full p-6 space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+              <div className="flex items-center gap-2.5">
                 <div
-                  className={`w-12 h-12 rounded-2xl flex items-center justify-center ${modalProblem.accentColor.bg} ${modalProblem.accentColor.text}`}
+                  className={`w-9 h-9 rounded-lg flex items-center justify-center border ${modalProblem.accentColor.bg} ${modalProblem.accentColor.text} ${modalProblem.accentColor.border}`}
                 >
                   {getProblemIcon(modalProblem.icon)}
                 </div>
                 <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                    Confirmar Seleção da Etapa 1
+                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                    Confirmar Seleção
                   </span>
-                  <h3 className="text-lg font-extrabold text-slate-900">
-                    Problema {modalProblem.number}: {modalProblem.title}
+                  <h3 className="text-base font-bold text-slate-900">
+                    Problema {modalProblem.number}: {modalProblem.shortTitle}
                   </h3>
                 </div>
               </div>
@@ -239,58 +232,54 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
               <button
                 type="button"
                 onClick={() => setModalProblem(null)}
-                className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl"
+                className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg cursor-pointer"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="space-y-4">
-              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80">
-                <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
-                  Resumo do Desafio:
+            <div className="space-y-3.5 text-sm">
+              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                <h4 className="text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                  Desafio da Empresa:
                 </h4>
-                <p className="text-sm text-slate-700 leading-relaxed font-normal">
+                <p className="text-xs text-slate-700 leading-relaxed">
                   {modalProblem.description}
                 </p>
               </div>
 
-              <div className="bg-indigo-50/60 p-4 rounded-2xl border border-indigo-100">
-                <h4 className="text-xs font-bold text-indigo-700 uppercase tracking-wider mb-1">
-                  Objetivo que o grupo vai desenvolver:
+              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                <h4 className="text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+                  Solução a Desenvolver na Planilha:
                 </h4>
-                <p className="text-sm text-slate-800 font-medium leading-relaxed">
+                <p className="text-xs text-slate-800 font-semibold leading-relaxed">
                   {modalProblem.objective}
                 </p>
               </div>
 
               <div>
-                <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                  Ferramentas ONLYOFFICE que serão estudadas:
+                <h4 className="text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-2">
+                  Tópicos ONLYOFFICE Planilhas que serão trabalhados:
                 </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                   {modalProblem.onlyofficeTools.map((tool, idx) => (
                     <div
                       key={idx}
-                      className="p-2.5 rounded-xl border border-slate-100 bg-slate-50 text-xs"
+                      className="p-2 rounded-lg border border-slate-200 bg-white text-xs"
                     >
-                      <span className="font-bold text-slate-800 block">{tool.category}</span>
+                      <span className="font-bold text-slate-800 block text-[11px]">{tool.category}</span>
                       <span className="text-slate-500 text-[11px]">{tool.details}</span>
                     </div>
                   ))}
                 </div>
               </div>
-
-              <p className="text-xs text-slate-500 italic bg-amber-50 text-amber-800 p-3 rounded-xl border border-amber-200">
-                Nota: O grupo poderá alterar sua escolha enquanto a atividade estiver em andamento.
-              </p>
             </div>
 
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+            <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-200">
               <button
                 type="button"
                 onClick={() => setModalProblem(null)}
-                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 transition-all"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 Cancelar
               </button>
@@ -298,9 +287,9 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
                 type="button"
                 disabled={submitting}
                 onClick={handleConfirmChoice}
-                className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold shadow-md shadow-indigo-500/20 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                className="px-5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
               >
-                {submitting ? 'Salvando...' : 'Confirmar Escolha'}
+                {submitting ? 'Gravando...' : 'Confirmar Escolha'}
               </button>
             </div>
           </div>
