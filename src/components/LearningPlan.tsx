@@ -5,7 +5,8 @@ import {
   Square,
   ArrowLeftRight,
   FileSpreadsheet,
-  BookmarkCheck,
+  GraduationCap,
+  Sparkles,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -35,6 +36,13 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
   const percent = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
   const isAllCompleted = completedCount === totalCount && totalCount > 0;
 
+  // Separação explícita entre Comum (Professor) e Específico (Grupo)
+  const commonObjectives = problem.learningObjectives.filter((o) => o.scope === 'comum');
+  const specificObjectives = problem.learningObjectives.filter((o) => o.scope === 'especifico');
+
+  const commonCompletedCount = commonObjectives.filter((o) => completedList.includes(o.id)).length;
+  const specificCompletedCount = specificObjectives.filter((o) => completedList.includes(o.id)).length;
+
   const handleToggle = async (objId: string) => {
     try {
       await onToggleObjective(objId);
@@ -48,27 +56,27 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
         showToast(
           'success',
           'Etapa 1 Concluída!',
-          'Todas as metas da planilha foram concluídas pela equipe!'
+          'Todas as metas (fundamentos e específicos da empresa) foram concluídas!'
         );
       }
     } catch (err: any) {
-      showToast('error', 'Erro ao salvar', err.message || 'Falha ao atualizar objetivo.');
+      showToast('error', 'Erro ao salvar', err.message || 'Falha ao atualizar meta.');
     }
   };
 
   return (
-    <div className="neo-card p-6 sm:p-8 space-y-7 max-w-5xl mx-auto">
+    <div className="neo-card p-6 sm:p-8 space-y-8 max-w-5xl mx-auto">
       {/* Topo do Plano de Aprendizagem */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b-2 border-slate-900">
         <div>
-          <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-display block mb-1">
-            PLANO DE APRENDIZAGEM • ONLYOFFICE
+          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-display block mb-1">
+            PLANO DE APRENDIZAGEM • DIVISÃO PEDAGÓGICA
           </span>
           <h3 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 tracking-tight">
             Metas de Planilha da Empresa
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 mt-1">
-            Desenvolva as habilidades necessárias para resolver a{' '}
+            Aulas gerais compartilhadas com o professor + desenvolvimento específico do grupo para a{' '}
             <strong className="text-slate-900 font-semibold">Missão {problem.number}: {problem.shortTitle}</strong>.
           </p>
         </div>
@@ -88,7 +96,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
       <div className="p-5 rounded-2xl bg-[#FAF9F5] border-2 border-slate-900 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
         <div>
           <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-0.5">
-            MISSÃO ATIVA
+            MISSÃO ATIVA DO GRUPO
           </span>
           <h4 className="text-lg font-display font-bold text-slate-900">{problem.title}</h4>
           <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
@@ -96,7 +104,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
           </p>
         </div>
 
-        {/* Medidor de Conclusão */}
+        {/* Medidor de Conclusão Global */}
         <div className="w-full md:w-56 shrink-0 bg-white p-4 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_#0f172a]">
           <div className="flex items-center justify-between text-xs font-bold mb-1.5">
             <span className="text-slate-700">Progresso Geral:</span>
@@ -110,41 +118,58 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
               style={{ width: `${percent}%` }}
             />
           </div>
-          <span className="text-[11px] text-slate-500 mt-1 block text-right font-medium">
-            {completedCount} de {totalCount} concluídos
-          </span>
+          <div className="flex justify-between items-center text-[10px] text-slate-500 mt-1 font-medium">
+            <span>Básico: {commonCompletedCount}/4</span>
+            <span>Específico: {specificCompletedCount}/3</span>
+          </div>
         </div>
       </div>
 
-      {/* Lista de Objetivos de Aprendizagem Interativa */}
-      <div className="space-y-3">
-        <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-display">
-          Checklist de Habilidades Digitais (Marque conforme for desenvolvendo):
-        </h4>
+      {/* SEÇÃO 1: O BÁSICO COM O PROFESSOR (COMUM A TODOS) */}
+      <div className="space-y-3.5">
+        <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-lg bg-slate-900 text-white flex items-center justify-center text-xs">
+              <GraduationCap className="w-4 h-4 text-emerald-400" />
+            </div>
+            <div>
+              <h4 className="text-sm font-display font-bold text-slate-900">
+                1. O Básico com o Professor (Comum a Todos)
+              </h4>
+              <p className="text-[11px] text-slate-500">
+                Conteúdos fundamentais ensinados pelo professor em aula para toda a turma
+              </p>
+            </div>
+          </div>
 
-        <div className="grid grid-cols-1 gap-2.5">
-          {problem.learningObjectives.map((obj, index) => {
+          <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 border border-slate-300 text-slate-700">
+            {commonCompletedCount} de {commonObjectives.length} concluídos
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 gap-2">
+          {commonObjectives.map((obj, index) => {
             const isCompleted = completedList.includes(obj.id);
 
             return (
               <div
                 key={obj.id}
                 onClick={() => handleToggle(obj.id)}
-                className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between gap-4 select-none ${
+                className={`p-3.5 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between gap-4 select-none ${
                   isCompleted
                     ? 'bg-emerald-50/70 border-emerald-400 text-slate-900 shadow-[2px_2px_0px_#22c55e]'
-                    : 'bg-white hover:bg-slate-50 border-slate-900 text-slate-800 shadow-[2px_2px_0px_#0f172a]'
+                    : 'bg-white hover:bg-slate-50 border-slate-300 text-slate-800 shadow-[2px_2px_0px_#0f172a]'
                 }`}
               >
-                <div className="flex items-center gap-3.5">
+                <div className="flex items-center gap-3">
                   <div className="shrink-0">
                     {isCompleted ? (
-                      <div className="w-6 h-6 rounded-md bg-emerald-500 text-white flex items-center justify-center border border-slate-900">
-                        <CheckSquare className="w-4 h-4" />
+                      <div className="w-5 h-5 rounded-md bg-emerald-500 text-white flex items-center justify-center border border-slate-900">
+                        <CheckSquare className="w-3.5 h-3.5" />
                       </div>
                     ) : (
-                      <div className="w-6 h-6 rounded-md bg-white border-2 border-slate-900 flex items-center justify-center">
-                        <Square className="w-3.5 h-3.5 text-transparent" />
+                      <div className="w-5 h-5 rounded-md bg-white border-2 border-slate-900 flex items-center justify-center">
+                        <Square className="w-3 h-3 text-transparent" />
                       </div>
                     )}
                   </div>
@@ -156,20 +181,20 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                     >
                       {obj.title}
                     </span>
-                    <span className="block text-[11px] text-slate-400 mt-0.5">
-                      Meta #{index + 1} • Prática orientada no ONLYOFFICE
+                    <span className="block text-[10px] text-slate-400 mt-0.5">
+                      Pilar Geral #{index + 1} • Praticado na aula geral com o professor
                     </span>
                   </div>
                 </div>
 
                 <span
-                  className={`text-[11px] font-bold px-3 py-1 rounded-full shrink-0 border ${
+                  className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full shrink-0 border ${
                     isCompleted
                       ? 'bg-emerald-100 text-emerald-900 border-emerald-400'
                       : 'bg-slate-100 text-slate-600 border-slate-300'
                   }`}
                 >
-                  {isCompleted ? 'Dominado ✓' : 'A Praticar'}
+                  {isCompleted ? 'Dominado ✓' : 'Em Aula'}
                 </span>
               </div>
             );
@@ -177,36 +202,120 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
         </div>
       </div>
 
-      {/* Ferramentas e Recursos no ONLYOFFICE */}
-      <div className="space-y-3">
-        <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-display flex items-center gap-1.5">
-          <FileSpreadsheet className="w-4 h-4 text-slate-700" />
-          Habilidades Práticas do ONLYOFFICE:
-        </h4>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {problem.onlyofficeTools.map((tool, idx) => (
-            <div
-              key={idx}
-              className="p-3.5 rounded-2xl bg-white border-2 border-slate-900 shadow-[2px_2px_0px_#0f172a] text-xs space-y-1"
-            >
-              <span className="font-display font-bold text-slate-900 text-xs block">{tool.category}</span>
-              <p className="text-slate-600 leading-relaxed text-[11px]">{tool.details}</p>
+      {/* SEÇÃO 2: OS ESPECÍFICOS COM O GRUPO (AUTONOMIA DA EMPRESA) */}
+      <div className="space-y-3.5">
+        <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-lg bg-emerald-500 text-white flex items-center justify-center text-xs">
+              <Sparkles className="w-4 h-4 text-white" />
             </div>
-          ))}
+            <div>
+              <h4 className="text-sm font-display font-bold text-slate-900">
+                2. Os Específicos com o seu Grupo (Autonomia da Empresa)
+              </h4>
+              <p className="text-[11px] text-slate-500">
+                Desafios e fórmulas exclusivas para a situação-problema escolhida pela sua equipe
+              </p>
+            </div>
+          </div>
+
+          <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 border border-emerald-400 text-emerald-900">
+            {specificCompletedCount} de {specificObjectives.length} concluídos
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 gap-2">
+          {specificObjectives.map((obj, index) => {
+            const isCompleted = completedList.includes(obj.id);
+
+            return (
+              <div
+                key={obj.id}
+                onClick={() => handleToggle(obj.id)}
+                className={`p-3.5 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between gap-4 select-none ${
+                  isCompleted
+                    ? 'bg-emerald-50/70 border-emerald-400 text-slate-900 shadow-[2px_2px_0px_#22c55e]'
+                    : 'bg-white hover:bg-slate-50 border-slate-900 text-slate-800 shadow-[2px_2px_0px_#0f172a]'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="shrink-0">
+                    {isCompleted ? (
+                      <div className="w-5 h-5 rounded-md bg-emerald-500 text-white flex items-center justify-center border border-slate-900">
+                        <CheckSquare className="w-3.5 h-3.5" />
+                      </div>
+                    ) : (
+                      <div className="w-5 h-5 rounded-md bg-white border-2 border-slate-900 flex items-center justify-center">
+                        <Square className="w-3 h-3 text-transparent" />
+                      </div>
+                    )}
+                  </div>
+                  <div>
+                    <span
+                      className={`text-xs sm:text-sm font-semibold ${
+                        isCompleted ? 'line-through text-slate-500' : 'text-slate-900'
+                      }`}
+                    >
+                      {obj.title}
+                    </span>
+                    <span className="block text-[10px] text-slate-400 mt-0.5">
+                      Meta Específica #{index + 1} • Fórmulas exclusivas da sua empresa
+                    </span>
+                  </div>
+                </div>
+
+                <span
+                  className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full shrink-0 border ${
+                    isCompleted
+                      ? 'bg-emerald-100 text-emerald-900 border-emerald-400'
+                      : 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                  }`}
+                >
+                  {isCompleted ? 'Concluído ✓' : 'Do Grupo'}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Mensagem Pedagógica Orientadora */}
-      <div className="p-4 rounded-2xl bg-[#FAF9F5] border-2 border-slate-900 flex items-start gap-3">
-        <BookmarkCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-        <div>
-          <h5 className="text-[11px] font-bold text-slate-900 uppercase tracking-widest font-display">
-            Compromisso de Aprendizagem
-          </h5>
-          <p className="text-xs text-slate-700 mt-0.5 leading-relaxed">
-            Esta é a primeira etapa do projeto. Durante o ano letivo, o grupo aplicará os conceitos aprendidos em aula para montar a planilha final da empresa.
-          </p>
+      {/* QUADRO DE FERRAMENTAS DIVIDIDO */}
+      <div className="space-y-4 pt-2">
+        <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-display flex items-center gap-1.5">
+          <FileSpreadsheet className="w-4 h-4 text-slate-700" />
+          Mapa de Recursos ONLYOFFICE Utilizados:
+        </h4>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Coluna 1: Comum (Professor) */}
+          <div className="p-4 rounded-2xl bg-[#FAF9F5] border-2 border-slate-900 space-y-2">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-700 block">
+              👨‍🏫 Ensinado pelo Professor em Aula:
+            </span>
+            <ul className="space-y-1.5 text-xs">
+              {problem.commonTools.map((tool, idx) => (
+                <li key={idx} className="flex flex-col">
+                  <strong className="text-slate-900">• {tool.category}</strong>
+                  <span className="text-[11px] text-slate-600 pl-2">{tool.details}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Coluna 2: Específico (Grupo) */}
+          <div className="p-4 rounded-2xl bg-white border-2 border-slate-900 shadow-[3px_3px_0px_#22c55e] space-y-2">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block">
+              🚀 Aprofundado pelo seu Grupo:
+            </span>
+            <ul className="space-y-1.5 text-xs">
+              {problem.specificTools.map((tool, idx) => (
+                <li key={idx} className="flex flex-col">
+                  <strong className="text-slate-900">• {tool.category}</strong>
+                  <span className="text-[11px] text-slate-600 pl-2">{tool.details}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>

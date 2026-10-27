@@ -20,6 +20,14 @@ export interface Group {
 export interface LearningObjective {
   id: string;
   title: string;
+  scope: 'comum' | 'especifico';
+  description?: string;
+}
+
+export interface OnlyofficeTool {
+  category: string;
+  details: string;
+  scope: 'comum' | 'especifico';
 }
 
 export interface Problem {
@@ -30,10 +38,9 @@ export interface Problem {
   tag: string;
   description: string;
   objective: string;
-  onlyofficeTools: {
-    category: string;
-    details: string;
-  }[];
+  commonTools: OnlyofficeTool[];
+  specificTools: OnlyofficeTool[];
+  onlyofficeTools: OnlyofficeTool[];
   learningObjectives: LearningObjective[];
   accentColor: {
     bg: string;

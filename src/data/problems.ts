@@ -1,5 +1,61 @@
-import type { Problem } from '../types';
+import type { Problem, OnlyofficeTool, LearningObjective } from '../types';
 
+// ============================================================================
+// 1. O BÁSICO COM O PROFESSOR (Comum a todos — aula geral compartilhada)
+// ============================================================================
+export const COMMON_SPREADSHEET_TOOLS: OnlyofficeTool[] = [
+  {
+    category: 'Estruturação de Tabela',
+    details: 'Criação de linhas e colunas organizadas, cabeçalhos claros e ajuste de largura.',
+    scope: 'comum',
+  },
+  {
+    category: 'Tipagem & Formatação',
+    details: 'Padronização de tipos de células: texto, valores numéricos, moeda (R$) e datas.',
+    scope: 'comum',
+  },
+  {
+    category: 'Fórmulas Aritméticas Básicas',
+    details: 'Cálculos fundamentais compartilhados por toda a turma (SOMA, subtração e MÉDIA).',
+    scope: 'comum',
+  },
+  {
+    category: 'Filtros & Ordenação',
+    details: 'Habilitação de filtros no cabeçalho e ordenação rápida de dados por coluna.',
+    scope: 'comum',
+  },
+];
+
+export const COMMON_LEARNING_OBJECTIVES: LearningObjective[] = [
+  {
+    id: 'core_obj1',
+    title: 'Estruturar tabela com cabeçalhos claros e boas práticas de layout',
+    scope: 'comum',
+    description: 'Ensinado pelo professor para toda a turma.',
+  },
+  {
+    id: 'core_obj2',
+    title: 'Padronizar formatação de células e tipos de dados (texto, número, moeda R$)',
+    scope: 'comum',
+    description: 'Ensinado pelo professor para toda a turma.',
+  },
+  {
+    id: 'core_obj3',
+    title: 'Aplicar fórmulas matemáticas fundamentais (SOMA, subtração e média)',
+    scope: 'comum',
+    description: 'Ensinado pelo professor para toda a turma.',
+  },
+  {
+    id: 'core_obj4',
+    title: 'Configurar filtros no cabeçalho e ordenar registros com segurança',
+    scope: 'comum',
+    description: 'Ensinado pelo professor para toda a turma.',
+  },
+];
+
+// ============================================================================
+// 2. AS 4 SITUAÇÕES-PROBLEMA (Básico com o professor + Específico com o grupo)
+// ============================================================================
 export const PROBLEMS_DATA: Problem[] = [
   {
     id: 1,
@@ -8,7 +64,7 @@ export const PROBLEMS_DATA: Problem[] = [
     shortTitle: 'Organização Financeira',
     tag: 'Finanças & Fluxo de Caixa',
     description: 'Pequenos negócios têm dificuldade para controlar receitas, despesas, custos operacionais e lucro real.',
-    objective: 'Criar uma planilha estruturada para registrar entradas e saídas, calcular o saldo automaticamente e visualizar a saúde financeira.',
+    objective: 'Criar uma planilha de fluxo de caixa para registrar entradas e saídas, calcular o saldo automaticamente e gerar gráficos de resultados.',
     icon: 'BadgeDollarSign',
     accentColor: {
       bg: 'bg-emerald-50',
@@ -18,35 +74,47 @@ export const PROBLEMS_DATA: Problem[] = [
       gradient: '',
       lightBg: 'bg-emerald-50',
     },
-    onlyofficeTools: [
+    commonTools: COMMON_SPREADSHEET_TOOLS,
+    specificTools: [
       {
-        category: 'Planilhas',
-        details: 'Estruturação de fluxo de caixa em linhas e colunas bem padronizadas.',
+        category: 'Cálculo de Saldo Automático',
+        details: 'Fórmulas para saldo final acumulado e apuração de lucro líquido (Receitas - Despesas).',
+        scope: 'especifico',
       },
       {
-        category: 'Fórmulas Matemáticas',
-        details: 'Cálculos essenciais com SOMA, SUBTRAÇÃO e MÉDIA.',
+        category: 'Formatação Condicional de Saldo',
+        details: 'Destaque visual automático com cores para saldo positivo (verde) ou negativo (vermelho).',
+        scope: 'especifico',
       },
       {
-        category: 'Formatação de Moeda',
-        details: 'Padronização visual em Real (R$) e formatação de valores decimais.',
-      },
-      {
-        category: 'Gráficos Financeiros',
-        details: 'Gráficos de barras e pizza para visualização clara de lucros e despesas.',
-      },
-      {
-        category: 'Filtros e Registros',
-        details: 'Filtragem por data, tipo de despesa e categoria de receita.',
+        category: 'Gráficos Comparativos',
+        details: 'Gráficos de barras e pizza para visualização clara da divisão de custos e receitas.',
+        scope: 'especifico',
       },
     ],
+    get onlyofficeTools() {
+      return [...this.commonTools, ...this.specificTools];
+    },
     learningObjectives: [
-      { id: 'p1_obj1', title: 'Organizar informações em uma planilha financeira estruturada' },
-      { id: 'p1_obj2', title: 'Criar fórmulas para calcular totais (SOMA e subtração)' },
-      { id: 'p1_obj3', title: 'Calcular receitas, despesas e saldo final automaticamente' },
-      { id: 'p1_obj4', title: 'Aplicar formatação de moeda (R$) e estilos visuais adequados' },
-      { id: 'p1_obj5', title: 'Criar gráficos comparativos de receitas vs. despesas' },
-      { id: 'p1_obj6', title: 'Apresentar os resultados e conclusões financeiras da empresa' },
+      ...COMMON_LEARNING_OBJECTIVES,
+      {
+        id: 'p1_spec1',
+        title: 'Calcular receitas, despesas e o saldo final da empresa automaticamente',
+        scope: 'especifico',
+        description: 'Desenvolvimento específico do grupo.',
+      },
+      {
+        id: 'p1_spec2',
+        title: 'Configurar formatação condicional com cores para saldo positivo vs. negativo',
+        scope: 'especifico',
+        description: 'Desenvolvimento específico do grupo.',
+      },
+      {
+        id: 'p1_spec3',
+        title: 'Criar gráficos comparativos de receitas vs. despesas para análise da empresa',
+        scope: 'especifico',
+        description: 'Desenvolvimento específico do grupo.',
+      },
     ],
   },
   {
@@ -66,35 +134,47 @@ export const PROBLEMS_DATA: Problem[] = [
       gradient: '',
       lightBg: 'bg-blue-50',
     },
-    onlyofficeTools: [
-      {
-        category: 'Planilhas',
-        details: 'Tabelas padronizadas com código, produto, custo unitário e preço de venda.',
-      },
+    commonTools: COMMON_SPREADSHEET_TOOLS,
+    specificTools: [
       {
         category: 'Fórmulas de Quantidade e Valor',
-        details: 'Multiplicações automáticas de volume por preço unitário e saldo em estoque.',
+        details: 'Cálculo de estoque atual dinâmico (Entradas - Saídas) e valor total do estoque (Qtd * Custo).',
+        scope: 'especifico',
       },
       {
-        category: 'Formatação Condicional',
-        details: 'Regras visuais para destacar automaticamente itens com estoque baixo.',
+        category: 'Alerta de Estoque Mínimo',
+        details: 'Formatação condicional com aviso visual automático para itens que atingiram o limite mínimo.',
+        scope: 'especifico',
       },
       {
-        category: 'Classificação e Filtros',
-        details: 'Ordenação rápida por produtos com maior giro ou em risco de falta.',
-      },
-      {
-        category: 'Gráficos de Movimentação',
-        details: 'Monitoramento da evolução de entradas e saídas de mercadorias.',
+        category: 'Gráficos de Giro de Mercadorias',
+        details: 'Visualização da movimentação de mercadorias e identificação dos itens mais vendidos.',
+        scope: 'especifico',
       },
     ],
+    get onlyofficeTools() {
+      return [...this.commonTools, ...this.specificTools];
+    },
     learningObjectives: [
-      { id: 'p2_obj1', title: 'Estruturar tabela de produtos com código, nome e categoria' },
-      { id: 'p2_obj2', title: 'Registrar entradas, saídas e calcular estoque atual dinâmico' },
-      { id: 'p2_obj3', title: 'Criar fórmulas para valor total investido em mercadorias' },
-      { id: 'p2_obj4', title: 'Configurar formatação condicional com cores para alerta de estoque mínimo' },
-      { id: 'p2_obj5', title: 'Aplicar filtros para localizar mercadorias com rapidez' },
-      { id: 'p2_obj6', title: 'Gerar gráficos de movimentação e giro de produtos' },
+      ...COMMON_LEARNING_OBJECTIVES,
+      {
+        id: 'p2_spec1',
+        title: 'Calcular o saldo atual de estoque (entradas - saídas) e valor total investido',
+        scope: 'especifico',
+        description: 'Desenvolvimento específico do grupo.',
+      },
+      {
+        id: 'p2_spec2',
+        title: 'Aplicar formatação condicional com alerta visual para reposição de estoque mínimo',
+        scope: 'especifico',
+        description: 'Desenvolvimento específico do grupo.',
+      },
+      {
+        id: 'p2_spec3',
+        title: 'Gerar gráficos de movimentação e giro de produtos para tomada de decisão',
+        scope: 'especifico',
+        description: 'Desenvolvimento específico do grupo.',
+      },
     ],
   },
   {
@@ -114,35 +194,47 @@ export const PROBLEMS_DATA: Problem[] = [
       gradient: '',
       lightBg: 'bg-amber-50',
     },
-    onlyofficeTools: [
-      {
-        category: 'Planilhas (Cronograma)',
-        details: 'Matriz de atividades, datas de início, prazos finais e responsáveis.',
-      },
+    commonTools: COMMON_SPREADSHEET_TOOLS,
+    specificTools: [
       {
         category: 'Validação de Dados (Listas)',
-        details: 'Menu suspenso para status (Pendente, Em Andamento, Concluído).',
+        details: 'Criação de menus suspensos para seleção padronizada de status (Pendente, Em Andamento, Concluído).',
+        scope: 'especifico',
       },
       {
-        category: 'Formatação Condicional',
-        details: 'Destaque automático de tarefas atrasadas ou que vencem na semana.',
+        category: 'Formatação Condicional de Prazos',
+        details: 'Regras visuais automáticas para destacar tarefas atrasadas ou que vencem na semana.',
+        scope: 'especifico',
       },
       {
-        category: 'Fórmulas de Data e Prazos',
-        details: 'Cálculo de dias restantes para a entrega e contagem de itens em aberto.',
-      },
-      {
-        category: 'Gráficos de Acompanhamento',
-        details: 'Gráfico de barras para visualização do progresso das atividades.',
+        category: 'Fórmulas de Data & Acompanhamento',
+        details: 'Cálculo de dias restantes para o prazo final e gráfico de tarefas concluídas vs. pendentes.',
+        scope: 'especifico',
       },
     ],
+    get onlyofficeTools() {
+      return [...this.commonTools, ...this.specificTools];
+    },
     learningObjectives: [
-      { id: 'p3_obj1', title: 'Construir um cronograma com atividades, prazos e responsáveis' },
-      { id: 'p3_obj2', title: 'Inserir listas suspensas de validação para status (A Fazer / Feito)' },
-      { id: 'p3_obj3', title: 'Aplicar formatação condicional para avisos visuais de prazos' },
-      { id: 'p3_obj4', title: 'Calcular dias restantes e prazos com fórmulas de data na planilha' },
-      { id: 'p3_obj5', title: 'Criar gráfico de acompanhamento de tarefas concluídas vs. pendentes' },
-      { id: 'p3_obj6', title: 'Avaliar e revisar periodicamente a divisão de funções do grupo' },
+      ...COMMON_LEARNING_OBJECTIVES,
+      {
+        id: 'p3_spec1',
+        title: 'Configurar lista suspensa com validação de dados para status das atividades',
+        scope: 'especifico',
+        description: 'Desenvolvimento específico do grupo.',
+      },
+      {
+        id: 'p3_spec2',
+        title: 'Aplicar formatação condicional para avisos visuais de prazos e tarefas atrasadas',
+        scope: 'especifico',
+        description: 'Desenvolvimento específico do grupo.',
+      },
+      {
+        id: 'p3_spec3',
+        title: 'Calcular dias restantes com fórmulas de data e gerar gráfico de progresso da equipe',
+        scope: 'especifico',
+        description: 'Desenvolvimento específico do grupo.',
+      },
     ],
   },
   {
@@ -152,7 +244,7 @@ export const PROBLEMS_DATA: Problem[] = [
     shortTitle: 'Cadastros e Informações',
     tag: 'Dados & Registros',
     description: 'Pequenos negócios, associações e projetos comunitários têm dificuldade para manter registros limpos e confiáveis de clientes ou participantes.',
-    objective: 'Desenvolver uma planilha de banco de dados organizada, com campos padronizados, validação para evitar erros e fórmulas de consulta.',
+    objective: 'Desenvolver uma planilha de banco de dados organizada, com campos padronizados, validação para evitar erros e fórmulas estatísticas.',
     icon: 'Database',
     accentColor: {
       bg: 'bg-slate-100',
@@ -162,35 +254,47 @@ export const PROBLEMS_DATA: Problem[] = [
       gradient: '',
       lightBg: 'bg-slate-50',
     },
-    onlyofficeTools: [
+    commonTools: COMMON_SPREADSHEET_TOOLS,
+    specificTools: [
       {
-        category: 'Planilhas (Base de Dados)',
-        details: 'Estruturação de colunas padronizadas com tipagem de dados correta.',
-      },
-      {
-        category: 'Classificação e Filtros Avançados',
-        details: 'Busca ágil por cidade, status, categoria ou data de cadastro.',
-      },
-      {
-        category: 'Validação de Dados',
-        details: 'Regras de preenchimento para evitar erros em e-mails, telefones e opções.',
+        category: 'Validação de Dados em Campos Críticos',
+        details: 'Restrição de preenchimento para garantir formato correto de contatos, estados e categorias.',
+        scope: 'especifico',
       },
       {
         category: 'Fórmulas Estatísticas (CONT.SE)',
-        details: 'Totalizadores automáticos de clientes por categoria ou região.',
+        details: 'Totalização automática de cadastros por categoria, cidade ou segmento com a função CONT.SE.',
+        scope: 'especifico',
       },
       {
-        category: 'Resumo e Métricas em Tabela',
-        details: 'Painel sintético com indicadores consolidados a partir dos registros.',
+        category: 'Tabela Resumo de Métricas',
+        details: 'Construção de painel sintético com indicadores consolidados a partir da base de dados.',
+        scope: 'especifico',
       },
     ],
+    get onlyofficeTools() {
+      return [...this.commonTools, ...this.specificTools];
+    },
     learningObjectives: [
-      { id: 'p5_obj1', title: 'Modelar colunas padronizadas para cadastro seguro de registros' },
-      { id: 'p5_obj2', title: 'Configurar validação de dados e menus suspensos de opções' },
-      { id: 'p5_obj3', title: 'Aplicar filtros avançados e ordenação por múltiplos critérios' },
-      { id: 'p5_obj4', title: 'Criar fórmulas estatísticas (ex: CONT.SE para totalizar categorias)' },
-      { id: 'p5_obj5', title: 'Gerar tabela de resumo com métricas consolidadas dos registros' },
-      { id: 'p5_obj6', title: 'Realizar testes práticos de busca e consulta ágil aos dados' },
+      ...COMMON_LEARNING_OBJECTIVES,
+      {
+        id: 'p4_spec1',
+        title: 'Configurar validação de dados para padronizar campos e evitar falhas de cadastro',
+        scope: 'especifico',
+        description: 'Desenvolvimento específico do grupo.',
+      },
+      {
+        id: 'p4_spec2',
+        title: 'Criar fórmulas com CONT.SE para totalizar automaticamente registros por categoria',
+        scope: 'especifico',
+        description: 'Desenvolvimento específico do grupo.',
+      },
+      {
+        id: 'p4_spec3',
+        title: 'Construir tabela de resumo com métricas e indicadores consolidados da base',
+        scope: 'especifico',
+        description: 'Desenvolvimento específico do grupo.',
+      },
     ],
   },
 ];
