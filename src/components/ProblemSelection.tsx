@@ -163,7 +163,7 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
         </p>
       </div>
 
-      {/* BLOCO 1: O BÁSICO COM O PROFESSOR (Comum a Todos os Grupos) */}
+      {/* BLOCO 1: APRENDENDO O BÁSICO (Comum a Todos os Grupos) */}
       <div className="max-w-6xl mx-auto bg-white border-2 border-slate-900 rounded-3xl p-6 sm:p-7 shadow-[4px_4px_0px_#0f172a]">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b-2 border-slate-900">
           <div className="flex items-center gap-3">
@@ -172,10 +172,10 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
             </div>
             <div>
               <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700 font-display">
-                AULAS GERAIS COMPARTILHADAS
+                BASE COMPARTILHADA DA TURMA
               </span>
               <h2 className="text-lg sm:text-xl font-display font-bold text-slate-900">
-                1. O Básico é com o Professor (Comum a Todos os Grupos)
+                Aprendendo o básico
               </h2>
             </div>
           </div>
@@ -186,17 +186,17 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
         </div>
 
         <p className="text-xs sm:text-sm text-slate-600 mt-3 mb-4 leading-relaxed">
-          Antes de cada grupo resolver sua missão individual, <strong className="text-slate-900">todos aprenderão os 4 pilares fundamentais de planilhas juntos em aula com o professor</strong>:
+          Antes de cada grupo resolver sua missão individual, <strong className="text-slate-900">todos aprenderão os fundamentos de planilhas juntos em aula</strong>:
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {COMMON_SPREADSHEET_TOOLS.map((tool, idx) => (
             <div
               key={idx}
               className="p-3.5 rounded-2xl bg-[#FAF9F5] border border-slate-300 space-y-1"
             >
               <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
-                Pilar 0{idx + 1}
+                Fundamento 0{idx + 1}
               </span>
               <strong className="text-slate-900 font-display font-bold text-xs block">
                 {tool.category}
@@ -209,7 +209,7 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
         </div>
       </div>
 
-      {/* BLOCO 2: OS ESPECÍFICOS COM CADA GRUPO (As 4 Missões) */}
+      {/* BLOCO 2: AGORA É COM VOCÊ (As 4 Missões) */}
       <div className="max-w-6xl mx-auto space-y-4">
         <div className="flex items-center justify-between">
           <div>
@@ -217,11 +217,11 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
               AUTONOMIA DO GRUPO
             </span>
             <h2 className="text-xl sm:text-2xl font-display font-bold text-slate-900">
-              2. Os Específicos com o seu Grupo (Escolha a sua Missão)
+              Agora é com você
             </h2>
           </div>
           <span className="text-xs font-semibold text-slate-500 hidden sm:inline">
-            Cada grupo aprofunda suas próprias fórmulas
+            Cada grupo aprofunda os desafios da sua empresa
           </span>
         </div>
 
@@ -277,11 +277,11 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
                       </p>
                     </div>
 
-                    {/* Recursos Específicos Desta Missão */}
+                    {/* Agora é com você (no seu grupo) */}
                     <div>
                       <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider block mb-1.5 flex items-center gap-1">
                         <Sparkles className="w-3 h-3 text-emerald-600" />
-                        Recursos Específicos que seu grupo irá desenvolver:
+                        Agora é com você (desenvolvimento do grupo):
                       </span>
                       <div className="space-y-1.5">
                         {problem.specificTools.map((tool, idx) => (
@@ -358,16 +358,16 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
             <div className="space-y-3 text-xs sm:text-sm">
               <div className="bg-[#FAF9F5] p-3.5 rounded-2xl border-2 border-slate-900">
                 <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider block mb-1">
-                  1. O Básico com o Professor:
+                  1. Aprendendo o básico:
                 </span>
                 <p className="text-slate-700 text-xs">
-                  Aulas gerais de estrutura de tabela, formatação de células, fórmulas básicas (SOMA, SUBTRAÇÃO) e filtros.
+                  Introdução ao ONLYOFFICE, criação de planilha, estrutura de tabela, formatação de células, fórmulas básicas (SOMA, SUBTRAÇÃO) e filtros.
                 </p>
               </div>
 
               <div className="bg-white p-3.5 rounded-2xl border-2 border-slate-900">
                 <span className="text-[10px] font-bold text-slate-900 uppercase tracking-wider block mb-1">
-                  2. Os Específicos com o seu Grupo:
+                  2. Agora é com você:
                 </span>
                 <p className="text-slate-900 text-xs font-semibold leading-relaxed">
                   {modalProblem.objective}

@@ -1,12 +1,22 @@
 import type { Problem, OnlyofficeTool, LearningObjective } from '../types';
 
 // ============================================================================
-// 1. O BÁSICO COM O PROFESSOR (Comum a todos — aula geral compartilhada)
+// 1. APRENDENDO O BÁSICO (Comum a todos — aula geral compartilhada)
 // ============================================================================
 export const COMMON_SPREADSHEET_TOOLS: OnlyofficeTool[] = [
   {
+    category: 'Introdução ao ONLYOFFICE',
+    details: 'Acesso à suíte, navegação pela interface, menus principais e salvamento na nuvem.',
+    scope: 'comum',
+  },
+  {
+    category: 'Criando uma Planilha',
+    details: 'Criação de nova pasta de trabalho, compreensão de linhas, colunas, células e intervalos.',
+    scope: 'comum',
+  },
+  {
     category: 'Estruturação de Tabela',
-    details: 'Criação de linhas e colunas organizadas, cabeçalhos claros e ajuste de largura.',
+    details: 'Criação de cabeçalhos claros, dimensionamento adequado de colunas e boas práticas de layout.',
     scope: 'comum',
   },
   {
@@ -29,32 +39,44 @@ export const COMMON_SPREADSHEET_TOOLS: OnlyofficeTool[] = [
 export const COMMON_LEARNING_OBJECTIVES: LearningObjective[] = [
   {
     id: 'core_obj1',
-    title: 'Estruturar tabela com cabeçalhos claros e boas práticas de layout',
+    title: 'Introdução ao ONLYOFFICE (conhecer a interface e navegação da suíte)',
     scope: 'comum',
-    description: 'Ensinado pelo professor para toda a turma.',
+    description: 'Aprendendo o básico em aula com o professor.',
   },
   {
     id: 'core_obj2',
-    title: 'Padronizar formatação de células e tipos de dados (texto, número, moeda R$)',
+    title: 'Criando uma planilha (criar novo arquivo e compreender linhas, colunas e células)',
     scope: 'comum',
-    description: 'Ensinado pelo professor para toda a turma.',
+    description: 'Aprendendo o básico em aula com o professor.',
   },
   {
     id: 'core_obj3',
-    title: 'Aplicar fórmulas matemáticas fundamentais (SOMA, subtração e média)',
+    title: 'Estruturar tabela com cabeçalhos claros e boas práticas de layout',
     scope: 'comum',
-    description: 'Ensinado pelo professor para toda a turma.',
+    description: 'Aprendendo o básico em aula com o professor.',
   },
   {
     id: 'core_obj4',
+    title: 'Padronizar formatação de células e tipos de dados (texto, número, moeda R$)',
+    scope: 'comum',
+    description: 'Aprendendo o básico em aula com o professor.',
+  },
+  {
+    id: 'core_obj5',
+    title: 'Aplicar fórmulas matemáticas fundamentais (SOMA, subtração e média)',
+    scope: 'comum',
+    description: 'Aprendendo o básico em aula com o professor.',
+  },
+  {
+    id: 'core_obj6',
     title: 'Configurar filtros no cabeçalho e ordenar registros com segurança',
     scope: 'comum',
-    description: 'Ensinado pelo professor para toda a turma.',
+    description: 'Aprendendo o básico em aula com o professor.',
   },
 ];
 
 // ============================================================================
-// 2. AS 4 SITUAÇÕES-PROBLEMA (Básico com o professor + Específico com o grupo)
+// 2. AS 4 MISSÕES (Aprendendo o básico + Agora é com você)
 // ============================================================================
 export const PROBLEMS_DATA: Problem[] = [
   {
@@ -101,19 +123,19 @@ export const PROBLEMS_DATA: Problem[] = [
         id: 'p1_spec1',
         title: 'Calcular receitas, despesas e o saldo final da empresa automaticamente',
         scope: 'especifico',
-        description: 'Desenvolvimento específico do grupo.',
+        description: 'Agora é com você: desenvolvimento do grupo.',
       },
       {
         id: 'p1_spec2',
         title: 'Configurar formatação condicional com cores para saldo positivo vs. negativo',
         scope: 'especifico',
-        description: 'Desenvolvimento específico do grupo.',
+        description: 'Agora é com você: desenvolvimento do grupo.',
       },
       {
         id: 'p1_spec3',
         title: 'Criar gráficos comparativos de receitas vs. despesas para análise da empresa',
         scope: 'especifico',
-        description: 'Desenvolvimento específico do grupo.',
+        description: 'Agora é com você: desenvolvimento do grupo.',
       },
     ],
   },
@@ -161,19 +183,19 @@ export const PROBLEMS_DATA: Problem[] = [
         id: 'p2_spec1',
         title: 'Calcular o saldo atual de estoque (entradas - saídas) e valor total investido',
         scope: 'especifico',
-        description: 'Desenvolvimento específico do grupo.',
+        description: 'Agora é com você: desenvolvimento do grupo.',
       },
       {
         id: 'p2_spec2',
         title: 'Aplicar formatação condicional com alerta visual para reposição de estoque mínimo',
         scope: 'especifico',
-        description: 'Desenvolvimento específico do grupo.',
+        description: 'Agora é com você: desenvolvimento do grupo.',
       },
       {
         id: 'p2_spec3',
         title: 'Gerar gráficos de movimentação e giro de produtos para tomada de decisão',
         scope: 'especifico',
-        description: 'Desenvolvimento específico do grupo.',
+        description: 'Agora é com você: desenvolvimento do grupo.',
       },
     ],
   },
@@ -221,19 +243,19 @@ export const PROBLEMS_DATA: Problem[] = [
         id: 'p3_spec1',
         title: 'Configurar lista suspensa com validação de dados para status das atividades',
         scope: 'especifico',
-        description: 'Desenvolvimento específico do grupo.',
+        description: 'Agora é com você: desenvolvimento do grupo.',
       },
       {
         id: 'p3_spec2',
         title: 'Aplicar formatação condicional para avisos visuais de prazos e tarefas atrasadas',
         scope: 'especifico',
-        description: 'Desenvolvimento específico do grupo.',
+        description: 'Agora é com você: desenvolvimento do grupo.',
       },
       {
         id: 'p3_spec3',
         title: 'Calcular dias restantes com fórmulas de data e gerar gráfico de progresso da equipe',
         scope: 'especifico',
-        description: 'Desenvolvimento específico do grupo.',
+        description: 'Agora é com você: desenvolvimento do grupo.',
       },
     ],
   },
@@ -281,19 +303,19 @@ export const PROBLEMS_DATA: Problem[] = [
         id: 'p4_spec1',
         title: 'Configurar validação de dados para padronizar campos e evitar falhas de cadastro',
         scope: 'especifico',
-        description: 'Desenvolvimento específico do grupo.',
+        description: 'Agora é com você: desenvolvimento do grupo.',
       },
       {
         id: 'p4_spec2',
         title: 'Criar fórmulas com CONT.SE para totalizar automaticamente registros por categoria',
         scope: 'especifico',
-        description: 'Desenvolvimento específico do grupo.',
+        description: 'Agora é com você: desenvolvimento do grupo.',
       },
       {
         id: 'p4_spec3',
         title: 'Construir tabela de resumo com métricas e indicadores consolidados da base',
         scope: 'especifico',
-        description: 'Desenvolvimento específico do grupo.',
+        description: 'Agora é com você: desenvolvimento do grupo.',
       },
     ],
   },

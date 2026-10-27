@@ -36,7 +36,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
   const percent = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
   const isAllCompleted = completedCount === totalCount && totalCount > 0;
 
-  // Separação explícita entre Comum (Professor) e Específico (Grupo)
+  // Separação explícita entre Aprendendo o básico e Agora é com você
   const commonObjectives = problem.learningObjectives.filter((o) => o.scope === 'comum');
   const specificObjectives = problem.learningObjectives.filter((o) => o.scope === 'especifico');
 
@@ -56,7 +56,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
         showToast(
           'success',
           'Etapa 1 Concluída!',
-          'Todas as metas (fundamentos e específicos da empresa) foram concluídas!'
+          'Todas as metas foram concluídas com sucesso!'
         );
       }
     } catch (err: any) {
@@ -76,7 +76,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             Metas de Planilha da Empresa
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 mt-1">
-            Aulas gerais compartilhadas com o professor + desenvolvimento específico do grupo para a{' '}
+            Aprendendo o básico com o professor + Agora é com você para a{' '}
             <strong className="text-slate-900 font-semibold">Missão {problem.number}: {problem.shortTitle}</strong>.
           </p>
         </div>
@@ -105,7 +105,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
         </div>
 
         {/* Medidor de Conclusão Global */}
-        <div className="w-full md:w-56 shrink-0 bg-white p-4 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_#0f172a]">
+        <div className="w-full md:w-60 shrink-0 bg-white p-4 rounded-xl border-2 border-slate-900 shadow-[2px_2px_0px_#0f172a]">
           <div className="flex items-center justify-between text-xs font-bold mb-1.5">
             <span className="text-slate-700">Progresso Geral:</span>
             <span className="text-slate-900 font-display text-sm">{percent}%</span>
@@ -118,14 +118,14 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
               style={{ width: `${percent}%` }}
             />
           </div>
-          <div className="flex justify-between items-center text-[10px] text-slate-500 mt-1 font-medium">
-            <span>Básico: {commonCompletedCount}/4</span>
-            <span>Específico: {specificCompletedCount}/3</span>
+          <div className="flex justify-between items-center text-[10px] text-slate-500 mt-1.5 font-medium">
+            <span>Básico: {commonCompletedCount}/6</span>
+            <span>Agora é com você: {specificCompletedCount}/3</span>
           </div>
         </div>
       </div>
 
-      {/* SEÇÃO 1: O BÁSICO COM O PROFESSOR (COMUM A TODOS) */}
+      {/* SEÇÃO 1: APRENDENDO O BÁSICO */}
       <div className="space-y-3.5">
         <div className="flex items-center justify-between pb-2 border-b border-slate-200">
           <div className="flex items-center gap-2">
@@ -134,7 +134,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             </div>
             <div>
               <h4 className="text-sm font-display font-bold text-slate-900">
-                1. O Básico com o Professor (Comum a Todos)
+                1. Aprendendo o básico
               </h4>
               <p className="text-[11px] text-slate-500">
                 Conteúdos fundamentais ensinados pelo professor em aula para toda a turma
@@ -182,7 +182,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                       {obj.title}
                     </span>
                     <span className="block text-[10px] text-slate-400 mt-0.5">
-                      Pilar Geral #{index + 1} • Praticado na aula geral com o professor
+                      Fundamento #{index + 1} • Aprendendo o básico em aula
                     </span>
                   </div>
                 </div>
@@ -202,7 +202,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
         </div>
       </div>
 
-      {/* SEÇÃO 2: OS ESPECÍFICOS COM O GRUPO (AUTONOMIA DA EMPRESA) */}
+      {/* SEÇÃO 2: AGORA É COM VOCÊ */}
       <div className="space-y-3.5">
         <div className="flex items-center justify-between pb-2 border-b border-slate-200">
           <div className="flex items-center gap-2">
@@ -211,7 +211,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             </div>
             <div>
               <h4 className="text-sm font-display font-bold text-slate-900">
-                2. Os Específicos com o seu Grupo (Autonomia da Empresa)
+                2. Agora é com você
               </h4>
               <p className="text-[11px] text-slate-500">
                 Desafios e fórmulas exclusivas para a situação-problema escolhida pela sua equipe
@@ -259,7 +259,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                       {obj.title}
                     </span>
                     <span className="block text-[10px] text-slate-400 mt-0.5">
-                      Meta Específica #{index + 1} • Fórmulas exclusivas da sua empresa
+                      Meta Específica #{index + 1} • Agora é com você: fórmulas da sua empresa
                     </span>
                   </div>
                 </div>
@@ -287,10 +287,10 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
         </h4>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Coluna 1: Comum (Professor) */}
+          {/* Coluna 1: Aprendendo o básico */}
           <div className="p-4 rounded-2xl bg-[#FAF9F5] border-2 border-slate-900 space-y-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-700 block">
-              👨‍🏫 Ensinado pelo Professor em Aula:
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-700 block font-display">
+              👨‍🏫 Aprendendo o básico:
             </span>
             <ul className="space-y-1.5 text-xs">
               {problem.commonTools.map((tool, idx) => (
@@ -302,10 +302,10 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             </ul>
           </div>
 
-          {/* Coluna 2: Específico (Grupo) */}
+          {/* Coluna 2: Agora é com você */}
           <div className="p-4 rounded-2xl bg-white border-2 border-slate-900 shadow-[3px_3px_0px_#22c55e] space-y-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block">
-              🚀 Aprofundado pelo seu Grupo:
+            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 block font-display">
+              🚀 Agora é com você:
             </span>
             <ul className="space-y-1.5 text-xs">
               {problem.specificTools.map((tool, idx) => (

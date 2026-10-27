@@ -154,7 +154,7 @@ export const App: React.FC = () => {
                   }`}
                 >
                   <FileSpreadsheet className="w-4 h-4" />
-                  Missões com Planilhas
+                  Missões
                   {selectedProblem && (
                     <span className="w-2 h-2 rounded-full bg-emerald-500 ml-0.5" />
                   )}
