@@ -2,25 +2,31 @@
 
 @layer base {
   :root {
-    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
   body {
     font-family: var(--font-sans);
     color: #0f172a;
-    background-color: #f8fafc;
+    background-color: #F8F8F5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
   }
 }
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #F8F8F5;
 }
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
@@ -28,4 +34,78 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Utility classes for Image 1 / Image 2 Neo-Editorial Design */
+.neo-card {
+  background: #ffffff;
+  border: 2px solid #0f172a;
+  border-radius: 1.5rem;
+  box-shadow: 4px 4px 0px 0px #0f172a;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0px 0px #0f172a;
+}
+
+.neo-card-sm {
+  background: #ffffff;
+  border: 1.5px solid #0f172a;
+  border-radius: 1rem;
+  box-shadow: 3px 3px 0px 0px #0f172a;
+}
+
+.neo-button {
+  border: 1.5px solid #0f172a;
+  border-radius: 9999px;
+  box-shadow: 2px 2px 0px 0px #0f172a;
+  transition: all 0.15s ease-out;
+}
+
+.neo-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 3px 3px 0px 0px #0f172a;
+}
+
+.neo-button:active {
+  transform: translateY(1px);
+  box-shadow: 1px 1px 0px 0px #0f172a;
+}
+
+/* Green Highlight with Corner Anchor Dots (exact match to Image 1's "handwritten" word) */
+.highlight-anchor {
+  position: relative;
+  display: inline-block;
+  background-color: #dcfce7;
+  border: 1.5px solid #4ade80;
+  border-radius: 4px;
+  padding: 0 0.45rem;
+  margin: 0 0.2rem;
+  color: #0f172a;
+}
+
+.highlight-anchor::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 7px;
+  height: 7px;
+  background-color: #22c55e;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+}
+
+.highlight-anchor::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 7px;
+  height: 7px;
+  background-color: #22c55e;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
 }
