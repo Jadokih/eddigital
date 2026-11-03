@@ -14,7 +14,6 @@ import {
 } from 'lucide-react';
 import type { LessonData } from '../../data/lessonsData';
 import { MenuPath } from '../ui/MenuPath';
-import { SpreadsheetMockup } from '../ui/SpreadsheetMockup';
 import { TipCallout } from '../ui/TipCallout';
 import { SelfChecklist } from '../ui/SelfChecklist';
 
@@ -160,23 +159,6 @@ export const LessonModal: React.FC<LessonModalProps> = ({
               ))}
             </div>
           </div>
-
-          {/* Demonstração Visual de Planilha */}
-          {lesson.mockup && (
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-slate-700 font-semibold text-xs">
-                <BookOpen className="w-4 h-4 text-slate-600" />
-                <span>Exemplo visual na planilha</span>
-              </div>
-              <SpreadsheetMockup
-                title={lesson.mockup.title}
-                formulaBar={lesson.mockup.formulaBar}
-                columns={lesson.mockup.columns}
-                rows={lesson.mockup.rows}
-                caption={lesson.mockup.caption}
-              />
-            </div>
-          )}
 
           {/* Seção D: Dica Anti-Erro / Macete de Sala de Aula */}
           <TipCallout type={lesson.tip.type} title={lesson.tip.title}>

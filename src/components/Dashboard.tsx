@@ -179,7 +179,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
               {selectedProblem
                 ? progressPercent === 100
                   ? 'Sua equipe dominou todos os fundamentos e desafios. Salve seu arquivo no formato .xlsx e faça o envio na Central de Entregas.'
-                  : `Sua equipe completou ${completedCount} de ${totalCount} habilidades de planilha. Acesse a trilha com passos ilustrados no ONLYOFFICE.`
+                  : `Sua equipe completou ${completedCount} de ${totalCount} habilidades de planilha. Acesse a trilha com orientações práticas no ONLYOFFICE.`
                 : 'Cada empresa deve escolher um desafio real de mercado (Finanças, Estoque, Prazos ou Cadastros) para resolver ao longo do ano letivo.'}
             </p>
           </div>

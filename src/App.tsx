@@ -235,6 +235,7 @@ export const App: React.FC = () => {
                 problem={selectedProblem}
                 onToggleObjective={handleToggleObjective}
                 onChangeProblem={() => setActiveSection('problems')}
+                onNavigateDeliveries={() => setActiveSection('deliveries')}
                 showToast={showToast}
               />
             )}
@@ -251,6 +252,7 @@ export const App: React.FC = () => {
                   problem={selectedProblem}
                   onToggleObjective={handleToggleObjective}
                   onChangeProblem={() => setActiveSection('problems')}
+                  onNavigateDeliveries={() => setActiveSection('deliveries')}
                   showToast={showToast}
                 />
               </div>
