@@ -109,7 +109,7 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
       <div className="ed-card p-6 sm:p-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display block mb-1">
+            <span className="text-xs font-bold text-slate-700 uppercase tracking-widest font-display block mb-1">
               CENTRAL DE ENTREGAS • ARQUIVOS ONLYOFFICE
             </span>
             <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 tracking-tight">Minhas Entregas</h2>

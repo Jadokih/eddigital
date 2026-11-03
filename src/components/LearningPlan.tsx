@@ -118,7 +118,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
         </div>
 
         {/* Barra de Ação Rápida: Próxima Aula & Progresso Geral */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center p-5 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 text-white shadow-sm">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center p-5 sm:p-6 rounded-2xl ed-card-dark text-white shadow-sm">
           <div className="md:col-span-2 space-y-1.5">
             <span className="text-[10px] uppercase font-bold tracking-wider text-emerald-400">
               Próxima Aula Recomendada
@@ -126,7 +126,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             <h4 className="text-base sm:text-lg font-bold text-white tracking-tight">
               {nextPendingObjective ? nextPendingObjective.title : 'Todas as aulas concluídas!'}
             </h4>
-            <p className="text-xs text-slate-300">
+            <p className="text-xs sm:text-sm text-slate-200 font-normal leading-relaxed">
               {isAllCompleted
                 ? 'Sua equipe completou todas as habilidades. Agora é só gerar o arquivo .xlsx e enviar!'
                 : 'Abra o guia passo a passo com exemplos visuais no ONLYOFFICE para executar sem travar.'}
@@ -147,11 +147,11 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             )}
 
             <div className="w-full md:w-48 space-y-1">
-              <div className="flex justify-between text-[11px] font-medium text-slate-300">
+              <div className="flex justify-between text-xs font-semibold text-slate-200">
                 <span>Progresso Total</span>
                 <span className="font-bold text-emerald-400">{percent}%</span>
               </div>
-              <div className="w-full bg-slate-700/60 h-2 rounded-full overflow-hidden">
+              <div className="w-full bg-slate-800/80 h-2 rounded-full overflow-hidden border border-slate-700">
                 <div
                   className="bg-emerald-400 h-full rounded-full transition-all duration-300 ease-out"
                   style={{ width: `${percent}%` }}
@@ -200,7 +200,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
               >
                 <div className="space-y-2">
                   <div className="flex items-start justify-between gap-2">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600">
                       Aula #{index + 1} • Básico
                     </span>
                     {isCompleted && (
@@ -214,7 +214,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                     {lesson?.title || obj.title}
                   </h5>
 
-                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-700 line-clamp-2 leading-relaxed">
                     {lesson?.learningGoal || obj.description}
                   </p>
                 </div>
@@ -236,7 +236,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                     className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
                       isCompleted
                         ? 'bg-emerald-600 border-emerald-600 text-white'
-                        : 'border-slate-300 text-slate-400 hover:border-slate-900 hover:text-slate-900'
+                        : 'border-slate-300 text-slate-500 hover:border-slate-900 hover:text-slate-900'
                     }`}
                     title={isCompleted ? 'Desmarcar aula' : 'Marcar como dominada'}
                   >
@@ -301,7 +301,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                     {lesson?.title || obj.title}
                   </h5>
 
-                  <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
+                  <p className="text-xs text-slate-700 line-clamp-3 leading-relaxed">
                     {lesson?.learningGoal || obj.description}
                   </p>
                 </div>
@@ -323,7 +323,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                     className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
                       isCompleted
                         ? 'bg-emerald-600 border-emerald-600 text-white'
-                        : 'border-slate-300 text-slate-400 hover:border-slate-900 hover:text-slate-900'
+                        : 'border-slate-300 text-slate-500 hover:border-slate-900 hover:text-slate-900'
                     }`}
                     title={isCompleted ? 'Desmarcar desafio' : 'Marcar como concluído'}
                   >

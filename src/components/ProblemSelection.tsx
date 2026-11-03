@@ -132,20 +132,20 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
       <div className="ed-card p-6 sm:p-8 space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-700 font-display">
               EDUCAÇÃO DIGITAL • ETAPA 1
             </span>
             <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 tracking-tight">
               Escolha a Missão Prática da sua Empresa
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-700 max-w-3xl leading-relaxed">
               Cada grupo escolhe uma situação real de mercado para resolver através de planilhas eletrônicas no
               ONLYOFFICE. Toda a turma aprende os fundamentos comuns em aula, e a sua equipe desenvolve os desafios
               específicos da missão escolhida.
             </p>
           </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 self-start md:self-auto shrink-0">
-            <Compass className="w-4 h-4 text-slate-700" />
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-300 text-xs font-bold text-slate-800 self-start md:self-auto shrink-0">
+            <Compass className="w-4 h-4 text-slate-800" />
             <span>4 Situações-Problema</span>
           </div>
         </div>
@@ -153,7 +153,7 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
 
       {/* BLOCO 1: FUNDAMENTOS BÁSICOS COMPARTILHADOS */}
       <div className="ed-card p-6 space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-200">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center text-xs">
               <GraduationCap className="w-4 h-4 text-emerald-400" />
@@ -162,12 +162,12 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
               <h4 className="text-sm sm:text-base font-display font-bold text-slate-900">
                 1. Aprendendo o básico (Compartilhado com toda a turma)
               </h4>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-600 font-medium">
                 Habilidades essenciais ensinadas pelo professor em aula antes dos desafios
               </p>
             </div>
           </div>
-          <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 hidden sm:inline">
+          <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 hidden sm:inline">
             6 Fundamentos Comuns
           </span>
         </div>
@@ -175,13 +175,13 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {COMMON_SPREADSHEET_TOOLS.map((tool, idx) => (
             <div key={idx} className="p-3 rounded-xl bg-[#F8FAFC] border border-slate-200/80 space-y-1">
-              <span className="text-[10px] font-bold text-slate-400 block uppercase">
+              <span className="text-[10px] font-bold text-slate-600 block uppercase">
                 Aula #{idx + 1}
               </span>
               <strong className="text-slate-900 text-xs font-semibold block leading-tight">
                 {tool.category}
               </strong>
-              <p className="text-slate-600 text-[11px] leading-snug line-clamp-2">
+              <p className="text-slate-700 text-[11px] leading-snug line-clamp-2">
                 {tool.details}
               </p>
             </div>
@@ -193,14 +193,14 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-700 font-display">
               AUTONOMIA DO GRUPO
             </span>
             <h3 className="text-xl sm:text-2xl font-display font-bold text-slate-900">
               2. Agora é com você — Escolha sua Missão
             </h3>
           </div>
-          <span className="text-xs font-medium text-slate-500 hidden sm:inline">
+          <span className="text-xs font-semibold text-slate-600 hidden sm:inline">
             Clique na missão desejada para vincular a empresa
           </span>
         </div>
@@ -307,7 +307,7 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
           <div className="bg-white rounded-3xl border border-slate-200 shadow-xl max-w-lg w-full p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div>
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">
+                <span className="text-xs font-bold text-slate-700 uppercase tracking-widest font-display">
                   CONFIRMAR MISSÃO 0{modalProblem.number}
                 </span>
                 <h3 className="text-lg font-display font-bold text-slate-900">

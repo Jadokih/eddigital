@@ -133,17 +133,17 @@ export const Dashboard: React.FC<DashboardProps> = ({
         {/* Informações da Equipe e Proposta */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-1.5">
-            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">
+            <h4 className="text-xs font-bold text-slate-700 uppercase tracking-widest font-display">
               Proposta de Valor da Empresa
             </h4>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed bg-[#FAF9F5] p-4 rounded-xl border border-slate-200">
+            <p className="text-xs sm:text-sm text-slate-800 leading-relaxed bg-[#FAF9F5] p-4 rounded-xl border border-slate-200">
               {group.description || 'Nenhuma descrição informada pela equipe.'}
             </p>
           </div>
 
           <div className="space-y-1.5">
-            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display flex items-center gap-1.5">
-              <Users className="w-3.5 h-3.5 text-slate-600" />
+            <h4 className="text-xs font-bold text-slate-700 uppercase tracking-widest font-display flex items-center gap-1.5">
+              <Users className="w-3.5 h-3.5 text-slate-700" />
               <span>Sócios Fundadores ({membersList.length})</span>
             </h4>
             <div className="flex flex-wrap gap-1.5">
@@ -151,13 +151,13 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 membersList.map((member, idx) => (
                   <span
                     key={idx}
-                    className="px-2.5 py-1 rounded-lg bg-white text-slate-800 text-xs font-medium border border-slate-200 shadow-2xs"
+                    className="px-2.5 py-1 rounded-lg bg-white text-slate-900 text-xs font-semibold border border-slate-300 shadow-2xs"
                   >
                     {member}
                   </span>
                 ))
               ) : (
-                <span className="text-xs text-slate-400">Nenhum integrante cadastrado.</span>
+                <span className="text-xs text-slate-500 font-medium">Nenhum integrante cadastrado.</span>
               )}
             </div>
           </div>
@@ -167,10 +167,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
       {/* 2 & 3. PERGUNTAS: EM QUE ETAPA ESTAMOS? E O QUE FAZER AGORA? */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
         {/* Card de Ação Principal em Destaque (Call to Action Primário) */}
-        <div className="md:col-span-2 ed-card p-6 sm:p-7 bg-gradient-to-br from-slate-900 to-slate-800 text-white flex flex-col justify-between gap-5 shadow-sm">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider">
-              <Compass className="w-4 h-4" />
+        <div className="md:col-span-2 ed-card-dark p-6 sm:p-7 text-white flex flex-col justify-between gap-5 shadow-sm">
+          <div className="space-y-2.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+              <Compass className="w-3.5 h-3.5 text-emerald-400" />
               <span>O que sua empresa precisa fazer agora?</span>
             </div>
 
@@ -182,7 +182,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 : 'Definir a Situação-Problema da Empresa'}
             </h3>
 
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl">
+            <p className="text-sm text-slate-200 leading-relaxed max-w-xl font-normal">
               {selectedProblem
                 ? progressPercent === 100
                   ? 'Sua equipe dominou todos os fundamentos e desafios. Salve seu arquivo no formato .xlsx e faça o envio na Central de Entregas.'
@@ -218,9 +218,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
               <button
                 type="button"
                 onClick={onNavigateDeliveries}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-100 text-xs font-semibold border border-slate-700 transition-colors cursor-pointer"
               >
-                <UploadCloud className="w-3.5 h-3.5 text-slate-400" />
+                <UploadCloud className="w-3.5 h-3.5 text-slate-300" />
                 <span>Ver Minhas Entregas</span>
               </button>
             )}
@@ -230,42 +230,42 @@ export const Dashboard: React.FC<DashboardProps> = ({
         {/* Painel Lateral: Métricas de Aprendizagem */}
         <div className="ed-card p-6 flex flex-col justify-between gap-4">
           <div className="space-y-3">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display block">
+            <span className="text-xs font-bold text-slate-700 uppercase tracking-widest font-display block">
               Status da Aprendizagem
             </span>
 
             {selectedProblem ? (
               <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs font-semibold text-slate-700">
+                <div className="flex items-center justify-between text-xs font-semibold text-slate-800">
                   <span>Habilidades Dominadas</span>
-                  <span className="font-bold text-slate-900">{progressPercent}%</span>
+                  <span className="font-bold text-slate-950 text-sm">{progressPercent}%</span>
                 </div>
-                <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden border border-slate-200">
                   <div
                     className="bg-emerald-500 h-full rounded-full transition-all duration-300"
                     style={{ width: `${progressPercent}%` }}
                   />
                 </div>
-                <p className="text-[11px] text-slate-500 pt-1">
+                <p className="text-xs text-slate-600 font-medium pt-1">
                   {completedCount} de {totalCount} aulas e desafios concluídos pela turma.
                 </p>
               </div>
             ) : (
-              <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-1">
-                <p className="font-bold">Missão Pendente</p>
-                <p className="text-[11px] text-amber-800">
+              <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-300 text-xs text-amber-950 space-y-1">
+                <p className="font-bold text-amber-900">Missão Pendente</p>
+                <p className="text-xs text-amber-900 font-medium">
                   Escolha um dos 4 desafios de planilhas para liberar a trilha de aulas do grupo.
                 </p>
               </div>
             )}
           </div>
 
-          <div className="pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
-            <span className="flex items-center gap-1 font-medium">
-              <FileSpreadsheet className="w-3.5 h-3.5 text-slate-500" />
+          <div className="pt-3 border-t border-slate-200 text-xs text-slate-700 flex items-center justify-between">
+            <span className="flex items-center gap-1.5 font-semibold text-slate-800">
+              <FileSpreadsheet className="w-4 h-4 text-emerald-600" />
               Suíte ONLYOFFICE
             </span>
-            <span className="text-[10px] uppercase font-bold text-slate-400">Etapa 1 de 3</span>
+            <span className="text-[11px] uppercase font-bold text-slate-600 tracking-wider">Etapa 1 de 3</span>
           </div>
         </div>
       </div>

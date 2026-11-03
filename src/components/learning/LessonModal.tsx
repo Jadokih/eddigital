@@ -120,8 +120,8 @@ export const LessonModal: React.FC<LessonModalProps> = ({
 
           {/* Seção B: O que você precisa fazer? */}
           <div className="space-y-1.5">
-            <div className="flex items-center gap-2 text-slate-500 font-bold text-xs uppercase tracking-wider font-display">
-              <Target className="w-4 h-4 text-slate-700" />
+            <div className="flex items-center gap-2 text-slate-700 font-bold text-xs uppercase tracking-wider font-display">
+              <Target className="w-4 h-4 text-slate-800" />
               <span>O que precisa fazer na sua planilha?</span>
             </div>
             <p className="text-sm font-semibold text-slate-900 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
@@ -131,8 +131,8 @@ export const LessonModal: React.FC<LessonModalProps> = ({
 
           {/* Seção C: Como fazer? Passo a Passo Visual */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2 text-slate-500 font-bold text-xs uppercase tracking-wider font-display">
-              <ListOrdered className="w-4 h-4 text-slate-700" />
+            <div className="flex items-center gap-2 text-slate-700 font-bold text-xs uppercase tracking-wider font-display">
+              <ListOrdered className="w-4 h-4 text-slate-800" />
               <span>Como fazer? (Passo a passo no ONLYOFFICE)</span>
             </div>
 
@@ -153,7 +153,7 @@ export const LessonModal: React.FC<LessonModalProps> = ({
                           <MenuPath steps={step.menuPath} />
                         </div>
                       )}
-                      <p className="text-xs text-slate-600 leading-relaxed pt-1">{step.detail}</p>
+                      <p className="text-xs text-slate-700 leading-relaxed pt-1">{step.detail}</p>
                     </div>
                   </div>
                 </div>
@@ -164,8 +164,8 @@ export const LessonModal: React.FC<LessonModalProps> = ({
           {/* Demonstração Visual de Planilha */}
           {lesson.mockup && (
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-slate-500 font-bold text-xs uppercase tracking-wider font-display">
-                <BookOpen className="w-4 h-4 text-slate-700" />
+              <div className="flex items-center gap-2 text-slate-700 font-bold text-xs uppercase tracking-wider font-display">
+                <BookOpen className="w-4 h-4 text-slate-800" />
                 <span>Exemplo visual na planilha</span>
               </div>
               <SpreadsheetMockup
