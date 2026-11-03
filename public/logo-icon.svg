@@ -1,37 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <!-- Fundo Midnight com curvatura nobre -->
-  <rect width="64" height="64" rx="16" fill="#060913" />
-  <rect width="64" height="64" rx="16" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+  <!-- Símbolo Autoral: Prisma Grid Founders Grid -->
+  <rect width="64" height="64" rx="16" fill="#18181B" />
+  <rect width="64" height="64" rx="16" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" />
   
-  <!-- Prisma Grid: Quadrante Superior Esquerdo -->
-  <path d="M32 12L16 22V38L32 28V12Z" fill="url(#prism-left)" stroke="#0E2338" stroke-width="0.75" />
+  <!-- Quadrante Superior Esquerdo -->
+  <path d="M32 12L16 22V38L32 28V12Z" fill="url(#prism-left)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
   
-  <!-- Prisma Grid: Quadrante Superior Direito -->
-  <path d="M32 12L48 22V38L32 28V12Z" fill="url(#prism-right)" stroke="#0E2338" stroke-width="0.75" />
+  <!-- Quadrante Superior Direito -->
+  <path d="M32 12L48 22V38L32 28V12Z" fill="url(#prism-right)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
   
-  <!-- Prisma Grid: Base Frontal / Grid -->
-  <path d="M16 38L32 48L48 38L32 28L16 38Z" fill="url(#prism-base)" stroke="rgba(16, 231, 157, 0.25)" stroke-width="0.75" />
+  <!-- Base do Prisma Grid -->
+  <path d="M16 38L32 48L48 38L32 28L16 38Z" fill="url(#prism-base)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="0.75" />
   
-  <!-- Linhas Internas do Grid de Construção -->
-  <path d="M24 33L40 43" stroke="rgba(16, 231, 157, 0.35)" stroke-width="1" stroke-linecap="round" />
-  <path d="M40 33L24 43" stroke="rgba(16, 231, 157, 0.35)" stroke-width="1" stroke-linecap="round" />
+  <!-- Linhas Conectoras do Grid de Construção -->
+  <path d="M24 33L40 43" stroke="rgba(255, 255, 255, 0.25)" stroke-width="1" stroke-linecap="round" />
+  <path d="M40 33L24 43" stroke="rgba(255, 255, 255, 0.25)" stroke-width="1" stroke-linecap="round" />
   
-  <!-- Vértice Central Luminoso (Ascensão de Ideias) -->
-  <circle cx="32" cy="28" r="3" fill="#10E79D" />
-  <circle cx="32" cy="28" r="6" stroke="rgba(16, 231, 157, 0.4)" stroke-width="1" />
+  <!-- Vértice Central Luminoso (Nó de Criação em Grafite Prateado) -->
+  <circle cx="32" cy="28" r="3" fill="#E4E4E7" />
+  <circle cx="32" cy="28" r="6" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1" />
   
   <defs>
     <linearGradient id="prism-left" x1="16" y1="12" x2="32" y2="38" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0F243A" />
-      <stop offset="1" stop-color="#07121E" />
+      <stop stop-color="#27272A" />
+      <stop offset="1" stop-color="#18181B" />
     </linearGradient>
     <linearGradient id="prism-right" x1="48" y1="12" x2="32" y2="38" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#163854" />
-      <stop offset="1" stop-color="#0B1C2A" />
+      <stop stop-color="#3F3F46" />
+      <stop offset="1" stop-color="#27272A" />
     </linearGradient>
     <linearGradient id="prism-base" x1="16" y1="28" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#09202D" />
-      <stop offset="1" stop-color="#06121B" />
+      <stop stop-color="#1F1F23" />
+      <stop offset="1" stop-color="#111113" />
     </linearGradient>
   </defs>
 </svg>

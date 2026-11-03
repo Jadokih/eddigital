@@ -6,7 +6,6 @@ import {
   ArrowRight,
   UploadCloud,
   FileSpreadsheet,
-  Target,
   Sparkles,
   Compass,
 } from 'lucide-react';
@@ -46,13 +45,13 @@ export const Dashboard: React.FC<DashboardProps> = ({
   ) || selectedProblem?.learningObjectives[0];
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto py-4">
-      {/* 1. IDENTIFICAÇÃO EDITORIAL DA EMPRESA (ESTRUTURA ABERTA, SEM CAIXA REDUNDANTE) */}
-      <section className="space-y-4 pb-6 border-b border-zinc-200/80">
+    <div className="space-y-12 max-w-5xl mx-auto py-6">
+      {/* 1. IDENTIFICAÇÃO EDITORIAL DA EMPRESA (ESTRUTURA ABERTA) */}
+      <section className="space-y-4 pb-8 border-b border-zinc-200/70">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-start sm:items-center gap-4 sm:gap-5">
             {/* Logo da Empresa */}
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border border-zinc-200 shrink-0 bg-zinc-900 flex items-center justify-center text-white shadow-2xs">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border border-zinc-200/80 shrink-0 bg-zinc-900 flex items-center justify-center text-white shadow-2xs">
               {group.logo_url ? (
                 <img
                   src={group.logo_url}
@@ -98,14 +97,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
           <button
             type="button"
             onClick={onEditCompany}
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-700 text-xs font-medium border border-zinc-200 transition-colors cursor-pointer shrink-0 self-start sm:self-auto"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-700 text-xs font-medium border border-zinc-200/80 transition-colors cursor-pointer shrink-0 self-start sm:self-auto"
           >
             <Edit3 className="w-3.5 h-3.5 text-zinc-400" />
             <span>Editar perfil</span>
           </button>
         </div>
 
-        {/* Sócios Fundadores em linha de texto pura, sem mini-cards ao redor de cada nome */}
+        {/* Sócios Fundadores em linha de texto pura */}
         {membersList.length > 0 && (
           <div className="text-xs text-zinc-500 flex flex-wrap items-center gap-x-1.5 gap-y-1 pt-1">
             <span className="font-medium text-zinc-700">Equipe fundadora:</span>
@@ -114,135 +113,121 @@ export const Dashboard: React.FC<DashboardProps> = ({
         )}
       </section>
 
-      {/* 2. PAINEL INTEGRADO: UM ÚNICO NÍVEL DE CARD PARA O TRABALHO DO DIA */}
-      <section className="liquid-glass p-6 sm:p-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Lado Esquerdo (2 colunas): Atividade do Dia em Aberto */}
-          <div className="lg:col-span-2 flex flex-col justify-between space-y-6">
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-zinc-400 text-xs font-normal uppercase tracking-wider">
-                <Compass className="w-3.5 h-3.5" />
-                <span>Atividade do Dia</span>
-              </div>
-
-              <h3
-                className="text-2xl sm:text-3xl font-serif text-zinc-900 tracking-tight font-normal leading-snug"
-                style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
-              >
-                {selectedProblem
-                  ? progressPercent === 100
-                    ? 'Todas as metas dominadas: faça a entrega da planilha'
-                    : nextObjective?.title || 'Continuar atividade de planilhas'
-                  : 'Selecione a situação-problema da sua empresa'}
-              </h3>
-
-              <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal max-w-xl">
-                {selectedProblem
-                  ? progressPercent === 100
-                    ? 'Sua equipe completou todas as habilidades e desafios da Etapa 1. Salve o arquivo em formato .xlsx e faça a submissão na Central de Entregas.'
-                    : nextObjective?.description ||
-                      `Sua equipe já completou ${completedCount} de ${totalCount} habilidades de planilha. Acesse a trilha com passos ilustrados no ONLYOFFICE.`
-                  : 'Defina qual situação-problema sua empresa vai resolver com planilhas para liberar a trilha de aulas e desafios práticos.'}
-              </p>
-            </div>
-
-            {/* Ações Diretas */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              {selectedProblem && progressPercent === 100 && onNavigateDeliveries ? (
-                <button
-                  type="button"
-                  onClick={onNavigateDeliveries}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs sm:text-sm transition-all cursor-pointer shadow-sm hover:shadow"
-                >
-                  <UploadCloud className="w-4 h-4" />
-                  <span>Entregar planilha (.xlsx)</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={onContinueActivity}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs sm:text-sm transition-all cursor-pointer shadow-sm hover:shadow"
-                >
-                  <PlayCircle className="w-4 h-4" />
-                  <span>{selectedProblem ? 'Abrir Plano de Aulas' : 'Escolher Missão da Empresa'}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              )}
-
-              {onNavigateDeliveries && selectedProblem && (
-                <button
-                  type="button"
-                  onClick={onNavigateDeliveries}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-800 text-xs font-medium border border-zinc-200 transition-colors cursor-pointer"
-                >
-                  <UploadCloud className="w-3.5 h-3.5 text-zinc-400" />
-                  <span>Ver Minhas Entregas</span>
-                </button>
-              )}
-            </div>
+      {/* 2. ATIVIDADE DO DIA (DESTAQUE MÁXIMO EM LAYOUT ABERTO, SEM CARD) */}
+      <section className="space-y-5">
+        <div className="space-y-3">
+          <div className="flex items-center gap-2 text-zinc-400 text-xs font-mono tracking-widest uppercase">
+            <Compass className="w-3.5 h-3.5 text-zinc-400" />
+            <span>Atividade do Dia</span>
           </div>
 
-          {/* Lado Direito (1 coluna): Metas e Status (Sem caixas aninhadas) */}
-          <div className="lg:border-l lg:border-zinc-200/80 lg:pl-8 flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between text-xs text-zinc-400 uppercase tracking-wider font-normal">
-                <span>Progresso da Empresa</span>
-                <Target className="w-4 h-4 text-zinc-400" />
-              </div>
+          <h3
+            className="text-3xl sm:text-4xl lg:text-5xl font-serif text-zinc-950 tracking-tight font-normal leading-[1.15]"
+            style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
+          >
+            {selectedProblem
+              ? progressPercent === 100
+                ? 'Todas as metas dominadas: faça a entrega da planilha'
+                : nextObjective?.title || 'Continuar atividade de planilhas'
+              : 'Selecione a situação-problema da sua empresa'}
+          </h3>
 
-              {selectedProblem ? (
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex items-baseline justify-between mb-1.5">
-                      <span className="text-xs text-zinc-500 font-normal">Habilidades dominadas</span>
-                      <span
-                        className="text-2xl font-serif text-zinc-900 tabular-nums font-normal"
-                        style={{ fontFamily: "'Instrument Serif', serif" }}
-                      >
-                        {progressPercent}%
-                      </span>
-                    </div>
+          <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-normal max-w-2xl">
+            {selectedProblem
+              ? progressPercent === 100
+                ? 'Sua equipe completou todas as habilidades e desafios da Etapa 1. Salve o arquivo em formato .xlsx e faça a submissão na Central de Entregas.'
+                : nextObjective?.description ||
+                  `Sua equipe já completou ${completedCount} de ${totalCount} habilidades de planilha. Acesse a trilha com passos ilustrados no ONLYOFFICE.`
+              : 'Defina qual situação-problema sua empresa vai resolver com planilhas para liberar a trilha de aulas e desafios práticos.'}
+          </p>
+        </div>
 
-                    <div className="w-full bg-zinc-100 h-1.5 rounded-full overflow-hidden">
-                      <div
-                        className="bg-zinc-900 h-full rounded-full transition-all duration-300"
-                        style={{ width: `${progressPercent}%` }}
-                      />
-                    </div>
+        {/* Ações Diretas Posicionadas Logo Abaixo */}
+        <div className="flex flex-wrap items-center gap-4 pt-2">
+          {selectedProblem && progressPercent === 100 && onNavigateDeliveries ? (
+            <button
+              type="button"
+              onClick={onNavigateDeliveries}
+              className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white font-medium text-sm transition-all cursor-pointer shadow-sm hover:shadow"
+            >
+              <UploadCloud className="w-4 h-4" />
+              <span>Entregar planilha (.xlsx)</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={onContinueActivity}
+              className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white font-medium text-sm transition-all cursor-pointer shadow-sm hover:shadow"
+            >
+              <PlayCircle className="w-4 h-4" />
+              <span>{selectedProblem ? 'Abrir Plano de Aulas' : 'Escolher Missão da Empresa'}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          )}
 
-                    <p className="text-xs text-zinc-500 font-normal mt-1.5">
-                      {completedCount} de {totalCount} aulas e desafios concluídos
-                    </p>
-                  </div>
+          {onNavigateDeliveries && selectedProblem && (
+            <button
+              type="button"
+              onClick={onNavigateDeliveries}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-transparent hover:bg-zinc-100/80 text-zinc-700 hover:text-zinc-950 text-sm font-normal transition-colors cursor-pointer"
+            >
+              <UploadCloud className="w-4 h-4 text-zinc-400" />
+              <span>Ver Minhas Entregas</span>
+            </button>
+          )}
+        </div>
+      </section>
 
-                  {/* Meta prática da empresa em tipografia aberta */}
-                  <div className="pt-3 border-t border-zinc-100 space-y-1">
-                    <span className="text-xs font-medium text-zinc-800 flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-zinc-400" />
-                      Meta pedagógica:
-                    </span>
-                    <p className="text-xs text-zinc-600 leading-relaxed font-normal">
-                      {selectedProblem.objective}
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-1 text-xs text-zinc-600">
-                  <p className="font-medium text-zinc-800">Missão pendente</p>
-                  <p className="leading-relaxed text-zinc-500 font-normal">
-                    Selecione um desafio de planilhas para liberar a trilha de aulas.
-                  </p>
-                </div>
-              )}
+      {/* 3. FAIXA DE PROGRESSO E META PEDAGÓGICA (INTEGRADA, SEM FUNDO DE CARD) */}
+      <section className="pt-8 border-t border-zinc-200/70">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          {/* Progresso com destaque em Verde */}
+          <div className="md:col-span-5 space-y-3.5">
+            <div className="flex items-baseline justify-between">
+              <span className="text-xs font-mono tracking-wider text-zinc-400 uppercase">
+                Progresso da Empresa
+              </span>
+              <span
+                className="text-3xl font-serif text-zinc-950 tabular-nums font-normal"
+                style={{ fontFamily: "'Instrument Serif', serif" }}
+              >
+                {progressPercent}%
+              </span>
             </div>
 
-            <div className="pt-3 border-t border-zinc-100 text-xs text-zinc-500 flex items-center justify-between font-normal">
-              <span className="flex items-center gap-1.5 text-zinc-700">
+            {/* Barra de progresso com verde esmeralda de conquista */}
+            <div className="w-full bg-zinc-200/60 h-1.5 rounded-full overflow-hidden">
+              <div
+                className="bg-emerald-600 h-full rounded-full transition-all duration-500 ease-out"
+                style={{ width: `${progressPercent}%` }}
+              />
+            </div>
+
+            <p className="text-xs text-zinc-500 font-normal">
+              <span className="text-zinc-900 font-medium">{completedCount}</span> de{' '}
+              <span className="text-zinc-900 font-medium">{totalCount}</span> aulas e desafios concluídos
+            </p>
+          </div>
+
+          {/* Meta Pedagógica Contextual */}
+          <div className="md:col-span-7 md:border-l md:border-zinc-200/60 md:pl-8 space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-mono tracking-wider text-zinc-400 uppercase">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Meta Pedagógica da Empresa</span>
+            </div>
+            <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
+              {selectedProblem
+                ? selectedProblem.objective
+                : 'Selecione um desafio de planilhas para liberar a trilha de aulas e metas da sua empresa.'}
+            </p>
+            <div className="flex items-center gap-2 pt-1 text-xs text-zinc-400 font-normal">
+              <span className="flex items-center gap-1.5 text-zinc-600">
                 <FileSpreadsheet className="w-3.5 h-3.5 text-zinc-400" />
                 Suíte ONLYOFFICE
               </span>
-              <span className="text-[11px] uppercase text-zinc-400 font-mono">Etapa 1</span>
+              <span>•</span>
+              <span className="font-mono text-[11px] uppercase">Etapa 1 de 3</span>
             </div>
           </div>
         </div>
