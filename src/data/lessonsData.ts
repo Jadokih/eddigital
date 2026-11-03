@@ -56,18 +56,18 @@ export const LESSONS_MAP: Record<string, LessonData> = {
   // ==========================================================================
   core_obj1: {
     id: 'core_obj1',
-    title: 'Introdução ao ONLYOFFICE',
+    title: 'Introdução ao ONLYOFFICE Desktop',
     category: 'Suíte ONLYOFFICE & Interface',
     scope: 'comum',
     learningGoal:
-      'Conhecer a interface da suíte ONLYOFFICE, como navegar entre os menus principais e garantir que o trabalho da sua empresa fique salvo na nuvem.',
+      'Conhecer a interface do aplicativo ONLYOFFICE Desktop, como navegar entre os menus principais e salvar a planilha da sua empresa no computador.',
     practicalTask:
-      'Acessar a suíte digital, reconhecer as barras de ferramentas e verificar o salvamento automático do arquivo de trabalho.',
+      'Abrir o aplicativo ONLYOFFICE Desktop no computador, reconhecer as barras de ferramentas e salvar o arquivo de trabalho .xlsx.',
     steps: [
       {
         number: 1,
-        instruction: 'Acesse a área de trabalho do ONLYOFFICE pelo navegador.',
-        detail: 'Certifique-se de que sua conta está logada e você vê o painel inicial com a lista de documentos.',
+        instruction: 'Abra o aplicativo ONLYOFFICE Desktop no computador.',
+        detail: 'Localize o ícone do ONLYOFFICE na Área de Trabalho ou no menu Iniciar do computador da escola ou no seu notebook.',
       },
       {
         number: 2,
@@ -77,16 +77,16 @@ export const LESSONS_MAP: Record<string, LessonData> = {
       },
       {
         number: 3,
-        instruction: 'Verifique o indicador de salvamento automático.',
-        detail: 'No topo da tela, próximo ao nome do arquivo, confirme se há o aviso "Salvo" com o ícone de nuvem.',
+        instruction: 'Aprenda a salvar o arquivo da sua empresa no computador.',
+        detail: 'No ONLYOFFICE Desktop, use o menu Arquivo → Salvar como para salvar sua planilha com extensão .xlsx na pasta da sua empresa, ou use o atalho Ctrl + S.',
       },
     ],
     mockup: {
-      title: 'Ambiente ONLYOFFICE — Barra Superior',
+      title: 'Ambiente ONLYOFFICE Desktop — Barra Superior',
       columns: ['Arquivo', 'Página Inicial', 'Inserir', 'Fórmulas', 'Dados'],
       rows: [
         [
-          { value: 'Novo / Baixar', isHeader: true, align: 'center' },
+          { value: 'Salvar / Salvar como', isHeader: true, align: 'center' },
           { value: 'Fonte & Moeda R$', isHeader: true, align: 'center', highlight: 'selected' },
           { value: 'Gráficos', isHeader: true, align: 'center' },
           { value: 'Soma / Média', isHeader: true, align: 'center' },
@@ -96,17 +96,17 @@ export const LESSONS_MAP: Record<string, LessonData> = {
       caption: 'A aba Página Inicial é a mais utilizada durante a estruturação da planilha da empresa.',
     },
     tip: {
-      title: 'Dica de Ouro de Nuvem',
+      title: 'Dica de Ouro de Salvamento',
       content:
-        'Sempre que for fechar o computador da escola ao final da aula, confirme se o status no topo está "Salvo na nuvem". Evite desligar o computador no meio de uma edição sem salvar.',
+        'Sempre que for encerrar a aula, salve sua planilha com Ctrl + S na pasta da sua empresa no computador. Ao final de todas as aulas da Etapa 1, esse mesmo arquivo .xlsx será enviado na Central de Entregas.',
       type: 'tip',
     },
     practiceExercise:
-      'Abra o ONLYOFFICE, clique em cada um dos menus principais para ver as opções disponíveis e localize o botão de salvar.',
+      'Abra o aplicativo ONLYOFFICE Desktop, explore as abas da barra superior e teste salvar um novo arquivo .xlsx no computador.',
     selfChecklist: [
-      'Consegui acessar a interface do ONLYOFFICE no computador.',
+      'Consegui abrir o aplicativo ONLYOFFICE Desktop no computador.',
       'Identifiquei as abas Arquivo, Página Inicial e Dados.',
-      'Localizei onde fica o nome do arquivo e o status de salvamento.',
+      'Localizei como salvar a planilha com formato .xlsx no computador.',
     ],
     nextStepPreview: 'Na próxima aula, você aprenderá a criar uma planilha do zero e entender o sistema de linhas, colunas e células.',
   },

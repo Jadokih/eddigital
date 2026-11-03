@@ -129,7 +129,7 @@ export const LessonModal: React.FC<LessonModalProps> = ({
           <div className="space-y-3 pt-2">
             <div className="flex items-center gap-2 text-zinc-500 font-medium text-xs uppercase tracking-wider">
               <ListOrdered className="w-3.5 h-3.5" />
-              <span>Passo a passo no ONLYOFFICE</span>
+              <span>Passo a passo no ONLYOFFICE Desktop</span>
             </div>
 
             <ol className="space-y-4 pt-1">

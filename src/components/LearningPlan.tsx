@@ -143,7 +143,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <span className="text-xs font-normal text-zinc-500 uppercase tracking-wider block mb-1">
-              Trilha de aprendizagem • ONLYOFFICE
+              Trilha de aprendizagem • ONLYOFFICE Desktop
             </span>
             <h3
               className="text-3xl sm:text-4xl font-serif font-normal text-zinc-900 tracking-tight"
@@ -184,7 +184,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed max-w-xl">
               {isAllCompleted
                 ? 'Sua equipe completou todas as habilidades e desafios. Salve seu arquivo no formato .xlsx e faça a entrega da atividade.'
-                : 'Abra o passo a passo objetivo com instruções detalhadas de menus e fórmulas no ONLYOFFICE.'}
+                : 'Abra o passo a passo objetivo com instruções detalhadas de menus e fórmulas no ONLYOFFICE Desktop.'}
             </p>
           </div>
 
@@ -542,7 +542,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                     Etapa de entrega da atividade do dia
                   </h4>
                   <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed max-w-2xl font-normal">
-                    Após concluir os fundamentos e resolver os desafios da empresa, salve a planilha no ONLYOFFICE
+                    Após concluir os fundamentos e resolver os desafios da empresa, salve a planilha no ONLYOFFICE Desktop
                     em formato <strong className="text-zinc-900 font-medium">.xlsx</strong> e envie o arquivo para correção do professor.
                   </p>
                 </div>
@@ -565,7 +565,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-zinc-200/60 text-xs">
               <div className="flex items-start gap-2 text-zinc-600 font-normal">
                 <FileSpreadsheet className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" />
-                <span>Formato: <strong className="text-zinc-800 font-medium">.xlsx</strong> (ONLYOFFICE)</span>
+                <span>Formato: <strong className="text-zinc-800 font-medium">.xlsx</strong> (ONLYOFFICE Desktop)</span>
               </div>
               <div className="flex items-start gap-2 text-zinc-600 font-normal">
                 <Calendar className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" />

@@ -93,7 +93,7 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
             </h2>
             <p className="text-xs sm:text-sm text-zinc-600 max-w-3xl leading-relaxed font-normal">
               Cada grupo escolhe uma situação real de mercado para resolver através de planilhas eletrônicas no
-              ONLYOFFICE. Toda a turma aprende os fundamentos comuns em aula, e a sua equipe desenvolve os desafios
+              ONLYOFFICE Desktop. Toda a turma aprende os fundamentos comuns em aula, e a sua equipe desenvolve os desafios
               específicos da missão escolhida.
             </p>
           </div>

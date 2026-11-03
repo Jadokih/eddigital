@@ -5,8 +5,8 @@ import type { Problem, OnlyofficeTool, LearningObjective } from '../types';
 // ============================================================================
 export const COMMON_SPREADSHEET_TOOLS: OnlyofficeTool[] = [
   {
-    category: 'Introdução ao ONLYOFFICE',
-    details: 'Acesso à suíte, navegação pela interface, menus principais e salvamento na nuvem.',
+    category: 'Introdução ao ONLYOFFICE Desktop',
+    details: 'Acesso ao aplicativo desktop, navegação pela interface, menus principais e salvamento no computador.',
     scope: 'comum',
   },
   {
@@ -39,7 +39,7 @@ export const COMMON_SPREADSHEET_TOOLS: OnlyofficeTool[] = [
 export const COMMON_LEARNING_OBJECTIVES: LearningObjective[] = [
   {
     id: 'core_obj1',
-    title: 'Introdução ao ONLYOFFICE (conhecer a interface e navegação da suíte)',
+    title: 'Introdução ao ONLYOFFICE Desktop (conhecer a interface e navegação da suíte)',
     scope: 'comum',
     description: 'Aprendendo o básico em aula com o professor.',
   },

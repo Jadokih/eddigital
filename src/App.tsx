@@ -171,15 +171,15 @@ export const App: React.FC = () => {
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         <div className="space-y-6">
-          {/* Navegação Mobile em Abas (Liquid Glass Suave) */}
-          <div className="md:hidden flex items-center justify-between gap-1 p-1 rounded-full bg-white/70 backdrop-blur-md border border-zinc-900/8 shadow-xs max-w-md mx-auto overflow-x-auto text-xs font-normal">
+          {/* Navegação Mobile em Abas (Editorial Aberto, sem cápsulas) */}
+          <div className="md:hidden flex items-center justify-between border-b border-zinc-200/70 pb-1 mb-2 text-xs font-normal">
             <button
               type="button"
               onClick={() => setActiveSection('dashboard')}
-              className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full transition-all ${
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 border-b-2 transition-colors ${
                 activeSection === 'dashboard'
-                  ? 'bg-zinc-900 text-white font-medium'
-                  : 'text-zinc-600 hover:text-zinc-900'
+                  ? 'border-zinc-950 text-zinc-950 font-medium'
+                  : 'border-transparent text-zinc-500 hover:text-zinc-900'
               }`}
             >
               <LayoutDashboard className="w-3.5 h-3.5" />
@@ -190,10 +190,10 @@ export const App: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setActiveSection('problems')}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full transition-all ${
+                className={`flex-1 flex items-center justify-center gap-1.5 py-2 border-b-2 transition-colors ${
                   activeSection === 'problems'
-                    ? 'bg-zinc-900 text-white font-medium'
-                    : 'text-zinc-600 hover:text-zinc-900'
+                    ? 'border-zinc-950 text-zinc-950 font-medium'
+                    : 'border-transparent text-zinc-500 hover:text-zinc-900'
                 }`}
               >
                 <Compass className="w-3.5 h-3.5" />
@@ -205,10 +205,10 @@ export const App: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setActiveSection('plan')}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full transition-all ${
+                className={`flex-1 flex items-center justify-center gap-1.5 py-2 border-b-2 transition-colors ${
                   activeSection === 'plan'
-                    ? 'bg-zinc-900 text-white font-medium'
-                    : 'text-zinc-600 hover:text-zinc-900'
+                    ? 'border-zinc-950 text-zinc-950 font-medium'
+                    : 'border-transparent text-zinc-500 hover:text-zinc-900'
                 }`}
               >
                 <CheckCircle2 className="w-3.5 h-3.5" />
@@ -219,10 +219,10 @@ export const App: React.FC = () => {
             <button
               type="button"
               onClick={() => setActiveSection('deliveries')}
-              className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full transition-all ${
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 border-b-2 transition-colors ${
                 activeSection === 'deliveries'
-                  ? 'bg-zinc-900 text-white font-medium'
-                  : 'text-zinc-600 hover:text-zinc-900'
+                  ? 'border-zinc-950 text-zinc-950 font-medium'
+                  : 'border-transparent text-zinc-500 hover:text-zinc-900'
               }`}
             >
               <UploadCloud className="w-3.5 h-3.5" />

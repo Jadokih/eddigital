@@ -251,7 +251,7 @@ export const submitDelivery = async (params: SubmitDeliveryParams): Promise<Subm
   const client = requireClient(getGroupClient());
   const { url, anonKey } = getActiveSupabaseCredentials();
 
-  if (!memberName.trim()) throw new Error('Selecione o integrante responsável pela entrega.');
+  if (!memberName.trim()) throw new Error('Digite o nome do integrante responsável pela entrega.');
   const validation = await validateXlsxFile(file);
   if (!validation.ok) throw new Error(validation.error);
 

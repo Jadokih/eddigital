@@ -115,7 +115,7 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <span className="text-xs font-normal text-zinc-500 uppercase tracking-wider block mb-1">
-              Central de entregas • ONLYOFFICE
+              Central de entregas • ONLYOFFICE Desktop
             </span>
             <h2
               className="text-3xl sm:text-4xl font-serif font-normal text-zinc-900 tracking-tight"

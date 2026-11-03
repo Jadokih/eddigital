@@ -30,7 +30,6 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
   showToast,
 }) => {
   const [members, setMembers] = useState<string[] | null>(null);
-  const [membersError, setMembersError] = useState<string | null>(null);
   const [memberName, setMemberName] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
@@ -49,9 +48,10 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
       .then((list) => {
         if (!active) return;
         setMembers(list);
-        if (list.length === 0) setMembersError('Nenhum integrante cadastrado. Atualize os dados da empresa antes de enviar.');
       })
-      .catch((err: Error) => active && setMembersError(err.message));
+      .catch(() => {
+        // Fallback silencioso: a digitação do nome permanece 100% funcional
+      });
     return () => {
       active = false;
     };
@@ -80,12 +80,12 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (inFlightRef.current) return; // trava contra cliques duplos
-    if (!memberName) {
-      setSubmitError('Selecione o integrante responsável por esta entrega.');
+    if (!memberName.trim()) {
+      setSubmitError('Digite o nome do integrante responsável por esta entrega.');
       return;
     }
     if (!file) {
-      setSubmitError('Selecione o arquivo .xlsx produzido no ONLYOFFICE.');
+      setSubmitError('Selecione o arquivo .xlsx gerado no ONLYOFFICE Desktop.');
       return;
     }
 
@@ -121,7 +121,7 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
     }
   };
 
-  const canSubmit = !busy && !!memberName && !!file && !membersError;
+  const canSubmit = !busy && !!memberName.trim() && !!file;
 
   return (
     <div
@@ -161,51 +161,44 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
             </p>
           )}
 
-          {/* Responsável */}
+          {/* Responsável (Digitação do Nome) */}
           <div>
-            <label htmlFor="responsible-member" className="flex items-center gap-1.5 text-xs font-semibold text-slate-800 mb-1.5">
-              <UserCheck className="w-4 h-4 text-slate-600" />
-              Quem é o integrante responsável por esta entrega? *
+            <label htmlFor="responsible-member" className="flex items-center gap-1.5 text-xs font-medium text-zinc-800 mb-1.5">
+              <UserCheck className="w-4 h-4 text-zinc-500" />
+              Nome do integrante responsável pelo envio *
             </label>
-            {members === null && !membersError ? (
-              <div className="flex items-center gap-2 text-xs text-slate-500 py-2">
-                <Loader2 className="w-3.5 h-3.5 animate-spin" /> Carregando integrantes da empresa...
-              </div>
-            ) : membersError ? (
-              <p className="text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200 rounded-lg p-3">{membersError}</p>
-            ) : (
-              <select
-                id="responsible-member"
-                required
-                value={memberName}
-                disabled={busy}
-                onChange={(e) => {
-                  setMemberName(e.target.value);
-                  setSubmitError(null);
-                }}
-                className="w-full px-3 py-2 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 font-medium cursor-pointer"
-              >
-                <option value="" disabled>
-                  Selecione um integrante...
-                </option>
-                {members!.map((m) => (
-                  <option key={m} value={m}>
-                    {m}
-                  </option>
+            <input
+              id="responsible-member"
+              type="text"
+              required
+              value={memberName}
+              disabled={busy}
+              placeholder="Digite seu nome completo..."
+              list="team-members-list"
+              autoComplete="name"
+              onChange={(e) => {
+                setMemberName(e.target.value);
+                setSubmitError(null);
+              }}
+              className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-white border border-zinc-300 rounded-lg text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900 font-normal"
+            />
+            {members && members.length > 0 && (
+              <datalist id="team-members-list">
+                {members.map((m) => (
+                  <option key={m} value={m} />
                 ))}
-              </select>
+              </datalist>
             )}
-            <p className="mt-1.5 text-[11px] text-slate-500 flex items-start gap-1">
-              <ShieldCheck className="w-3.5 h-3.5 shrink-0 mt-px text-slate-400" />
-              O login é compartilhado pelo grupo: fica registrado o integrante declarado como
-              responsável, junto com a data e o horário do envio.
+            <p className="mt-1.5 text-[11px] text-zinc-500 flex items-start gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 shrink-0 mt-px text-zinc-400" />
+              O login é compartilhado pelo grupo: o nome digitado fica registrado como responsável pelo envio desta versão da planilha.
             </p>
           </div>
 
           {/* Arquivo */}
           <div>
-            <label htmlFor="delivery-file" className="flex items-center gap-1.5 text-xs font-semibold text-slate-800 mb-1.5">
-              <FileSpreadsheet className="w-4 h-4 text-slate-600" />
+            <label htmlFor="delivery-file" className="flex items-center gap-1.5 text-xs font-medium text-zinc-800 mb-1.5">
+              <FileSpreadsheet className="w-4 h-4 text-zinc-500" />
               Arquivo da planilha (.xlsx) *
             </label>
             <input
@@ -214,10 +207,10 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
               accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
               disabled={busy}
               onChange={handleFileChange}
-              className="block w-full text-xs text-slate-700 file:mr-3 file:px-3 file:py-1.5 file:rounded-md file:border file:border-slate-300 file:bg-slate-50 file:text-slate-800 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer"
+              className="block w-full text-xs text-zinc-700 file:mr-3 file:px-3 file:py-1.5 file:rounded-md file:border file:border-zinc-300 file:bg-zinc-50 file:text-zinc-800 file:font-medium file:cursor-pointer hover:file:bg-zinc-100 cursor-pointer"
             />
-            <p className="mt-1.5 text-[11px] text-slate-500">
-              No ONLYOFFICE: Arquivo → Baixar como → <strong>XLSX</strong>. Tamanho máximo: {formatBytes(MAX_DELIVERY_BYTES)}.
+            <p className="mt-1.5 text-[11px] text-zinc-500">
+              No ONLYOFFICE Desktop: salve a planilha no seu computador como <strong>.xlsx</strong> (menu Arquivo → Salvar como). Tamanho máximo: {formatBytes(MAX_DELIVERY_BYTES)}.
             </p>
             {file && !fileError && (
               <p className="mt-2 text-xs font-medium text-zinc-800 bg-zinc-100 border border-zinc-200 rounded-lg px-3 py-2">

@@ -252,7 +252,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                 Que bom ter você de volta!
               </h2>
               <p className="text-sm text-zinc-600 font-normal max-w-md mx-auto">
-                Acesse a conta da sua empresa para continuar desenvolvendo suas habilidades no ONLYOFFICE.
+                Acesse a conta da sua empresa para continuar desenvolvendo suas habilidades no ONLYOFFICE Desktop.
               </p>
             </div>
 

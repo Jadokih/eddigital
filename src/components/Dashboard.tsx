@@ -137,7 +137,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
               ? progressPercent === 100
                 ? 'Sua equipe completou todas as habilidades e desafios da Etapa 1. Salve o arquivo em formato .xlsx e faça a submissão na Central de Entregas.'
                 : nextObjective?.description ||
-                  `Sua equipe já completou ${completedCount} de ${totalCount} habilidades de planilha. Acesse a trilha com passos ilustrados no ONLYOFFICE.`
+                  `Sua equipe já completou ${completedCount} de ${totalCount} habilidades de planilha. Acesse a trilha com passos ilustrados no ONLYOFFICE Desktop.`
               : 'Defina qual situação-problema sua empresa vai resolver com planilhas para liberar a trilha de aulas e desafios práticos.'}
           </p>
         </div>
@@ -224,7 +224,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <div className="flex items-center gap-2 pt-1 text-xs text-zinc-400 font-normal">
               <span className="flex items-center gap-1.5 text-zinc-600">
                 <FileSpreadsheet className="w-3.5 h-3.5 text-zinc-400" />
-                Suíte ONLYOFFICE
+                Suíte ONLYOFFICE Desktop
               </span>
               <span>•</span>
               <span className="font-mono text-[11px] uppercase">Etapa 1 de 3</span>
