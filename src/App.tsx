@@ -18,11 +18,11 @@ import { ToastContainer } from './components/Toast';
 import type { ToastMessage, ToastType } from './components/Toast';
 import { MyDeliveries } from './components/deliveries/MyDeliveries';
 import { TeacherApp } from './components/teacher/TeacherApp';
+import { BrandLogo } from './components/ui/BrandLogo';
 import {
-  GraduationCap,
   LayoutDashboard,
   CheckCircle2,
-  FileSpreadsheet,
+  Compass,
   UploadCloud,
 } from 'lucide-react';
 
@@ -109,12 +109,12 @@ export const App: React.FC = () => {
 
   if (loadingSession) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-4">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-900">
-            <GraduationCap className="w-6 h-6 animate-pulse text-emerald-600" />
-          </div>
-          <span className="text-xs font-medium text-slate-600">Carregando Founders Grid...</span>
+      <div className="min-h-screen bg-[#060913] flex items-center justify-center p-4">
+        <div className="flex flex-col items-center gap-4 animate-in fade-in duration-300">
+          <BrandLogo size="lg" variant="symbol" theme="dark" />
+          <span className="text-xs font-mono text-slate-400 tracking-wider">
+            Iniciando Founders Grid...
+          </span>
         </div>
       </div>
     );
@@ -125,7 +125,7 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col text-slate-900 selection:bg-emerald-200 selection:text-slate-900">
+    <div className="min-h-screen bg-[#060913] flex flex-col text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-200">
       <ToastContainer toasts={toasts} onDismiss={removeToast} />
 
       <Header
@@ -147,44 +147,46 @@ export const App: React.FC = () => {
         ) : (
           <div className="space-y-6">
             {/* Navegação Mobile em Abas (Aparece apenas em telas pequenas) */}
-            <div className="md:hidden flex items-center justify-between gap-1 p-1 rounded-xl bg-white border border-slate-200 shadow-2xs max-w-md mx-auto overflow-x-auto">
+            <div className="md:hidden flex items-center justify-between gap-1 p-1 rounded-xl bg-[#0A1224]/90 backdrop-blur-xl border border-white/10 shadow-lg max-w-md mx-auto overflow-x-auto text-xs">
               <button
                 type="button"
                 onClick={() => setActiveSection('dashboard')}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg font-medium transition-colors ${
                   activeSection === 'dashboard'
-                    ? 'bg-slate-900 text-white'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-white/15 text-white font-semibold border border-white/15'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
-                <LayoutDashboard className="w-3.5 h-3.5" />
+                <LayoutDashboard className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Painel</span>
               </button>
 
-              <button
-                type="button"
-                onClick={() => setActiveSection('problems')}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all ${
-                  activeSection === 'problems'
-                    ? 'bg-slate-900 text-white'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                <FileSpreadsheet className="w-3.5 h-3.5" />
-                <span>Missões</span>
-              </button>
+              {!selectedProblem && (
+                <button
+                  type="button"
+                  onClick={() => setActiveSection('problems')}
+                  className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg font-medium transition-colors ${
+                    activeSection === 'problems'
+                      ? 'bg-white/15 text-white font-semibold border border-white/15'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Compass className="w-3.5 h-3.5" />
+                  <span>Missões</span>
+                </button>
+              )}
 
               {selectedProblem && (
                 <button
                   type="button"
                   onClick={() => setActiveSection('plan')}
-                  className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all ${
+                  className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg font-medium transition-colors ${
                     activeSection === 'plan'
-                      ? 'bg-slate-900 text-white'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'bg-white/15 text-white font-semibold border border-white/15'
+                      : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                   <span>Aulas</span>
                 </button>
               )}
@@ -192,13 +194,13 @@ export const App: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setActiveSection('deliveries')}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all ${
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg font-medium transition-colors ${
                   activeSection === 'deliveries'
-                    ? 'bg-slate-900 text-white'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-white/15 text-white font-semibold border border-white/15'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
-                <UploadCloud className="w-3.5 h-3.5" />
+                <UploadCloud className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Entregas</span>
               </button>
             </div>

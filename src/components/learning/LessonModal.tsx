@@ -89,7 +89,10 @@ export const LessonModal: React.FC<LessonModalProps> = ({
                   </span>
                 )}
               </div>
-              <h2 className="text-lg sm:text-xl font-display font-semibold text-slate-900 mt-0.5">
+              <h2
+                className="text-lg sm:text-xl font-serif font-semibold text-slate-900 mt-0.5"
+                style={{ fontFamily: "'Newsreader', serif" }}
+              >
                 {lesson.title}
               </h2>
             </div>

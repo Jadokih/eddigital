@@ -3,159 +3,130 @@
 @layer base {
   :root {
     --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-display: 'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif;
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-serif: 'Newsreader', Georgia, Cambria, 'Times New Roman', serif;
+    --font-mono: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
 
   body {
     font-family: var(--font-sans);
-    color: #0f172a;
-    background-color: #F8FAFC;
+    color: #F8FAFC;
+    background-color: #060913;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, .font-display {
-    font-family: var(--font-display);
-    letter-spacing: -0.025em;
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-serif);
+    letter-spacing: -0.015em;
   }
 }
 
-/* Custom scrollbars elegantes */
+/* Custom scrollbars cinematográficos */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: #060913;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #1e293b;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #334155;
 }
 
 /* ==========================================================================
-   UNSLOPPED DESIGN SYSTEM — INSTRUMENTAL, DIDÁTICO E EDITORIAL
-   Tokens calibrados com base na escala 4px, neutral ramp grafite e nested radius
+   NOVA DIREÇÃO CRIATIVA — ATMOSFERA CINEMATOGRÁFICA & EDITORIAL (LUNORA STYLE)
+   Fundos noturnos, vidros translúcidos, luz ambiente difusa e serifas nobres
    ========================================================================== */
 
-/* Cartões Principais: editorial, estruturado e calmo */
-.neo-card,
-.ed-card {
-  background-color: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 14px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-  transition: border-color 150ms cubic-bezier(0.22, 1, 0.36, 1);
+/* Superfície Cinematográfica Principal (Vellum / Glass) */
+.cinematic-panel,
+.ed-card,
+.neo-card {
+  background: rgba(11, 19, 36, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 
-.neo-card:hover,
-.ed-card:hover {
-  border-color: rgba(15, 23, 42, 0.16);
+.cinematic-panel:hover,
+.ed-card:hover,
+.neo-card:hover {
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
-/* Cartão de Destaque / Painel Escuro Instrumental */
-.ed-card-dark {
-  background-color: #0b1329 !important;
-  background-image: linear-gradient(135deg, #0b1329 0%, #172554 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 14px;
-  color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(11, 19, 41, 0.2);
-  transition: border-color 150ms cubic-bezier(0.22, 1, 0.36, 1);
+/* Superfície Secundária Compacta */
+.ed-card-sm,
+.neo-card-sm {
+  background: rgba(14, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  transition: border-color 150ms ease;
 }
 
-.ed-card-dark:hover {
-  border-color: rgba(255, 255, 255, 0.2) !important;
+.ed-card-sm:hover,
+.neo-card-sm:hover {
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
-.ed-card-dark h1,
-.ed-card-dark h2,
-.ed-card-dark h3,
-.ed-card-dark h4 {
-  color: #ffffff !important;
+/* Painel de Foco / Iluminação Esmeralda Suave */
+.ed-card-dark,
+.cinematic-focus {
+  background: radial-gradient(circle at 15% 20%, rgba(16, 231, 157, 0.08) 0%, rgba(8, 14, 28, 0.95) 70%) !important;
+  border: 1px solid rgba(16, 231, 157, 0.22) !important;
+  border-radius: 16px;
+  box-shadow: 0 0 35px -10px rgba(16, 231, 157, 0.15), 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 
-/* Cartões Secundários */
-.neo-card-sm,
-.ed-card-sm {
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 10px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
-  transition: border-color 150ms cubic-bezier(0.22, 1, 0.36, 1);
+.ed-card-dark:hover,
+.cinematic-focus:hover {
+  border-color: rgba(16, 231, 157, 0.35) !important;
+  box-shadow: 0 0 40px -8px rgba(16, 231, 157, 0.22), 0 12px 32px -5px rgba(0, 0, 0, 0.55);
 }
 
-.neo-card-sm:hover,
-.ed-card-sm:hover {
-  border-color: rgba(15, 23, 42, 0.18);
-}
-
-/* Botões Instrumentais (Nested radius: 8-10px, sem formato de pílula infinita) */
-.neo-button,
-.ed-btn {
-  border-radius: 8px;
+/* Botões Cinematográficos Instrumentais */
+.ed-btn-primary {
+  background-color: #10e79d;
+  color: #04130d;
   font-weight: 600;
-  transition: background-color 150ms cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 150ms cubic-bezier(0.22, 1, 0.36, 1),
-              transform 100ms ease;
+  border-radius: 8px;
+  transition: background-color 150ms ease, transform 100ms ease;
 }
 
-.neo-button:active,
-.ed-btn:active {
+.ed-btn-primary:hover {
+  background-color: #34d399;
+}
+
+.ed-btn-primary:active {
   transform: scale(0.98);
 }
 
-/* Badge de destaque elegante e sóbrio */
-.highlight-anchor {
-  display: inline-block;
-  background-color: #ecfdf5;
-  border: 1px solid #a7f3d0;
-  border-radius: 6px;
-  padding: 0.125rem 0.5rem;
-  color: #065f46;
-  font-weight: 600;
+.ed-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  transition: background-color 150ms ease, border-color 150ms ease;
 }
 
-/* Mockup de Planilha ONLYOFFICE */
-.spreadsheet-grid {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  border-collapse: collapse;
+.ed-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.spreadsheet-header-col {
-  background-color: #f1f5f9;
-  color: #64748b;
-  font-weight: 700;
-  text-align: center;
-  border: 1px solid #cbd5e1;
-  user-select: none;
-}
-
-.spreadsheet-header-row {
-  background-color: #f1f5f9;
-  color: #64748b;
-  font-weight: 700;
-  text-align: center;
-  border: 1px solid #cbd5e1;
-  width: 2rem;
-  user-select: none;
-}
-
-.spreadsheet-cell {
-  background-color: #ffffff;
-  color: #1e293b;
-  border: 1px solid #e2e8f0;
-  padding: 0.35rem 0.6rem;
-  white-space: nowrap;
-}
-
-.spreadsheet-cell-selected {
-  outline: 2px solid #10b981;
-  outline-offset: -1px;
-  background-color: #f0fdf4;
+/* Brilho e Iluminação Atmosférica Sutil */
+.cinematic-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.15;
 }

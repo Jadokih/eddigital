@@ -14,6 +14,7 @@ import {
 } from '../../lib/deliveries';
 import { TeacherCorrections } from './TeacherCorrections';
 import { TeacherActivities } from './TeacherActivities';
+import { BrandLogo } from '../ui/BrandLogo';
 
 export type ShowToast = (type: ToastType, title: string, message?: string) => void;
 
@@ -74,25 +75,20 @@ export const TeacherApp: React.FC = () => {
       <ToastContainer toasts={toasts} onDismiss={removeToast} />
 
       <header className="sticky top-3 z-40 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto bg-white/95 backdrop-blur-md border border-slate-200/80 rounded-xl px-4 sm:px-6 py-2.5 shadow-2xs flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-            </div>
-            <span className="font-display font-semibold text-slate-900 text-base sm:text-lg tracking-tight">
-              Founders<span className="text-emerald-600">Grid</span>
-            </span>
-            <span className="hidden md:inline-block text-xs font-medium px-2 py-0.5 rounded-md bg-amber-50 border border-amber-200 text-amber-800">
+        <div className="max-w-7xl mx-auto bg-[#0A1224]/85 backdrop-blur-xl border border-white/10 rounded-xl px-4 sm:px-6 py-2.5 shadow-lg flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <BrandLogo size="md" variant="full" theme="dark" />
+            <span className="hidden md:inline-block text-xs font-mono px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-300">
               Área do professor
             </span>
           </div>
           {teacherEmail && (
             <div className="flex items-center gap-2">
-              <span className="hidden sm:inline text-xs font-medium text-slate-500 max-w-[200px] truncate">{teacherEmail}</span>
+              <span className="hidden sm:inline text-xs font-mono text-slate-400 max-w-[200px] truncate">{teacherEmail}</span>
               <button
                 type="button"
                 onClick={handleLogout}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-200 hover:bg-slate-50 text-slate-700 cursor-pointer transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-white/10 hover:bg-white/10 text-slate-300 cursor-pointer transition-colors"
               >
                 <LogOut className="w-3.5 h-3.5" /> Sair
               </button>

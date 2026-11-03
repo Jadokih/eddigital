@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Group } from '../types';
-import { LogOut, Building2, LayoutDashboard, FileSpreadsheet, CheckCircle2, UploadCloud } from 'lucide-react';
+import { LogOut, Building2, LayoutDashboard, CheckCircle2, UploadCloud, Compass } from 'lucide-react';
+import { BrandLogo } from './ui/BrandLogo';
 
 interface HeaderProps {
   currentGroup: Group | null;
@@ -15,68 +16,63 @@ export const Header: React.FC<HeaderProps> = ({
   activeSection,
   onNavigate,
 }) => {
+  const hasSelectedProblem = !!currentGroup?.selected_problem_id;
+
   return (
     <header className="sticky top-3 z-50 px-3 sm:px-6">
-      <div className="max-w-6xl mx-auto bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl px-4 sm:px-6 py-2 shadow-xs flex items-center justify-between gap-4 transition-colors">
-        {/* Marca / Logo */}
+      <div className="max-w-6xl mx-auto bg-[#0A1224]/85 backdrop-blur-xl border border-white/10 rounded-xl px-4 sm:px-6 py-2.5 shadow-lg flex items-center justify-between gap-4 transition-colors">
+        {/* Marca / Nova Logo Autoral Prisma Grid */}
         <div
           onClick={() => onNavigate && onNavigate('dashboard')}
-          className="flex items-center gap-2.5 cursor-pointer select-none group"
+          className="cursor-pointer select-none group"
         >
-          <div className="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center text-white font-bold text-xs">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="font-display font-bold text-slate-900 text-base sm:text-lg tracking-tight">
-              Founders<span className="text-emerald-600">Grid</span>
-            </span>
-            <span className="hidden md:inline-block text-xs font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-600">
-              Educação Digital
-            </span>
-          </div>
+          <BrandLogo size="md" variant="full" theme="dark" />
         </div>
 
         {/* Links Centrais de Navegação (Desktop) */}
         {currentGroup && onNavigate && (
-          <nav className="hidden md:flex items-center gap-1 bg-slate-100/80 p-1 rounded-lg border border-slate-200/60 text-xs font-semibold text-slate-600">
+          <nav className="hidden md:flex items-center gap-1 bg-white/5 p-1 rounded-lg border border-white/10 text-xs font-medium text-slate-300">
             <button
               type="button"
               onClick={() => onNavigate('dashboard')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
                 activeSection === 'dashboard'
-                  ? 'bg-white text-slate-900 font-bold shadow-2xs'
-                  : 'hover:text-slate-900 hover:bg-white/60'
+                  ? 'bg-white/15 text-white font-semibold border border-white/15 shadow-2xs'
+                  : 'hover:text-white hover:bg-white/10'
               }`}
             >
-              <LayoutDashboard className="w-3.5 h-3.5" />
+              <LayoutDashboard className="w-3.5 h-3.5 text-emerald-400" />
               <span>Painel</span>
             </button>
 
-            <button
-              type="button"
-              onClick={() => onNavigate('problems')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
-                activeSection === 'problems'
-                  ? 'bg-white text-slate-900 font-bold shadow-2xs'
-                  : 'hover:text-slate-900 hover:bg-white/60'
-              }`}
-            >
-              <FileSpreadsheet className="w-3.5 h-3.5" />
-              <span>Missões</span>
-            </button>
+            {/* Aba Missões: SÓ aparece se o grupo AINDA NÃO tiver escolhido uma missão */}
+            {!hasSelectedProblem && (
+              <button
+                type="button"
+                onClick={() => onNavigate('problems')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
+                  activeSection === 'problems'
+                    ? 'bg-white/15 text-white font-semibold border border-white/15 shadow-2xs'
+                    : 'hover:text-white hover:bg-white/10'
+                }`}
+              >
+                <Compass className="w-3.5 h-3.5" />
+                <span>Escolher Missão</span>
+              </button>
+            )}
 
-            {currentGroup.selected_problem_id && (
+            {hasSelectedProblem && (
               <button
                 type="button"
                 onClick={() => onNavigate('plan')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
                   activeSection === 'plan'
-                    ? 'bg-white text-slate-900 font-bold shadow-2xs'
-                    : 'hover:text-slate-900 hover:bg-white/60'
+                    ? 'bg-white/15 text-white font-semibold border border-white/15 shadow-2xs'
+                    : 'hover:text-white hover:bg-white/10'
                 }`}
               >
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Plano de Aulas</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Trilha de Aulas</span>
               </button>
             )}
 
@@ -85,11 +81,11 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onNavigate('deliveries')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
                 activeSection === 'deliveries'
-                  ? 'bg-white text-slate-900 font-bold shadow-2xs'
-                  : 'hover:text-slate-900 hover:bg-white/60'
+                  ? 'bg-white/15 text-white font-semibold border border-white/15 shadow-2xs'
+                  : 'hover:text-white hover:bg-white/10'
               }`}
             >
-              <UploadCloud className="w-3.5 h-3.5" />
+              <UploadCloud className="w-3.5 h-3.5 text-emerald-400" />
               <span>Entregas</span>
             </button>
           </nav>
@@ -99,16 +95,16 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-2">
           {currentGroup ? (
             <div className="flex items-center gap-2">
-              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800">
-                <Building2 className="w-3.5 h-3.5 text-slate-500" />
+              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-medium text-slate-200">
+                <Building2 className="w-3.5 h-3.5 text-emerald-400" />
                 <span className="max-w-[130px] truncate">{currentGroup.company_name}</span>
-                <span className="text-xs font-bold text-slate-600">({currentGroup.class_name})</span>
+                <span className="text-xs font-mono text-slate-400">({currentGroup.class_name})</span>
               </div>
 
               <button
                 type="button"
                 onClick={onLogout}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer border border-transparent hover:border-slate-200"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer border border-transparent hover:border-white/10"
                 title="Sair da sessão"
               >
                 <LogOut className="w-3.5 h-3.5" />
@@ -117,12 +113,12 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           ) : (
             <div className="flex items-center gap-1.5">
-              <span className="text-[11px] font-semibold text-slate-500 hidden sm:inline-block mr-1">
+              <span className="text-xs text-slate-400 hidden sm:inline-block mr-1">
                 Turmas 2º2 e 2º3
               </span>
               <a
                 href="#auth-section"
-                className="px-4 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors"
+                className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-colors"
               >
                 Acessar Plataforma
               </a>
