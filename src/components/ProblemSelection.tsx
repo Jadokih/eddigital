@@ -129,59 +129,59 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
   return (
     <div className="space-y-8 max-w-6xl mx-auto">
       {/* Banner Introdutório */}
-      <div className="ed-card p-6 sm:p-8 space-y-4">
+      <div className="ed-card p-6 sm:p-7 space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1">
-            <span className="text-xs font-bold uppercase tracking-widest text-slate-700 font-display">
-              EDUCAÇÃO DIGITAL • ETAPA 1
+            <span className="text-xs font-medium text-slate-500 block">
+              Educação Digital • Etapa 1
             </span>
-            <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 tracking-tight">
-              Escolha a Missão Prática da sua Empresa
+            <h2 className="text-2xl sm:text-3xl font-display font-semibold text-slate-900 tracking-tight">
+              Escolha a missão prática da sua empresa
             </h2>
-            <p className="text-xs sm:text-sm text-slate-700 max-w-3xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
               Cada grupo escolhe uma situação real de mercado para resolver através de planilhas eletrônicas no
               ONLYOFFICE. Toda a turma aprende os fundamentos comuns em aula, e a sua equipe desenvolve os desafios
               específicos da missão escolhida.
             </p>
           </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-300 text-xs font-bold text-slate-800 self-start md:self-auto shrink-0">
-            <Compass className="w-4 h-4 text-slate-800" />
-            <span>4 Situações-Problema</span>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs font-medium text-slate-700 self-start md:self-auto shrink-0">
+            <Compass className="w-4 h-4 text-slate-500" />
+            <span>4 Situações-problema</span>
           </div>
         </div>
       </div>
 
       {/* BLOCO 1: FUNDAMENTOS BÁSICOS COMPARTILHADOS */}
       <div className="ed-card p-6 space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center text-xs">
+            <div className="w-7 h-7 rounded-lg bg-slate-900 text-white flex items-center justify-center text-xs">
               <GraduationCap className="w-4 h-4 text-emerald-400" />
             </div>
             <div>
-              <h4 className="text-sm sm:text-base font-display font-bold text-slate-900">
+              <h4 className="text-sm sm:text-base font-display font-semibold text-slate-900">
                 1. Aprendendo o básico (Compartilhado com toda a turma)
               </h4>
-              <p className="text-xs text-slate-600 font-medium">
+              <p className="text-xs text-slate-500">
                 Habilidades essenciais ensinadas pelo professor em aula antes dos desafios
               </p>
             </div>
           </div>
-          <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 hidden sm:inline">
-            6 Fundamentos Comuns
+          <span className="text-xs font-medium px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700 hidden sm:inline">
+            6 Fundamentos comuns
           </span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {COMMON_SPREADSHEET_TOOLS.map((tool, idx) => (
-            <div key={idx} className="p-3 rounded-xl bg-[#F8FAFC] border border-slate-200/80 space-y-1">
-              <span className="text-[10px] font-bold text-slate-600 block uppercase">
-                Aula #{idx + 1}
+            <div key={idx} className="p-3 rounded-lg bg-[#F8FAFC] border border-slate-200/80 space-y-1">
+              <span className="text-xs font-medium text-slate-500 block">
+                Aula {idx + 1}
               </span>
               <strong className="text-slate-900 text-xs font-semibold block leading-tight">
                 {tool.category}
               </strong>
-              <p className="text-slate-700 text-[11px] leading-snug line-clamp-2">
+              <p className="text-slate-600 text-[11px] leading-snug line-clamp-2">
                 {tool.details}
               </p>
             </div>
@@ -193,15 +193,15 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-slate-700 font-display">
-              AUTONOMIA DO GRUPO
+            <span className="text-xs font-medium text-slate-500 block mb-0.5">
+              Autonomia da equipe
             </span>
-            <h3 className="text-xl sm:text-2xl font-display font-bold text-slate-900">
-              2. Agora é com você — Escolha sua Missão
+            <h3 className="text-xl sm:text-2xl font-display font-semibold text-slate-900">
+              2. Agora é com você (Escolha da missão)
             </h3>
           </div>
-          <span className="text-xs font-semibold text-slate-600 hidden sm:inline">
-            Clique na missão desejada para vincular a empresa
+          <span className="text-xs text-slate-500 hidden sm:inline">
+            Selecione uma missão para vincular sua empresa
           </span>
         </div>
 
@@ -212,27 +212,27 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
             return (
               <div
                 key={problem.id}
-                className={`ed-card p-6 flex flex-col justify-between gap-5 transition-all ${
+                className={`ed-card p-6 flex flex-col justify-between gap-5 transition-colors ${
                   isSelected
-                    ? 'border-emerald-500 ring-2 ring-emerald-500/20 bg-white'
+                    ? 'border-emerald-500 ring-1 ring-emerald-500/20 bg-white'
                     : 'bg-white hover:border-slate-300'
                 }`}
               >
                 <div className="space-y-3">
                   <div className="flex items-start justify-between gap-2">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 px-2 py-0.5 rounded-md bg-slate-100">
-                      Missão 0{problem.number} • {problem.tag}
+                    <span className="text-xs font-medium text-slate-600 px-2.5 py-0.5 rounded-md bg-slate-100">
+                      Missão {problem.number} • {problem.tag}
                     </span>
 
                     {isSelected && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium bg-emerald-100 text-emerald-800">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                         Ativa
                       </span>
                     )}
                   </div>
 
-                  <h4 className="text-lg sm:text-xl font-display font-bold text-slate-900 leading-snug">
+                  <h4 className="text-lg sm:text-xl font-display font-semibold text-slate-900 leading-snug">
                     {problem.title}
                   </h4>
 
@@ -241,14 +241,14 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
                   </p>
 
                   {/* Ilustração Visual */}
-                  <div className="bg-[#FAF9F5] rounded-xl border border-slate-100 p-2 flex items-center justify-center">
+                  <div className="bg-[#FAF9F5] rounded-lg border border-slate-100 p-2 flex items-center justify-center">
                     {renderIllustration(problem.number)}
                   </div>
 
                   {/* Box de Objetivo na Planilha */}
-                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
-                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
-                      Desafio da sua Planilha:
+                  <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200/80 space-y-1">
+                    <span className="text-xs font-medium text-slate-500 block">
+                      Desafio prático da planilha:
                     </span>
                     <p className="text-xs text-slate-800 font-medium leading-relaxed">
                       {problem.objective}
@@ -257,15 +257,15 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
 
                   {/* 3 Habilidades Específicas */}
                   <div className="space-y-1.5 pt-1">
-                    <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1">
-                      <Sparkles className="w-3 h-3 text-emerald-600" />
+                    <span className="text-xs font-medium text-emerald-800 flex items-center gap-1">
+                      <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
                       <span>Habilidades específicas da missão:</span>
                     </span>
                     <div className="space-y-1">
                       {problem.specificTools.map((tool, idx) => (
-                        <div key={idx} className="p-2 rounded-lg bg-white border border-slate-200 text-xs">
-                          <strong className="text-slate-900 block text-[11px]">• {tool.category}</strong>
-                          <span className="text-slate-500 text-[10px] block">{tool.details}</span>
+                        <div key={idx} className="p-2 rounded-md bg-white border border-slate-200 text-xs">
+                          <strong className="text-slate-900 block text-xs">• {tool.category}</strong>
+                          <span className="text-slate-500 text-[11px] block">{tool.details}</span>
                         </div>
                       ))}
                     </div>
@@ -276,20 +276,20 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
                   <button
                     type="button"
                     onClick={() => handleOpenConfirmModal(problem)}
-                    className={`w-full py-2.5 px-4 rounded-full font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                    className={`w-full py-2.5 px-4 rounded-lg font-semibold text-xs sm:text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer ${
                       isSelected
                         ? 'bg-slate-100 text-slate-800 border border-slate-300 hover:bg-slate-200'
-                        : 'bg-slate-900 hover:bg-slate-800 text-white shadow-xs'
+                        : 'bg-slate-900 hover:bg-slate-800 text-white shadow-2xs'
                     }`}
                   >
                     {isSelected ? (
                       <>
                         <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                        <span>Missão Selecionada (Ver Detalhes)</span>
+                        <span>Missão selecionada (ver detalhes)</span>
                       </>
                     ) : (
                       <>
-                        <span>Escolher esta Missão</span>
+                        <span>Escolher esta missão</span>
                         <ArrowRight className="w-4 h-4" />
                       </>
                     )}
@@ -304,13 +304,13 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
       {/* Modal de Confirmação Editorial */}
       {modalProblem && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white rounded-3xl border border-slate-200 shadow-xl max-w-lg w-full p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-xl max-w-lg w-full p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div>
-                <span className="text-xs font-bold text-slate-700 uppercase tracking-widest font-display">
-                  CONFIRMAR MISSÃO 0{modalProblem.number}
+                <span className="text-xs font-medium text-slate-500 block">
+                  Confirmar missão {modalProblem.number}
                 </span>
-                <h3 className="text-lg font-display font-bold text-slate-900">
+                <h3 className="text-lg font-display font-semibold text-slate-900">
                   {modalProblem.title}
                 </h3>
               </div>
@@ -318,15 +318,15 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
               <button
                 type="button"
                 onClick={() => setModalProblem(null)}
-                className="w-8 h-8 rounded-full border border-slate-200 hover:border-slate-400 flex items-center justify-center text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-lg border border-slate-200 hover:border-slate-400 flex items-center justify-center text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <div className="space-y-3 text-xs">
-              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-1">
-                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
+              <div className="bg-slate-50 p-3.5 rounded-lg border border-slate-200 space-y-1">
+                <span className="text-xs font-medium text-slate-500 block">
                   1. Aprendendo o básico em aula:
                 </span>
                 <p className="text-slate-700 leading-relaxed">
@@ -334,21 +334,21 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
                 </p>
               </div>
 
-              <div className="bg-emerald-50/60 p-3.5 rounded-xl border border-emerald-200 space-y-1">
-                <span className="text-[10px] font-bold text-emerald-900 uppercase tracking-wider block">
+              <div className="bg-emerald-50/60 p-3.5 rounded-lg border border-emerald-200 space-y-1">
+                <span className="text-xs font-medium text-emerald-900 block">
                   2. Desafios práticos da sua equipe:
                 </span>
-                <p className="text-emerald-950 font-semibold leading-relaxed">
+                <p className="text-emerald-950 font-medium leading-relaxed">
                   {modalProblem.objective}
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
+            <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => setModalProblem(null)}
-                className="px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
+                className="px-3.5 py-2 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 Cancelar
               </button>
@@ -356,9 +356,9 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
                 type="button"
                 disabled={submitting}
                 onClick={handleConfirmChoice}
-                className="px-6 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                className="px-5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
               >
-                {submitting ? 'Gravando...' : 'Confirmar e Iniciar Missão'}
+                {submitting ? 'Gravando...' : 'Confirmar e iniciar missão'}
               </button>
             </div>
           </div>

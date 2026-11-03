@@ -29,12 +29,12 @@ export const TipCallout: React.FC<TipCalloutProps> = ({ type, title, children })
   const cfg = configs[type];
 
   return (
-    <div className={`p-4 rounded-2xl border ${cfg.bg} flex items-start gap-3 text-xs leading-relaxed`}>
-      <div className={`p-2 rounded-xl shrink-0 ${cfg.iconBg}`}>
+    <div className={`p-4 rounded-xl border ${cfg.bg} flex items-start gap-3 text-xs leading-relaxed`}>
+      <div className={`p-1.5 rounded-lg shrink-0 ${cfg.iconBg}`}>
         {cfg.icon}
       </div>
       <div className="space-y-1">
-        <h4 className="font-bold text-sm tracking-tight">{title}</h4>
+        <h4 className="font-semibold text-sm tracking-tight">{title}</h4>
         <div className="text-slate-700 space-y-1">{children}</div>
       </div>
     </div>

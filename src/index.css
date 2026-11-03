@@ -38,38 +38,38 @@
 }
 
 /* ==========================================================================
-   DESIGN SYSTEM EDTECH — MODERN, EDITORIAL & TECNOLÓGICO
+   UNSLOPPED DESIGN SYSTEM — INSTRUMENTAL, DIDÁTICO E EDITORIAL
+   Tokens calibrados com base na escala 4px, neutral ramp grafite e nested radius
    ========================================================================== */
 
-/* Cartões Principais: limpos, espaçosos e com profundidade natural */
+/* Cartões Principais: editorial, estruturado e calmo */
 .neo-card,
 .ed-card {
   background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 1.25rem;
-  box-shadow: 0 4px 6px -1px rgb(15 23 42 / 0.04), 0 2px 4px -2px rgb(15 23 42 / 0.04);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: border-color 150ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .neo-card:hover,
 .ed-card:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 10px 15px -3px rgb(15 23 42 / 0.06), 0 4px 6px -4px rgb(15 23 42 / 0.04);
+  border-color: rgba(15, 23, 42, 0.16);
 }
 
-/* Cartão de Destaque Tecnológico / Dark Hero Card com Alto Contraste */
+/* Cartão de Destaque / Painel Escuro Instrumental */
 .ed-card-dark {
   background-color: #0b1329 !important;
-  background-image: linear-gradient(135deg, #0b1329 0%, #1e293b 100%) !important;
-  border: 1px solid #1e293b !important;
-  border-radius: 1.25rem;
+  background-image: linear-gradient(135deg, #0b1329 0%, #172554 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 14px;
   color: #ffffff !important;
-  box-shadow: 0 10px 25px -5px rgb(15 23 42 / 0.25), 0 8px 10px -6px rgb(15 23 42 / 0.2);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(11, 19, 41, 0.2);
+  transition: border-color 150ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .ed-card-dark:hover {
-  border-color: #334155 !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 .ed-card-dark h1,
@@ -83,42 +83,39 @@
 .neo-card-sm,
 .ed-card-sm {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 1rem;
-  box-shadow: 0 1px 3px 0 rgb(15 23 42 / 0.03);
-  transition: all 0.15s ease-out;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+  transition: border-color 150ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .neo-card-sm:hover,
 .ed-card-sm:hover {
-  border-color: #cbd5e1;
+  border-color: rgba(15, 23, 42, 0.18);
 }
 
-/* Botões Modernos e Intuitivos */
+/* Botões Instrumentais (Nested radius: 8-10px, sem formato de pílula infinita) */
 .neo-button,
 .ed-btn {
-  border: 1px solid #0f172a;
-  border-radius: 9999px;
-  transition: all 0.15s ease-out;
-}
-
-.neo-button:hover,
-.ed-btn:hover {
-  transform: translateY(-1px);
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 150ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 150ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 100ms ease;
 }
 
 .neo-button:active,
 .ed-btn:active {
-  transform: translateY(0);
+  transform: scale(0.98);
 }
 
-/* Badge de destaque elegante */
+/* Badge de destaque elegante e sóbrio */
 .highlight-anchor {
   display: inline-block;
   background-color: #ecfdf5;
-  border: 1px solid #6ee7b7;
-  border-radius: 0.375rem;
-  padding: 0.1rem 0.5rem;
+  border: 1px solid #a7f3d0;
+  border-radius: 6px;
+  padding: 0.125rem 0.5rem;
   color: #065f46;
   font-weight: 600;
 }

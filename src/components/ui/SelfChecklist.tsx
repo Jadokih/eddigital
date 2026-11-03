@@ -14,8 +14,8 @@ export const SelfChecklist: React.FC<SelfChecklistProps> = ({
 }) => {
   return (
     <div className="space-y-2">
-      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
-        <span>Confira seu resultado (Autoavaliação da equipe)</span>
+      <h4 className="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+        <span>Confira seu resultado (autoavaliação da equipe)</span>
       </h4>
       <div className="space-y-1.5">
         {items.map((item, idx) => {
@@ -24,7 +24,7 @@ export const SelfChecklist: React.FC<SelfChecklistProps> = ({
             <label
               key={idx}
               onClick={() => onToggleItem(idx)}
-              className={`flex items-start gap-3 p-3 rounded-xl border text-xs cursor-pointer transition-all ${
+              className={`flex items-start gap-3 p-3 rounded-lg border text-xs cursor-pointer transition-colors ${
                 checked
                   ? 'bg-emerald-50/60 border-emerald-300 text-emerald-950 font-medium'
                   : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50'

@@ -42,17 +42,17 @@ export const SpreadsheetMockup: React.FC<SpreadsheetMockupProps> = ({
   };
 
   return (
-    <div className="rounded-2xl border border-slate-200 overflow-hidden shadow-xs bg-white text-xs">
+    <div className="rounded-xl border border-slate-200 overflow-hidden shadow-xs bg-white text-xs">
       {/* Topo do Arquivo ONLYOFFICE */}
       <div className="bg-slate-900 text-white px-3.5 py-2 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <FileSpreadsheet className="w-4 h-4 text-emerald-400" />
-          <span className="font-semibold text-xs tracking-tight text-slate-200">
+          <span className="font-medium text-xs tracking-tight text-slate-200">
             {title || 'ONLYOFFICE Planilha — Exemplo Prático'}
           </span>
         </div>
-        <span className="text-[10px] uppercase font-bold text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full border border-slate-700">
-          Visualização Didática
+        <span className="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded-md border border-slate-700">
+          ONLYOFFICE
         </span>
       </div>
 

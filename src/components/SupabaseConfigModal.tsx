@@ -267,9 +267,9 @@ export const SupabaseConfigModal: React.FC<SupabaseConfigModalProps> = ({
           {/* Formulário de Configuração */}
           <form onSubmit={handleTestAndSave} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+              <label className="block text-xs font-medium text-slate-700 mb-1.5 flex items-center gap-1.5">
                 <Globe className="w-3.5 h-3.5 text-indigo-600" />
-                Supabase Project URL
+                URL do projeto Supabase
               </label>
               <input
                 type="url"
@@ -277,14 +277,14 @@ export const SupabaseConfigModal: React.FC<SupabaseConfigModalProps> = ({
                 placeholder="https://xyzcompany.supabase.co"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className="w-full px-3.5 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
+                className="w-full px-3.5 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-300 rounded-lg font-mono text-slate-800 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:bg-white transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+              <label className="block text-xs font-medium text-slate-700 mb-1.5 flex items-center gap-1.5">
                 <KeyRound className="w-3.5 h-3.5 text-indigo-600" />
-                Supabase Anon Public Key
+                Chave anônima pública (anon key)
               </label>
               <textarea
                 rows={2}
@@ -292,9 +292,9 @@ export const SupabaseConfigModal: React.FC<SupabaseConfigModalProps> = ({
                 placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
                 value={anonKey}
                 onChange={(e) => setAnonKey(e.target.value)}
-                className="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-300 rounded-xl font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
+                className="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg font-mono text-slate-800 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:bg-white transition-colors"
               />
-              <p className="text-[11px] text-slate-500 mt-1">
+              <p className="text-xs text-slate-500 mt-1">
                 Utilize apenas a chave pública (anon/public). Nunca use a chave privada service_role no frontend.
               </p>
             </div>

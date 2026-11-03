@@ -77,23 +77,23 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
   };
 
   return (
-    <div className="bg-[#FAF9F5] border-2 border-slate-900 rounded-2xl p-4 sm:p-5 shadow-[3px_3px_0px_#0f172a]">
+    <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 sm:p-5 shadow-2xs">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
-          <label className="block text-xs font-bold text-slate-900 uppercase tracking-widest font-display">
-            Identidade Visual da Empresa
+          <label className="block text-xs font-semibold text-slate-900 font-display">
+            Identidade visual da empresa
           </label>
-          <p className="text-xs text-slate-600 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             Crie um monograma com as iniciais da empresa ou envie um arquivo de imagem.
           </p>
         </div>
 
-        {/* Alternador de Modo em Pílula */}
-        <div className="flex items-center gap-1 bg-white p-1 rounded-full border border-slate-900 self-start sm:self-auto shadow-xs">
+        {/* Alternador de Modo */}
+        <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 self-start sm:self-auto">
           <button
             type="button"
             onClick={() => setMode('generate')}
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer ${
               mode === 'generate'
                 ? 'bg-slate-900 text-white'
                 : 'text-slate-600 hover:text-slate-900'
@@ -105,14 +105,14 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
           <button
             type="button"
             onClick={() => setMode('upload')}
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer ${
               mode === 'upload'
                 ? 'bg-slate-900 text-white'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <Upload className="w-3.5 h-3.5" />
-            Enviar Foto
+            Enviar foto
           </button>
         </div>
       </div>
@@ -122,7 +122,7 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
         <div className="flex flex-col items-center gap-2">
           <div className="relative">
             <div
-              className={`w-20 h-20 sm:w-22 sm:h-22 flex items-center justify-center overflow-hidden border-2 border-slate-900 bg-white shadow-[2px_2px_0px_#0f172a] ${shape}`}
+              className={`w-20 h-20 sm:w-22 sm:h-22 flex items-center justify-center overflow-hidden border border-slate-200 bg-white shadow-2xs ${shape}`}
             >
               {previewUrl ? (
                 <img
@@ -131,16 +131,16 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className={`w-full h-full ${selectedColor.bgClass} flex items-center justify-center text-white font-display font-bold text-xl`}>
+                <div className={`w-full h-full ${selectedColor.bgClass} flex items-center justify-center text-white font-display font-semibold text-xl`}>
                   {activeInitials}
                 </div>
               )}
             </div>
-            <div className="absolute -bottom-1 -right-1 bg-emerald-500 text-white p-1 rounded-full border-2 border-slate-900">
+            <div className="absolute -bottom-1 -right-1 bg-emerald-500 text-white p-1 rounded-full border border-white shadow-2xs">
               <Check className="w-3 h-3" />
             </div>
           </div>
-          <span className="text-[11px] font-bold text-slate-600">Prévia</span>
+          <span className="text-xs font-medium text-slate-500">Prévia</span>
         </div>
 
         {/* Controles */}
@@ -149,7 +149,7 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-800 mb-1">
+                  <label className="block text-xs font-medium text-slate-700 mb-1">
                     Iniciais
                   </label>
                   <input
@@ -158,28 +158,28 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
                     value={customInitials}
                     onChange={(e) => setCustomInitials(e.target.value.toUpperCase())}
                     placeholder={derivedInitials || 'FG'}
-                    className="w-full px-3 py-1.5 text-xs sm:text-sm bg-white border-2 border-slate-900 rounded-xl uppercase font-display font-bold tracking-wider text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    className="w-full px-3 py-1.5 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg uppercase font-display font-semibold tracking-wider text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-800 mb-1">
+                  <label className="block text-xs font-medium text-slate-700 mb-1">
                     Formato
                   </label>
                   <div className="grid grid-cols-3 gap-1">
                     {[
-                      { id: 'rounded-2xl', label: 'Suave' },
+                      { id: 'rounded-xl', label: 'Suave' },
                       { id: 'rounded-full', label: 'Circular' },
-                      { id: 'rounded-xl', label: 'Compacto' },
+                      { id: 'rounded-md', label: 'Compacto' },
                     ].map((item) => (
                       <button
                         key={item.id}
                         type="button"
                         onClick={() => setShape(item.id as any)}
-                        className={`py-1.5 text-xs font-bold rounded-xl border transition-all cursor-pointer ${
+                        className={`py-1.5 text-xs font-medium rounded-lg border transition-colors cursor-pointer ${
                           shape === item.id
-                            ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
-                            : 'bg-white border-slate-300 text-slate-700 hover:border-slate-900'
+                            ? 'bg-slate-900 text-white border-slate-900'
+                            : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                         }`}
                       >
                         {item.label}
@@ -190,7 +190,7 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                <label className="block text-xs font-medium text-slate-700 mb-1.5">
                   Cor sólida da marca
                 </label>
                 <div className="grid grid-cols-6 gap-2">
@@ -200,7 +200,7 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
                       type="button"
                       onClick={() => setSelectedColor(col)}
                       title={col.name}
-                      className={`h-8 rounded-xl ${col.bgClass} border-2 border-slate-900 relative flex items-center justify-center transition-transform hover:scale-105 cursor-pointer ${
+                      className={`h-8 rounded-lg ${col.bgClass} border border-slate-200 relative flex items-center justify-center transition-transform hover:scale-105 cursor-pointer ${
                         selectedColor.id === col.id ? 'ring-2 ring-offset-2 ring-slate-900' : ''
                       }`}
                     >
@@ -224,19 +224,19 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
               />
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-slate-900 hover:border-emerald-600 bg-white rounded-2xl p-4 text-center cursor-pointer transition-colors"
+                className="border border-dashed border-slate-300 hover:border-slate-400 bg-white rounded-lg p-4 text-center cursor-pointer transition-colors"
               >
-                <ImageIcon className="w-6 h-6 mx-auto text-slate-600 mb-1.5" />
-                <p className="text-xs font-bold text-slate-800">
+                <ImageIcon className="w-6 h-6 mx-auto text-slate-500 mb-1.5" />
+                <p className="text-xs font-medium text-slate-800">
                   Clique para selecionar uma imagem do seu dispositivo
                 </p>
-                <p className="text-[11px] text-slate-500 mt-0.5">
+                <p className="text-xs text-slate-500 mt-0.5">
                   PNG, JPG, SVG ou WEBP (Até 3MB)
                 </p>
               </div>
 
               {previewUrl && (
-                <div className="flex items-center justify-between text-xs text-slate-700 bg-white border border-slate-300 px-3 py-1.5 rounded-xl">
+                <div className="flex items-center justify-between text-xs text-slate-700 bg-white border border-slate-200 px-3 py-1.5 rounded-lg">
                   <span>Arquivo selecionado</span>
                   <button
                     type="button"
@@ -245,7 +245,7 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
                       if (fileInputRef.current) fileInputRef.current.value = '';
                       onLogoChange(null, null);
                     }}
-                    className="text-rose-600 font-bold hover:underline cursor-pointer"
+                    className="text-rose-600 font-medium hover:underline cursor-pointer"
                   >
                     Remover
                   </button>

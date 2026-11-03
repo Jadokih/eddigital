@@ -109,12 +109,12 @@ export const App: React.FC = () => {
 
   if (loadingSession) {
     return (
-      <div className="min-h-screen bg-[#F8F8F5] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-4">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-white border-2 border-slate-900 shadow-[3px_3px_0px_#0f172a] flex items-center justify-center text-slate-900">
+          <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-900">
             <GraduationCap className="w-6 h-6 animate-pulse text-emerald-600" />
           </div>
-          <span className="text-xs font-display font-bold text-slate-800">Carregando Founders Grid...</span>
+          <span className="text-xs font-medium text-slate-600">Carregando Founders Grid...</span>
         </div>
       </div>
     );
