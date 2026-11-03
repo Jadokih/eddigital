@@ -20,28 +20,28 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-3 z-50 px-3 sm:px-6">
-      <div className="max-w-6xl mx-auto bg-[#0A1224]/85 backdrop-blur-xl border border-white/10 rounded-xl px-4 sm:px-6 py-2.5 shadow-lg flex items-center justify-between gap-4 transition-colors">
+      <div className="max-w-6xl mx-auto bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-xl px-4 sm:px-6 py-2.5 shadow-2xs flex items-center justify-between gap-4 transition-colors">
         {/* Marca / Nova Logo Autoral Prisma Grid */}
         <div
           onClick={() => onNavigate && onNavigate('dashboard')}
           className="cursor-pointer select-none group"
         >
-          <BrandLogo size="md" variant="full" theme="dark" />
+          <BrandLogo size="md" variant="full" theme="light" />
         </div>
 
         {/* Links Centrais de Navegação (Desktop) */}
         {currentGroup && onNavigate && (
-          <nav className="hidden md:flex items-center gap-1 bg-white/5 p-1 rounded-lg border border-white/10 text-xs font-medium text-slate-300">
+          <nav className="hidden md:flex items-center gap-1 bg-slate-100/80 p-1 rounded-lg border border-slate-200/60 text-xs font-medium text-slate-600">
             <button
               type="button"
               onClick={() => onNavigate('dashboard')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
                 activeSection === 'dashboard'
-                  ? 'bg-white/15 text-white font-semibold border border-white/15 shadow-2xs'
-                  : 'hover:text-white hover:bg-white/10'
+                  ? 'bg-slate-900 text-white font-medium shadow-2xs'
+                  : 'hover:text-slate-900 hover:bg-white'
               }`}
             >
-              <LayoutDashboard className="w-3.5 h-3.5 text-emerald-400" />
+              <LayoutDashboard className="w-3.5 h-3.5" />
               <span>Painel</span>
             </button>
 
@@ -52,8 +52,8 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => onNavigate('problems')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
                   activeSection === 'problems'
-                    ? 'bg-white/15 text-white font-semibold border border-white/15 shadow-2xs'
-                    : 'hover:text-white hover:bg-white/10'
+                    ? 'bg-slate-900 text-white font-medium shadow-2xs'
+                    : 'hover:text-slate-900 hover:bg-white'
                 }`}
               >
                 <Compass className="w-3.5 h-3.5" />
@@ -67,11 +67,11 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => onNavigate('plan')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
                   activeSection === 'plan'
-                    ? 'bg-white/15 text-white font-semibold border border-white/15 shadow-2xs'
-                    : 'hover:text-white hover:bg-white/10'
+                    ? 'bg-slate-900 text-white font-medium shadow-2xs'
+                    : 'hover:text-slate-900 hover:bg-white'
                 }`}
               >
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Trilha de Aulas</span>
               </button>
             )}
@@ -81,11 +81,11 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onNavigate('deliveries')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
                 activeSection === 'deliveries'
-                  ? 'bg-white/15 text-white font-semibold border border-white/15 shadow-2xs'
-                  : 'hover:text-white hover:bg-white/10'
+                  ? 'bg-slate-900 text-white font-medium shadow-2xs'
+                  : 'hover:text-slate-900 hover:bg-white'
               }`}
             >
-              <UploadCloud className="w-3.5 h-3.5 text-emerald-400" />
+              <UploadCloud className="w-3.5 h-3.5 text-emerald-600" />
               <span>Entregas</span>
             </button>
           </nav>
@@ -95,16 +95,16 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-2">
           {currentGroup ? (
             <div className="flex items-center gap-2">
-              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-medium text-slate-200">
-                <Building2 className="w-3.5 h-3.5 text-emerald-400" />
+              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200 text-xs font-medium text-slate-800">
+                <Building2 className="w-3.5 h-3.5 text-emerald-600" />
                 <span className="max-w-[130px] truncate">{currentGroup.company_name}</span>
-                <span className="text-xs font-mono text-slate-400">({currentGroup.class_name})</span>
+                <span className="text-xs font-mono text-slate-500">({currentGroup.class_name})</span>
               </div>
 
               <button
                 type="button"
                 onClick={onLogout}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer border border-transparent hover:border-white/10"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer border border-transparent hover:border-slate-200"
                 title="Sair da sessão"
               >
                 <LogOut className="w-3.5 h-3.5" />
@@ -113,12 +113,12 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           ) : (
             <div className="flex items-center gap-1.5">
-              <span className="text-xs text-slate-400 hidden sm:inline-block mr-1">
+              <span className="text-xs text-slate-500 hidden sm:inline-block mr-1">
                 Turmas 2º2 e 2º3
               </span>
               <a
                 href="#auth-section"
-                className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-colors"
+                className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition-colors"
               >
                 Acessar Plataforma
               </a>

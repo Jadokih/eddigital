@@ -10,7 +10,7 @@ interface BrandLogoProps {
 export const BrandLogo: React.FC<BrandLogoProps> = ({
   size = 'md',
   variant = 'full',
-  theme = 'dark',
+  theme = 'light',
   className = '',
 }) => {
   const pixelSizes = {
@@ -118,7 +118,9 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
               Founders
             </span>
             <span
-              className="font-sans font-semibold tracking-wider text-emerald-400"
+              className={`font-sans font-semibold tracking-wider ${
+                isLight ? 'text-emerald-700' : 'text-emerald-400'
+              }`}
               style={{ fontSize: size === 'lg' ? '1.25rem' : size === 'md' ? '0.95rem' : '0.85rem' }}
             >
               Grid
@@ -137,3 +139,4 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     </div>
   );
 };
+
