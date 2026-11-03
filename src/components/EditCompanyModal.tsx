@@ -61,7 +61,7 @@ export const EditCompanyModal: React.FC<EditCompanyModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/40 backdrop-blur-md">
-      <div className="liquid-glass rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-150">
+      <div className="bg-white rounded-3xl border border-zinc-200/90 shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-150">
         <div className="flex items-center justify-between p-5 border-b border-zinc-200/80 bg-zinc-50/70">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-zinc-900 text-white flex items-center justify-center">

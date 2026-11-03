@@ -5,16 +5,12 @@ import {
   BookOpen,
   ArrowRight,
   ArrowLeft,
-  Sparkles,
-  Target,
   ListOrdered,
-  PlayCircle,
   CheckSquare,
   Square,
 } from 'lucide-react';
 import type { LessonData } from '../../data/lessonsData';
 import { MenuPath } from '../ui/MenuPath';
-import { TipCallout } from '../ui/TipCallout';
 import { SelfChecklist } from '../ui/SelfChecklist';
 
 interface LessonModalProps {
@@ -67,30 +63,30 @@ export const LessonModal: React.FC<LessonModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-zinc-950/40 backdrop-blur-md overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-zinc-950/40 backdrop-blur-sm overflow-y-auto"
       role="dialog"
       aria-modal="true"
     >
-      <div className="liquid-glass rounded-2xl max-w-3xl w-full max-h-[92vh] flex flex-col my-auto overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+      <div className="bg-white rounded-3xl border border-zinc-200/90 shadow-2xl max-w-3xl w-full max-h-[92vh] flex flex-col my-auto overflow-hidden animate-in fade-in zoom-in-95 duration-150">
         {/* Cabeçalho da Aula */}
-        <div className="flex items-center justify-between p-5 sm:p-6 border-b border-zinc-200/80 bg-zinc-50/70">
+        <div className="flex items-center justify-between p-5 sm:p-6 border-b border-zinc-200/80 bg-zinc-50/50">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white flex items-center justify-center shadow-xs">
+            <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white flex items-center justify-center shadow-2xs">
               <BookOpen className="w-4 h-4 text-zinc-300" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-zinc-200/80 text-zinc-700">
+                <span className="text-xs font-normal text-zinc-500">
                   {lesson.category}
                 </span>
                 {isCompleted && (
-                  <span className="inline-flex items-center gap-1 text-xs font-medium text-zinc-800 bg-zinc-100 border border-zinc-200 px-2.5 py-0.5 rounded-full">
-                    <CheckCircle2 className="w-3 h-3 text-zinc-800" /> Concluída
+                  <span className="inline-flex items-center gap-1 text-xs font-medium text-zinc-900 bg-zinc-100 px-2.5 py-0.5 rounded-full">
+                    <CheckCircle2 className="w-3 h-3 text-zinc-900" /> Concluída
                   </span>
                 )}
               </div>
               <h2
-                className="text-lg sm:text-xl font-serif font-normal text-zinc-900 mt-0.5"
+                className="text-xl sm:text-2xl font-serif font-normal text-zinc-900 mt-0.5"
                 style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
               >
                 {lesson.title}
@@ -107,80 +103,73 @@ export const LessonModal: React.FC<LessonModalProps> = ({
           </button>
         </div>
 
-        {/* Corpo da Aula Didática */}
-        <div className="flex-1 overflow-y-auto p-5 sm:p-7 space-y-6 text-sm">
-          {/* Seção A: O que você vai aprender? */}
-          <div className="bg-zinc-50 border border-zinc-200/80 rounded-xl p-4 sm:p-5 space-y-1.5">
-            <div className="flex items-center gap-2 text-zinc-800 font-medium text-xs">
-              <Sparkles className="w-3.5 h-3.5 text-zinc-600" />
-              <span>O que você vai aprender</span>
-            </div>
-            <p className="text-sm font-normal text-zinc-900 leading-relaxed">
+        {/* Corpo da Aula Didática (Layout Aberto, Sem Cards Aninhados) */}
+        <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 text-sm">
+          {/* Seção A: O que você vai aprender? (Texto Aberto com Respiro) */}
+          <div className="space-y-1.5 pb-4 border-b border-zinc-100">
+            <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider block">
+              Objetivo pedagógico
+            </span>
+            <p className="text-base text-zinc-900 leading-relaxed font-normal">
               {lesson.learningGoal}
             </p>
           </div>
 
           {/* Seção B: O que você precisa fazer? */}
           <div className="space-y-1.5">
-            <div className="flex items-center gap-2 text-zinc-600 font-medium text-xs">
-              <Target className="w-4 h-4 text-zinc-600" />
-              <span>O que precisa fazer na sua planilha</span>
-            </div>
-            <p className="text-sm font-normal text-zinc-900 bg-zinc-50 p-3.5 rounded-xl border border-zinc-200">
+            <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider block">
+              O que fazer na sua planilha
+            </span>
+            <p className="text-sm font-normal text-zinc-800 leading-relaxed">
               {lesson.practicalTask}
             </p>
           </div>
 
-          {/* Seção C: Como fazer? Passo a Passo Visual */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 text-zinc-600 font-medium text-xs">
-              <ListOrdered className="w-4 h-4 text-zinc-600" />
-              <span>Como fazer (passo a passo no ONLYOFFICE)</span>
+          {/* Seção C: Como fazer? Passo a Passo em Lista Aberta (SEM BORDAS INDIVIDUAIS) */}
+          <div className="space-y-3 pt-2">
+            <div className="flex items-center gap-2 text-zinc-500 font-medium text-xs uppercase tracking-wider">
+              <ListOrdered className="w-3.5 h-3.5" />
+              <span>Passo a passo no ONLYOFFICE</span>
             </div>
 
-            <div className="space-y-3">
+            <ol className="space-y-4 pt-1">
               {lesson.steps.map((step) => (
-                <div
-                  key={step.number}
-                  className="p-4 rounded-xl border border-zinc-200 bg-white space-y-2 hover:border-zinc-300 transition-colors"
-                >
-                  <div className="flex items-start gap-3">
-                    <span className="w-5 h-5 rounded-full bg-zinc-900 text-white font-medium text-xs flex items-center justify-center shrink-0 mt-0.5">
-                      {step.number}
-                    </span>
-                    <div className="space-y-1.5 flex-1">
-                      <p className="font-medium text-zinc-900 text-sm">{step.instruction}</p>
-                      {step.menuPath && (
-                        <div className="pt-0.5">
-                          <MenuPath steps={step.menuPath} />
-                        </div>
-                      )}
-                      <p className="text-xs text-slate-600 leading-relaxed pt-1">{step.detail}</p>
-                    </div>
+                <li key={step.number} className="flex items-start gap-3.5">
+                  <span className="w-6 h-6 rounded-full bg-zinc-900 text-white font-medium text-xs flex items-center justify-center shrink-0 mt-0.5">
+                    {step.number}
+                  </span>
+                  <div className="space-y-1 flex-1">
+                    <p className="font-medium text-zinc-900 text-sm">{step.instruction}</p>
+                    {step.menuPath && (
+                      <div className="pt-0.5">
+                        <MenuPath steps={step.menuPath} />
+                      </div>
+                    )}
+                    <p className="text-xs text-zinc-500 leading-relaxed pt-0.5">{step.detail}</p>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
 
           {/* Seção D: Dica Anti-Erro / Macete de Sala de Aula */}
-          <TipCallout type={lesson.tip.type} title={lesson.tip.title}>
-            <p>{lesson.tip.content}</p>
-          </TipCallout>
+          <div className="border-l-2 border-zinc-900 pl-4 py-1 space-y-1 text-xs">
+            <h4 className="font-medium text-zinc-900 text-xs">{lesson.tip.title}</h4>
+            <div className="text-zinc-600 leading-relaxed">{lesson.tip.content}</div>
+          </div>
 
-          {/* Seção E: Hora de praticar */}
-          <div className="p-4 rounded-xl bg-blue-50/70 border border-blue-200 space-y-1.5">
-            <div className="flex items-center gap-2 text-blue-900 font-semibold text-xs">
-              <PlayCircle className="w-4 h-4 text-blue-600" />
-              <span>Hora de praticar com a sua equipe</span>
-            </div>
-            <p className="text-xs sm:text-sm text-blue-950 font-normal leading-relaxed">
+          {/* Seção E: Hora de praticar (Aberto) */}
+          <div className="space-y-1.5 pt-2 border-t border-zinc-100">
+            <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider block">
+              Hora de praticar com a sua equipe
+            </span>
+            <p className="text-xs sm:text-sm text-zinc-700 font-normal leading-relaxed">
               {lesson.practiceExercise}
             </p>
           </div>
 
           {/* Seção F: Confira seu resultado (Autoavaliação) */}
-          <div className="pt-2">
+          <div className="pt-2 border-t border-zinc-100">
             <SelfChecklist
               items={lesson.selfChecklist}
               checkedItems={checkedItems}
@@ -190,7 +179,7 @@ export const LessonModal: React.FC<LessonModalProps> = ({
         </div>
 
         {/* Rodapé e Navegação entre Aulas */}
-        <div className="p-4 sm:p-5 border-t border-zinc-200/80 bg-zinc-50/70 flex flex-wrap items-center justify-between gap-3">
+        <div className="p-4 sm:p-5 border-t border-zinc-200/80 bg-zinc-50/50 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             {hasPrev && onNavigateLesson && (
               <button

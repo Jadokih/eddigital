@@ -13,21 +13,21 @@ export const SelfChecklist: React.FC<SelfChecklistProps> = ({
   onToggleItem,
 }) => {
   return (
-    <div className="space-y-2">
-      <h4 className="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
-        <span>Confira seu resultado (autoavaliação da equipe)</span>
+    <div className="space-y-3 pt-2">
+      <h4 className="text-xs font-medium text-zinc-500 uppercase tracking-wider">
+        Confira seu resultado (autoavaliação da equipe)
       </h4>
-      <div className="space-y-1.5">
+      <div className="space-y-1 divide-y divide-zinc-100">
         {items.map((item, idx) => {
           const checked = !!checkedItems[idx];
           return (
             <label
               key={idx}
               onClick={() => onToggleItem(idx)}
-              className={`flex items-start gap-3 p-3 rounded-lg border text-xs cursor-pointer transition-colors ${
+              className={`flex items-start gap-3 py-2.5 px-2 rounded-lg text-xs cursor-pointer transition-colors ${
                 checked
-                  ? 'bg-zinc-100/90 border-zinc-300 text-zinc-900 font-medium'
-                  : 'bg-white border-zinc-200 text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50'
+                  ? 'text-zinc-900 font-medium'
+                  : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50/70'
               }`}
             >
               <div
@@ -39,7 +39,9 @@ export const SelfChecklist: React.FC<SelfChecklistProps> = ({
               >
                 {checked && <Check className="w-3 h-3 stroke-[3]" />}
               </div>
-              <span className="leading-relaxed">{item}</span>
+              <span className={`leading-relaxed ${checked ? 'line-through text-zinc-400' : ''}`}>
+                {item}
+              </span>
             </label>
           );
         })}

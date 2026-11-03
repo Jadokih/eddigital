@@ -77,16 +77,16 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
   };
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto py-2">
-      {/* Banner Introdutório em Liquid Glass */}
-      <div className="liquid-glass p-6 sm:p-8 space-y-3">
+    <div className="space-y-8 max-w-5xl mx-auto py-4">
+      {/* 1. CABEÇALHO EDITORIAL ABERTO */}
+      <section className="space-y-3 pb-6 border-b border-zinc-200/80">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1">
             <span className="text-xs font-normal text-zinc-500 uppercase tracking-wider block">
               Educação Digital • Etapa 1
             </span>
             <h2
-              className="text-2xl sm:text-3xl lg:text-4xl font-serif text-zinc-900 tracking-tight font-normal"
+              className="text-3xl sm:text-4xl font-serif text-zinc-900 tracking-tight font-normal"
               style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               Escolha a missão prática da sua empresa
@@ -97,18 +97,18 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
               específicos da missão escolhida.
             </p>
           </div>
-          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-100/80 border border-zinc-200/80 text-xs font-normal text-zinc-700 self-start md:self-auto shrink-0">
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-100 text-xs font-medium text-zinc-700 self-start md:self-auto shrink-0">
             <Compass className="w-3.5 h-3.5 text-zinc-400" />
             <span>4 Situações-problema</span>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* BLOCO 1: FUNDAMENTOS BÁSICOS COMPARTILHADOS */}
-      <div className="liquid-glass p-6 space-y-4">
+      {/* BLOCO 1: FUNDAMENTOS BÁSICOS COMPARTILHADOS (GRADE ABERTA) */}
+      <section className="space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-zinc-200/60">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-zinc-100 border border-zinc-200/60 text-zinc-600 flex items-center justify-center text-xs">
+            <div className="w-8 h-8 rounded-full bg-zinc-100 text-zinc-600 flex items-center justify-center text-xs">
               <GraduationCap className="w-4 h-4" />
             </div>
             <div>
@@ -123,30 +123,30 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
               </p>
             </div>
           </div>
-          <span className="text-xs font-normal px-3 py-0.5 rounded-full bg-zinc-100 border border-zinc-200/60 text-zinc-700 hidden sm:inline">
+          <span className="text-xs font-normal text-zinc-500 hidden sm:inline">
             6 Fundamentos comuns
           </span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {COMMON_SPREADSHEET_TOOLS.map((tool, idx) => (
-            <div key={idx} className="p-3 rounded-xl bg-zinc-50/70 border border-zinc-200/60 space-y-1">
-              <span className="text-xs font-mono text-zinc-400 block">
+            <div key={idx} className="space-y-1 p-2 rounded-xl text-xs font-normal">
+              <span className="text-[11px] font-mono text-zinc-400 block">
                 Aula {idx + 1}
               </span>
-              <strong className="text-zinc-800 text-xs font-medium block leading-tight">
+              <strong className="text-zinc-900 text-xs font-medium block leading-tight">
                 {tool.category}
               </strong>
-              <p className="text-zinc-500 text-[11px] leading-snug line-clamp-2 font-normal">
+              <p className="text-zinc-500 text-[11px] leading-snug line-clamp-2">
                 {tool.details}
               </p>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* BLOCO 2: AS 4 MISSÕES PRÁTICAS */}
-      <div className="space-y-4">
+      <section className="space-y-4 pt-2">
         <div className="flex items-center justify-between">
           <div>
             <span className="text-xs font-normal text-zinc-500 uppercase tracking-wider block mb-0.5">
@@ -164,7 +164,7 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {PROBLEMS_DATA.map((problem) => {
             const isSelected = selectedProblemId === problem.id;
             const atmosphere = MISSION_ATMOSPHERES[problem.number];
@@ -172,15 +172,15 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
             return (
               <div
                 key={problem.id}
-                className={`liquid-glass p-6 flex flex-col justify-between gap-5 transition-all overflow-hidden ${
+                className={`bg-white rounded-3xl border p-6 flex flex-col justify-between gap-6 transition-all overflow-hidden ${
                   isSelected
-                    ? 'border-zinc-900 ring-1 ring-zinc-900/15'
-                    : 'hover:border-zinc-300'
+                    ? 'border-zinc-900 ring-1 ring-zinc-900/10 shadow-sm'
+                    : 'border-zinc-200/90 hover:border-zinc-300'
                 }`}
               >
                 <div className="space-y-4">
                   {/* Fotografia Cinematográfica */}
-                  <div className="relative h-44 sm:h-48 rounded-xl overflow-hidden border border-zinc-200 group">
+                  <div className="relative h-44 sm:h-48 rounded-2xl overflow-hidden group">
                     <img
                       src={atmosphere?.image}
                       alt={atmosphere?.alt}
@@ -195,8 +195,8 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
                       </span>
 
                       {isSelected && (
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-normal bg-zinc-100 text-zinc-900 shadow-sm border border-zinc-200">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-zinc-700" />
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-white text-zinc-900 shadow-sm">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-zinc-900" />
                           Ativa
                         </span>
                       )}
@@ -219,8 +219,8 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
                     {problem.description}
                   </p>
 
-                  {/* Box de Objetivo na Planilha */}
-                  <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200/70 space-y-1">
+                  {/* Desafio prático da planilha em tipografia aberta (SEM CAIXA CINZA) */}
+                  <div className="space-y-1 pt-1 border-t border-zinc-100">
                     <span className="text-xs font-medium text-zinc-800 block">
                       Desafio prático da planilha:
                     </span>
@@ -229,24 +229,27 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
                     </p>
                   </div>
 
-                  {/* 3 Habilidades Específicas */}
-                  <div className="space-y-1.5 pt-1">
-                    <span className="text-xs font-medium text-zinc-700 flex items-center gap-1.5">
+                  {/* 3 Habilidades Específicas em lista limpa (SEM SUB-BOXES) */}
+                  <div className="space-y-1.5 pt-2 border-t border-zinc-100">
+                    <span className="text-xs font-medium text-zinc-800 flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5 text-zinc-400" />
                       <span>Habilidades específicas da missão:</span>
                     </span>
-                    <div className="space-y-1">
+                    <ul className="space-y-1 text-xs text-zinc-600 font-normal">
                       {problem.specificTools.map((tool, idx) => (
-                        <div key={idx} className="p-2 rounded-lg bg-zinc-50 border border-zinc-200/50 text-xs font-normal">
-                          <strong className="text-zinc-800 block text-xs font-medium">• {tool.category}</strong>
-                          <span className="text-zinc-500 text-[11px] block">{tool.details}</span>
-                        </div>
+                        <li key={idx} className="flex items-start gap-1.5 leading-snug">
+                          <span className="text-zinc-400 mt-0.5">•</span>
+                          <span>
+                            <strong className="text-zinc-800 font-medium">{tool.category}:</strong>{' '}
+                            {tool.details}
+                          </span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-zinc-200/60">
+                <div className="pt-3 border-t border-zinc-100">
                   <button
                     type="button"
                     onClick={() => handleOpenConfirmModal(problem)}
@@ -273,19 +276,19 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
             );
           })}
         </div>
-      </div>
+      </section>
 
-      {/* Modal de Confirmação Editorial em Liquid Glass */}
+      {/* Modal de Confirmação Editorial */}
       {modalProblem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/40 backdrop-blur-xs">
-          <div className="liquid-glass max-w-lg w-full p-6 sm:p-7 space-y-5 animate-in fade-in zoom-in-95 duration-150 text-zinc-800">
-            <div className="flex items-center justify-between pb-3 border-b border-zinc-200/60">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/40 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl border border-zinc-200/90 shadow-2xl max-w-lg w-full p-6 sm:p-7 space-y-5 animate-in fade-in zoom-in-95 duration-150 text-zinc-800">
+            <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
               <div>
                 <span className="text-xs font-normal text-zinc-500 block">
                   Confirmar missão {modalProblem.number}
                 </span>
                 <h3
-                  className="text-xl font-serif font-normal text-zinc-900"
+                  className="text-2xl font-serif font-normal text-zinc-900"
                   style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
                 >
                   {modalProblem.title}
@@ -301,21 +304,21 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
               </button>
             </div>
 
-            <div className="space-y-3 text-xs">
-              <div className="bg-zinc-50 p-3.5 rounded-xl border border-zinc-200/60 space-y-1">
+            <div className="space-y-3 text-xs leading-relaxed">
+              <div className="space-y-1">
                 <span className="text-xs font-medium text-zinc-800 block">
                   1. Aprendendo o básico em aula:
                 </span>
-                <p className="text-zinc-600 leading-relaxed font-normal">
+                <p className="text-zinc-600 font-normal">
                   Introdução ao ONLYOFFICE, criação de planilha, tabela, formatação, fórmulas fundamentais (SOMA, SUBTRAÇÃO, MÉDIA) e filtros.
                 </p>
               </div>
 
-              <div className="bg-zinc-100/80 p-3.5 rounded-xl border border-zinc-200 space-y-1">
+              <div className="space-y-1 pt-2 border-t border-zinc-100">
                 <span className="text-xs font-medium text-zinc-800 block">
                   2. Desafios práticos da sua equipe:
                 </span>
-                <p className="text-zinc-700 font-normal leading-relaxed">
+                <p className="text-zinc-700 font-normal">
                   {modalProblem.objective}
                 </p>
               </div>

@@ -130,7 +130,7 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
       aria-modal="true"
       aria-labelledby="submit-delivery-title"
     >
-      <div className="liquid-glass rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-150">
+      <div className="bg-white rounded-3xl border border-zinc-200/90 shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-150">
         <div className="flex items-center justify-between p-5 border-b border-zinc-200/80 bg-zinc-50/70">
           <div className="flex items-center gap-2.5">
             <div className="p-2 rounded-xl bg-zinc-900 text-white shadow-2xs">

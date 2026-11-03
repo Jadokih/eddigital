@@ -137,16 +137,16 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto py-2">
-      {/* Topo do Plano de Aprendizagem em Liquid Glass */}
-      <div className="liquid-glass p-6 sm:p-8 space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-200/60">
+    <div className="space-y-8 max-w-5xl mx-auto py-4">
+      {/* 1. CABEÇALHO EDITORIAL ABERTO (SEM CAIXA REDUNDANTE) */}
+      <section className="space-y-4 pb-6 border-b border-zinc-200/80">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <span className="text-xs font-normal text-zinc-500 uppercase tracking-wider block mb-1">
               Trilha de aprendizagem • ONLYOFFICE
             </span>
             <h3
-              className="text-2xl sm:text-3xl font-serif font-normal text-zinc-900 tracking-tight"
+              className="text-3xl sm:text-4xl font-serif font-normal text-zinc-900 tracking-tight"
               style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               Metas de aprendizagem da empresa
@@ -160,40 +160,40 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
           <button
             type="button"
             onClick={onChangeProblem}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/80 hover:bg-white text-zinc-700 text-xs font-normal border border-zinc-200/80 shadow-2xs transition-colors cursor-pointer self-start md:self-auto"
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white hover:bg-zinc-50 text-zinc-700 text-xs font-medium border border-zinc-200 transition-colors cursor-pointer self-start md:self-auto shrink-0"
           >
             <ArrowLeftRight className="w-3.5 h-3.5 text-zinc-400" />
             <span>Trocar missão</span>
           </button>
         </div>
 
-        {/* Barra de Ação Rápida em Grafite Escuro com Liquid Glass */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center p-6 rounded-2xl liquid-glass-dark text-white">
-          <div className="md:col-span-2 space-y-1.5">
-            <span className="text-xs font-normal text-zinc-300 uppercase tracking-wider">
+        {/* 2. CARD ÚNICO DE DESTAQUE: PRÓXIMA AÇÃO RECOMENDADA */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center p-6 sm:p-7 rounded-2xl liquid-glass-dark text-white shadow-sm">
+          <div className="md:col-span-2 space-y-2">
+            <span className="text-xs font-normal text-zinc-400 uppercase tracking-wider">
               Próxima ação recomendada
             </span>
             <h4
-              className="text-base sm:text-lg font-serif font-normal text-white tracking-tight"
+              className="text-xl sm:text-2xl font-serif font-normal text-white tracking-tight"
               style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               {isAllCompleted
                 ? 'Metas concluídas: envie sua planilha do dia'
                 : nextPendingObjective?.title}
             </h4>
-            <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed max-w-xl">
               {isAllCompleted
                 ? 'Sua equipe completou todas as habilidades e desafios. Salve seu arquivo no formato .xlsx e faça a entrega da atividade.'
                 : 'Abra o passo a passo objetivo com instruções detalhadas de menus e fórmulas no ONLYOFFICE.'}
             </p>
           </div>
 
-          <div className="flex flex-col items-start md:items-end justify-center gap-2">
+          <div className="flex flex-col items-start md:items-end justify-center gap-3">
             {isAllCompleted && onNavigateDeliveries ? (
               <button
                 type="button"
                 onClick={onNavigateDeliveries}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-950 font-medium text-xs sm:text-sm transition-colors cursor-pointer shadow-sm"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-950 font-medium text-xs sm:text-sm transition-colors cursor-pointer shadow-sm"
               >
                 <UploadCloud className="w-4 h-4" />
                 <span>Entregar planilha (.xlsx)</span>
@@ -203,7 +203,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
               <button
                 type="button"
                 onClick={() => setActiveObjectiveId(nextPendingObjective.id)}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-950 font-medium text-xs sm:text-sm transition-colors cursor-pointer shadow-sm"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-950 font-medium text-xs sm:text-sm transition-colors cursor-pointer shadow-sm"
               >
                 <PlayCircle className="w-4 h-4" />
                 <span>Continuar aula</span>
@@ -211,14 +211,14 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
               </button>
             ) : null}
 
-            <div className="w-full md:w-48 space-y-1">
-              <div className="flex justify-between text-xs text-zinc-300 font-normal">
+            <div className="w-full md:w-52 space-y-1">
+              <div className="flex justify-between text-xs text-zinc-400 font-normal">
                 <span>Progresso total</span>
                 <span className="font-serif text-white tabular-nums font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>
                   {percent}%
                 </span>
               </div>
-              <div className="w-full bg-white/20 h-1.5 rounded-full overflow-hidden border border-white/10">
+              <div className="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
                 <div
                   className="bg-white h-full rounded-full transition-all duration-300"
                   style={{ width: `${percent}%` }}
@@ -227,18 +227,18 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Navegação Rápida entre Fases da Trilha em Liquid Glass */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-full bg-white/70 backdrop-blur-md border border-zinc-200/80 shadow-2xs text-xs font-normal">
+      {/* 3. NAVEGAÇÃO ENTRE FASES (ABAS DIRETAS NO LAYOUT) */}
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center gap-2 text-xs font-normal">
           <button
             type="button"
             onClick={() => setFilterPhase('all')}
-            className={`px-3.5 py-1.5 rounded-full transition-colors cursor-pointer ${
+            className={`px-4 py-1.5 rounded-full transition-colors cursor-pointer ${
               filterPhase === 'all'
-                ? 'bg-zinc-900 text-white font-medium shadow-xs'
-                : 'text-zinc-600 hover:text-zinc-900 hover:bg-white/80'
+                ? 'bg-zinc-900 text-white font-medium shadow-2xs'
+                : 'text-zinc-600 hover:text-zinc-900 bg-zinc-100/70 hover:bg-zinc-100'
             }`}
           >
             Trilha completa ({totalCount + 1})
@@ -246,10 +246,10 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
           <button
             type="button"
             onClick={() => setFilterPhase('common')}
-            className={`px-3.5 py-1.5 rounded-full transition-colors cursor-pointer ${
+            className={`px-4 py-1.5 rounded-full transition-colors cursor-pointer ${
               filterPhase === 'common'
-                ? 'bg-zinc-900 text-white font-medium shadow-xs'
-                : 'text-zinc-600 hover:text-zinc-900 hover:bg-white/80'
+                ? 'bg-zinc-900 text-white font-medium shadow-2xs'
+                : 'text-zinc-600 hover:text-zinc-900 bg-zinc-100/70 hover:bg-zinc-100'
             }`}
           >
             1. Fundamentos em aula ({commonCompletedCount}/{commonObjectives.length})
@@ -257,10 +257,10 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
           <button
             type="button"
             onClick={() => setFilterPhase('specific')}
-            className={`px-3.5 py-1.5 rounded-full transition-colors cursor-pointer ${
+            className={`px-4 py-1.5 rounded-full transition-colors cursor-pointer ${
               filterPhase === 'specific'
-                ? 'bg-zinc-900 text-white font-medium shadow-xs'
-                : 'text-zinc-600 hover:text-zinc-900 hover:bg-white/80'
+                ? 'bg-zinc-900 text-white font-medium shadow-2xs'
+                : 'text-zinc-600 hover:text-zinc-900 bg-zinc-100/70 hover:bg-zinc-100'
             }`}
           >
             2. Desafios da empresa ({specificCompletedCount}/{specificObjectives.length})
@@ -268,10 +268,10 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
           <button
             type="button"
             onClick={() => setFilterPhase('delivery')}
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-colors cursor-pointer ${
+            className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full transition-colors cursor-pointer ${
               filterPhase === 'delivery'
-                ? 'bg-zinc-900 text-white font-medium shadow-xs'
-                : 'text-zinc-600 hover:text-zinc-900 hover:bg-white/80'
+                ? 'bg-zinc-900 text-white font-medium shadow-2xs'
+                : 'text-zinc-600 hover:text-zinc-900 bg-zinc-100/70 hover:bg-zinc-100'
             }`}
           >
             <UploadCloud className="w-3.5 h-3.5 text-zinc-400" />
@@ -310,7 +310,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             </span>
           </div>
 
-          <div className="divide-y divide-zinc-100 liquid-glass overflow-hidden">
+          <div className="divide-y divide-zinc-100 bg-white rounded-2xl border border-zinc-200/80 overflow-hidden shadow-2xs">
             {commonObjectives.map((obj, index) => {
               const isCompleted = completedList.includes(obj.id);
               const isCurrent = !isCompleted && nextPendingObjective?.id === obj.id;
@@ -423,7 +423,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             </span>
           </div>
 
-          <div className="divide-y divide-zinc-100 liquid-glass overflow-hidden">
+          <div className="divide-y divide-zinc-100 bg-white rounded-2xl border border-zinc-200/80 overflow-hidden shadow-2xs">
             {specificObjectives.map((obj, index) => {
               const isCompleted = completedList.includes(obj.id);
               const isCurrent = !isCompleted && nextPendingObjective?.id === obj.id;
@@ -513,7 +513,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
       {/* FASE 3: ETAPA DE ENTREGA DA ATIVIDADE DO DIA (MARCO FINAL) */}
       {(filterPhase === 'all' || filterPhase === 'delivery') && (
         <div className="pt-2">
-          <div className="liquid-glass p-6 sm:p-7 space-y-4 relative overflow-hidden">
+          <div className="bg-white rounded-2xl border border-zinc-200/80 p-6 sm:p-7 space-y-4 shadow-2xs">
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
               <div className="flex items-start gap-3.5">
                 <div className="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-700 flex items-center justify-center shrink-0">

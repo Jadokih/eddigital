@@ -243,7 +243,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
             MODO 1: LOGIN (AMBIENTE BRANCO E ACOLHEDOR)
             ======================================================== */}
         {activeTab === 'signin' ? (
-          <div className="liquid-glass rounded-3xl p-8 sm:p-10 space-y-6 animate-in fade-in zoom-in-98 duration-200">
+          <div className="bg-white rounded-3xl border border-zinc-200/90 shadow-xl p-8 sm:p-10 space-y-6 animate-in fade-in zoom-in-98 duration-200">
             <div className="text-center space-y-2">
               <h2
                 className="text-3xl sm:text-4xl font-serif font-normal text-zinc-900 tracking-tight"
@@ -346,7 +346,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
           /* ========================================================
              MODO 2: CADASTRO (ORGANIZADO, DIDÁTICO E AMIGÁVEL)
              ======================================================== */
-          <div className="liquid-glass rounded-3xl p-6 sm:p-10 space-y-8 animate-in fade-in zoom-in-98 duration-200">
+          <div className="bg-white rounded-3xl border border-zinc-200/90 shadow-xl p-6 sm:p-10 space-y-8 animate-in fade-in zoom-in-98 duration-200">
             <div className="text-center space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs font-medium text-zinc-800 mb-2">
                 <GraduationCap className="w-4 h-4 text-zinc-700" />
@@ -602,8 +602,8 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
 
       {/* Modal de Recuperação de Senha */}
       {isForgotModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/40 backdrop-blur-md">
-          <div className="liquid-glass rounded-3xl max-w-md w-full p-6 sm:p-7 space-y-5 animate-in fade-in zoom-in-95 duration-150 text-zinc-900">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/40 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl border border-zinc-200/90 shadow-2xl max-w-md w-full p-6 sm:p-7 space-y-5 animate-in fade-in zoom-in-95 duration-150 text-zinc-900">
             <div className="flex items-center justify-between pb-3 border-b border-zinc-200">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center">
