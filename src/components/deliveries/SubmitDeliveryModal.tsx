@@ -125,22 +125,22 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs"
       role="dialog"
       aria-modal="true"
       aria-labelledby="submit-delivery-title"
     >
-      <div className="bg-white rounded-3xl border-2 border-slate-900 shadow-[6px_6px_0px_#0f172a] max-w-xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between p-5 border-b-2 border-slate-900 bg-[#FAF9F5]">
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-xl max-w-xl w-full max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-150">
+        <div className="flex items-center justify-between p-5 border-b border-slate-100 bg-[#F8FAFC]">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-slate-900 text-white shadow-xs">
+            <div className="p-2 rounded-xl bg-slate-900 text-white shadow-2xs">
               <Upload className="w-4 h-4 text-emerald-400" />
             </div>
             <div>
               <h3 id="submit-delivery-title" className="text-base font-display font-bold text-slate-900">
                 {isReplacement ? 'Substituir entrega' : 'Enviar entrega'}
               </h3>
-              <p className="text-xs text-slate-600 line-clamp-1">{activity.title}</p>
+              <p className="text-xs text-slate-500 line-clamp-1">{activity.title}</p>
             </div>
           </div>
           <button
@@ -148,7 +148,7 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
             onClick={onClose}
             disabled={busy}
             aria-label="Fechar"
-            className="w-8 h-8 rounded-full border border-slate-300 hover:border-slate-900 flex items-center justify-center text-slate-500 hover:text-slate-900 transition-colors cursor-pointer disabled:opacity-40"
+            className="w-8 h-8 rounded-full border border-slate-200 hover:border-slate-400 flex items-center justify-center text-slate-500 hover:text-slate-900 transition-colors cursor-pointer disabled:opacity-40"
           >
             <X className="w-4 h-4" />
           </button>
@@ -183,7 +183,7 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
                   setMemberName(e.target.value);
                   setSubmitError(null);
                 }}
-                className="w-full px-3 py-2.5 text-sm bg-white border-2 border-slate-900 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-400 font-semibold cursor-pointer"
+                className="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-400 font-semibold cursor-pointer shadow-2xs"
               >
                 <option value="" disabled>
                   Selecione um integrante...
@@ -196,7 +196,7 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
               </select>
             )}
             <p className="mt-1.5 text-[11px] text-slate-500 flex items-start gap-1">
-              <ShieldCheck className="w-3.5 h-3.5 shrink-0 mt-px" />
+              <ShieldCheck className="w-3.5 h-3.5 shrink-0 mt-px text-slate-400" />
               O login é compartilhado pelo grupo: fica registrado o integrante <strong>declarado</strong> como
               responsável, junto com a data e o horário do envio.
             </p>
@@ -214,13 +214,13 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
               accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
               disabled={busy}
               onChange={handleFileChange}
-              className="block w-full text-xs text-slate-700 file:mr-3 file:px-4 file:py-2 file:rounded-full file:border-2 file:border-slate-900 file:bg-white file:text-slate-900 file:font-bold file:cursor-pointer hover:file:bg-slate-50 cursor-pointer"
+              className="block w-full text-xs text-slate-700 file:mr-3 file:px-4 file:py-2 file:rounded-full file:border file:border-slate-300 file:bg-slate-50 file:text-slate-800 file:font-bold file:cursor-pointer hover:file:bg-slate-100 cursor-pointer"
             />
             <p className="mt-1.5 text-[11px] text-slate-500">
               No ONLYOFFICE: Arquivo → Baixar como → <strong>XLSX</strong>. Tamanho máximo: {formatBytes(MAX_DELIVERY_BYTES)}.
             </p>
             {file && !fileError && (
-              <p className="mt-2 text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-300 rounded-xl px-3 py-2">
+              <p className="mt-2 text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2">
                 {file.name} • {formatBytes(file.size)}
               </p>
             )}
@@ -239,7 +239,7 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
                 <span>{progress}%</span>
               </div>
               <div
-                className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border-2 border-slate-900"
+                className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden border border-slate-200"
                 role="progressbar"
                 aria-valuenow={progress}
                 aria-valuemin={0}
@@ -256,19 +256,19 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
             </p>
           )}
 
-          <div className="flex items-center justify-end gap-3 pt-4 border-t-2 border-slate-900">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
             <button
               type="button"
               onClick={onClose}
               disabled={busy}
-              className="px-4 py-2 rounded-full text-xs font-bold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer disabled:opacity-40"
+              className="px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer disabled:opacity-40"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={!canSubmit}
-              className="flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-[2px_2px_0px_#22c55e] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+              className="flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-xs disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
             >
               {busy ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Upload className="w-3.5 h-3.5" />}
               <span>{busy ? 'Enviando...' : isReplacement ? 'Enviar nova versão' : 'Enviar entrega'}</span>

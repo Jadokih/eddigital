@@ -125,7 +125,7 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F8F5] flex flex-col text-slate-900 selection:bg-emerald-200 selection:text-slate-900">
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col text-slate-900 selection:bg-emerald-200 selection:text-slate-900">
       <ToastContainer toasts={toasts} onDismiss={removeToast} />
 
       <Header
@@ -135,7 +135,7 @@ export const App: React.FC = () => {
         onNavigate={(sec) => setActiveSection(sec)}
       />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {!currentGroup ? (
           <AuthScreen
             onAuthSuccess={(group) => {
@@ -145,76 +145,62 @@ export const App: React.FC = () => {
             showToast={showToast}
           />
         ) : (
-          <div className="space-y-8">
-            {/* Barra de Navegação Interna estilo Pílula Segmentada (Image 1 & Image 2) */}
-            <div className="flex flex-wrap items-center justify-between gap-4 p-2 rounded-full bg-white border-2 border-slate-900 shadow-[3px_3px_0px_#0f172a] max-w-5xl mx-auto">
-              <div className="flex flex-wrap items-center gap-1">
+          <div className="space-y-6">
+            {/* Navegação Mobile em Abas (Aparece apenas em telas pequenas) */}
+            <div className="md:hidden flex items-center justify-between gap-1 p-1 rounded-xl bg-white border border-slate-200 shadow-2xs max-w-md mx-auto overflow-x-auto">
+              <button
+                type="button"
+                onClick={() => setActiveSection('dashboard')}
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all ${
+                  activeSection === 'dashboard'
+                    ? 'bg-slate-900 text-white'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <LayoutDashboard className="w-3.5 h-3.5" />
+                <span>Painel</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveSection('problems')}
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all ${
+                  activeSection === 'problems'
+                    ? 'bg-slate-900 text-white'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <FileSpreadsheet className="w-3.5 h-3.5" />
+                <span>Missões</span>
+              </button>
+
+              {selectedProblem && (
                 <button
                   type="button"
-                  onClick={() => setActiveSection('dashboard')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                    activeSection === 'dashboard'
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  onClick={() => setActiveSection('plan')}
+                  className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all ${
+                    activeSection === 'plan'
+                      ? 'bg-slate-900 text-white'
+                      : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
-                  <LayoutDashboard className="w-4 h-4" />
-                  Painel da Empresa
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <span>Aulas</span>
                 </button>
+              )}
 
-                <button
-                  type="button"
-                  onClick={() => setActiveSection('problems')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                    activeSection === 'problems'
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-                  }`}
-                >
-                  <FileSpreadsheet className="w-4 h-4" />
-                  Missões
-                  {selectedProblem && (
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 ml-0.5" />
-                  )}
-                </button>
-
-                {selectedProblem && (
-                  <button
-                    type="button"
-                    onClick={() => setActiveSection('plan')}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                      activeSection === 'plan'
-                        ? 'bg-slate-900 text-white shadow-xs'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-                    }`}
-                  >
-                    <CheckCircle2 className="w-4 h-4" />
-                    Plano de Metas
-                    <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-400 text-[10px] font-extrabold">
-                      {currentGroup.completed_objectives?.length || 0}/
-                      {selectedProblem.learningObjectives.length}
-                    </span>
-                  </button>
-                )}
-
-                <button
-                  type="button"
-                  onClick={() => setActiveSection('deliveries')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                    activeSection === 'deliveries'
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-                  }`}
-                >
-                  <UploadCloud className="w-4 h-4" />
-                  Minhas Entregas
-                </button>
-              </div>
-
-              <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-600 pr-3 hidden sm:flex">
-                <GraduationCap className="w-4 h-4 text-slate-800" />
-                <span>Educação Digital • 2º Ano</span>
-              </div>
+              <button
+                type="button"
+                onClick={() => setActiveSection('deliveries')}
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-all ${
+                  activeSection === 'deliveries'
+                    ? 'bg-slate-900 text-white'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <UploadCloud className="w-3.5 h-3.5" />
+                <span>Entregas</span>
+              </button>
             </div>
 
             {/* Visualização de Abas */}
