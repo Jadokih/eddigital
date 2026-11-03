@@ -130,17 +130,17 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
       aria-modal="true"
       aria-labelledby="submit-delivery-title"
     >
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-xl max-w-xl w-full max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-150">
-        <div className="flex items-center justify-between p-5 border-b border-slate-100 bg-[#F8FAFC]">
+      <div className="liquid-glass rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-150">
+        <div className="flex items-center justify-between p-5 border-b border-zinc-200/80 bg-zinc-50/70">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-slate-900 text-white shadow-2xs">
-              <Upload className="w-4 h-4 text-emerald-400" />
+            <div className="p-2 rounded-xl bg-zinc-900 text-white shadow-2xs">
+              <Upload className="w-4 h-4 text-zinc-200" />
             </div>
             <div>
-              <h3 id="submit-delivery-title" className="text-base font-display font-bold text-slate-900">
+              <h3 id="submit-delivery-title" className="text-base font-serif font-normal text-zinc-900">
                 {isReplacement ? 'Substituir entrega' : 'Enviar entrega'}
               </h3>
-              <p className="text-xs text-slate-500 line-clamp-1">{activity.title}</p>
+              <p className="text-xs text-zinc-500 line-clamp-1">{activity.title}</p>
             </div>
           </div>
           <button
@@ -220,7 +220,7 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
               No ONLYOFFICE: Arquivo → Baixar como → <strong>XLSX</strong>. Tamanho máximo: {formatBytes(MAX_DELIVERY_BYTES)}.
             </p>
             {file && !fileError && (
-              <p className="mt-2 text-xs font-medium text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-2">
+              <p className="mt-2 text-xs font-medium text-zinc-800 bg-zinc-100 border border-zinc-200 rounded-lg px-3 py-2">
                 {file.name} • {formatBytes(file.size)}
               </p>
             )}
@@ -234,41 +234,41 @@ export const SubmitDeliveryModal: React.FC<SubmitDeliveryModalProps> = ({
           {/* Progresso */}
           {busy && (
             <div className="space-y-1.5" aria-live="polite">
-              <div className="flex items-center justify-between text-xs font-medium text-slate-700">
+              <div className="flex items-center justify-between text-xs font-medium text-zinc-700">
                 <span>{phase === 'uploading' ? 'Enviando arquivo...' : 'Confirmando registro no servidor...'}</span>
                 <span>{progress}%</span>
               </div>
               <div
-                className="w-full bg-slate-100 h-2 rounded-full overflow-hidden border border-slate-200"
+                className="w-full bg-zinc-100 h-2 rounded-full overflow-hidden border border-zinc-200"
                 role="progressbar"
                 aria-valuenow={progress}
                 aria-valuemin={0}
                 aria-valuemax={100}
               >
-                <div className="bg-emerald-500 h-full transition-[width] duration-200" style={{ width: `${progress}%` }} />
+                <div className="bg-zinc-900 h-full transition-[width] duration-200" style={{ width: `${progress}%` }} />
               </div>
             </div>
           )}
 
           {submitError && !busy && (
-            <p className="text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200 rounded-lg p-3" role="alert">
+            <p className="text-xs font-medium text-rose-700 bg-rose-50 border border-rose-200 rounded-lg p-3" role="alert">
               {submitError}
             </p>
           )}
 
-          <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100">
+          <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-zinc-100">
             <button
               type="button"
               onClick={onClose}
               disabled={busy}
-              className="px-3.5 py-2 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer disabled:opacity-40"
+              className="px-4 py-2 rounded-full text-xs font-medium text-zinc-600 hover:bg-zinc-100 transition-colors cursor-pointer disabled:opacity-40"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={!canSubmit}
-              className="flex items-center gap-1.5 px-5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+              className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-sm hover:shadow"
             >
               {busy ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Upload className="w-3.5 h-3.5" />}
               <span>{busy ? 'Enviando...' : isReplacement ? 'Enviar nova versão' : 'Enviar entrega'}</span>

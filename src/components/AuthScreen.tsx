@@ -228,10 +228,10 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
             <button
               type="button"
               onClick={() => setActiveTab('signup')}
-              className={`py-2 px-5 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+              className={`py-2 px-5 rounded-full text-xs sm:text-sm font-medium transition-all cursor-pointer ${
                 activeTab === 'signup'
-                  ? 'bg-white text-slate-900 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-zinc-900 text-white shadow-xs'
+                  : 'text-zinc-600 hover:text-zinc-900'
               }`}
             >
               Criar Nova Empresa
@@ -243,22 +243,22 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
             MODO 1: LOGIN (AMBIENTE BRANCO E ACOLHEDOR)
             ======================================================== */}
         {activeTab === 'signin' ? (
-          <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 sm:p-10 space-y-6 animate-in fade-in zoom-in-98 duration-200">
+          <div className="liquid-glass rounded-3xl p-8 sm:p-10 space-y-6 animate-in fade-in zoom-in-98 duration-200">
             <div className="text-center space-y-2">
               <h2
-                className="text-3xl sm:text-4xl font-serif font-normal text-slate-900 tracking-tight"
+                className="text-3xl sm:text-4xl font-serif font-normal text-zinc-900 tracking-tight"
                 style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
               >
                 Que bom ter você de volta!
               </h2>
-              <p className="text-sm text-slate-600 font-normal max-w-md mx-auto">
+              <p className="text-sm text-zinc-600 font-normal max-w-md mx-auto">
                 Acesse a conta da sua empresa para continuar desenvolvendo suas habilidades no ONLYOFFICE.
               </p>
             </div>
 
             <form onSubmit={handleSignIn} className="space-y-4 max-w-md mx-auto pt-2">
               <div>
-                <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                <label className="block text-xs font-medium text-zinc-800 mb-1.5">
                   E-mail cadastrado da empresa *
                 </label>
                 <div className="relative">
@@ -268,15 +268,15 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                     placeholder="ex: grupo@escola.com"
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
-                    className="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-medium placeholder:text-slate-400"
+                    className="w-full px-4 py-2.5 text-sm bg-white border border-zinc-300 rounded-full text-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900 font-normal placeholder:text-zinc-400"
                   />
-                  <Mail className="w-4 h-4 text-slate-400 absolute right-3.5 top-3 pointer-events-none" />
+                  <Mail className="w-4 h-4 text-zinc-400 absolute right-4 top-3 pointer-events-none" />
                 </div>
               </div>
 
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs font-semibold text-slate-800">
+                  <label className="block text-xs font-medium text-zinc-800">
                     Senha de acesso *
                   </label>
                   <button
@@ -285,7 +285,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                       setForgotEmail(loginEmail);
                       setIsForgotModalOpen(true);
                     }}
-                    className="text-xs font-medium text-emerald-800 hover:text-emerald-950 underline cursor-pointer"
+                    className="text-xs font-medium text-zinc-600 hover:text-zinc-900 underline cursor-pointer"
                   >
                     Esqueceu a senha?
                   </button>
@@ -298,12 +298,12 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                     placeholder="Sua senha de acesso"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
-                    className="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 pr-10 font-medium placeholder:text-slate-400"
+                    className="w-full px-4 py-2.5 text-sm bg-white border border-zinc-300 rounded-full text-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900 pr-10 font-normal placeholder:text-zinc-400"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-3 text-slate-400 hover:text-slate-700 cursor-pointer"
+                    className="absolute right-4 top-3 text-zinc-400 hover:text-zinc-700 cursor-pointer"
                     aria-label={showPassword ? 'Ocultar senha' : 'Exibir senha'}
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -315,7 +315,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 px-5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shadow-sm"
+                  className="w-full py-3 px-5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shadow-sm hover:shadow"
                 >
                   {loading ? (
                     <span>Acessando...</span>
@@ -328,13 +328,13 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                 </button>
               </div>
 
-              <div className="pt-4 text-center border-t border-slate-100">
-                <p className="text-xs text-slate-600 font-normal">
+              <div className="pt-4 text-center border-t border-zinc-100">
+                <p className="text-xs text-zinc-600 font-normal">
                   Sua equipe ainda não tem cadastro?{' '}
                   <button
                     type="button"
                     onClick={() => setActiveTab('signup')}
-                    className="font-semibold text-emerald-800 hover:text-emerald-950 underline cursor-pointer"
+                    className="font-medium text-zinc-900 underline cursor-pointer"
                   >
                     Criar nova empresa
                   </button>
@@ -346,20 +346,20 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
           /* ========================================================
              MODO 2: CADASTRO (ORGANIZADO, DIDÁTICO E AMIGÁVEL)
              ======================================================== */
-          <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-10 space-y-8 animate-in fade-in zoom-in-98 duration-200">
+          <div className="liquid-glass rounded-3xl p-6 sm:p-10 space-y-8 animate-in fade-in zoom-in-98 duration-200">
             <div className="text-center space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-900 mb-2">
-                <GraduationCap className="w-4 h-4 text-emerald-700" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs font-medium text-zinc-800 mb-2">
+                <GraduationCap className="w-4 h-4 text-zinc-700" />
                 <span>Educação Digital • Turmas 2º2 e 2º3</span>
               </div>
 
               <h2
-                className="text-3xl sm:text-4xl font-serif font-normal text-slate-900 tracking-tight"
+                className="text-3xl sm:text-4xl font-serif font-normal text-zinc-900 tracking-tight"
                 style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
               >
                 Cadastre sua nova empresa
               </h2>
-              <p className="text-sm text-slate-600 font-normal max-w-lg mx-auto">
+              <p className="text-sm text-zinc-600 font-normal max-w-lg mx-auto">
                 Registre a identidade da sua equipe fictícia para resolver desafios práticos com planilhas.
               </p>
             </div>
@@ -367,16 +367,16 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
             <form onSubmit={handleSignUp} className="space-y-6">
               {/* Bloco 1: Acesso do Grupo */}
               <div className="space-y-4">
-                <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
-                  <Mail className="w-4 h-4 text-emerald-700" />
-                  <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                <div className="flex items-center gap-2 pb-2 border-b border-zinc-200">
+                  <Mail className="w-4 h-4 text-zinc-700" />
+                  <h3 className="text-xs font-medium text-zinc-800 uppercase tracking-wider">
                     1. Dados de acesso do grupo
                   </h3>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="sm:col-span-1">
-                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                    <label className="block text-xs font-medium text-zinc-800 mb-1.5">
                       E-mail do grupo *
                     </label>
                     <input
@@ -385,13 +385,13 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                       placeholder="ex: grupo@escola.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-medium"
+                      className="w-full px-3.5 py-2 text-sm bg-white border border-zinc-300 rounded-xl text-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900 font-normal"
                     />
-                    <p className="text-[11px] text-slate-500 mt-1">E-mail compartilhado para login</p>
+                    <p className="text-[11px] text-zinc-500 mt-1">E-mail compartilhado para login</p>
                   </div>
 
                   <div className="sm:col-span-1">
-                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                    <label className="block text-xs font-medium text-zinc-800 mb-1.5">
                       Senha de acesso *
                     </label>
                     <div className="relative">
@@ -401,12 +401,12 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                         placeholder="Mínimo 6 caracteres"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 pr-9 font-medium"
+                        className="w-full px-3.5 py-2 text-sm bg-white border border-zinc-300 rounded-xl text-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900 pr-9 font-normal"
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-700 cursor-pointer"
+                        className="absolute right-3 top-2.5 text-zinc-400 hover:text-zinc-700 cursor-pointer"
                       >
                         {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
@@ -414,7 +414,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                   </div>
 
                   <div className="sm:col-span-1">
-                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                    <label className="block text-xs font-medium text-zinc-800 mb-1.5">
                       Confirmar senha *
                     </label>
                     <input
@@ -423,7 +423,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                       placeholder="Repita a senha"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-medium"
+                      className="w-full px-3.5 py-2 text-sm bg-white border border-zinc-300 rounded-xl text-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900 font-normal"
                     />
                   </div>
                 </div>
@@ -431,16 +431,16 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
 
               {/* Bloco 2: Turma e Integrantes */}
               <div className="space-y-4">
-                <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
-                  <Users className="w-4 h-4 text-emerald-700" />
-                  <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                <div className="flex items-center gap-2 pb-2 border-b border-zinc-200">
+                  <Users className="w-4 h-4 text-zinc-700" />
+                  <h3 className="text-xs font-medium text-zinc-800 uppercase tracking-wider">
                     2. Turma e integrantes da equipe
                   </h3>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                    <label className="block text-xs font-medium text-zinc-800 mb-1.5">
                       Turma escolar *
                     </label>
                     <div className="grid grid-cols-2 gap-2">
@@ -449,10 +449,10 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                           key={c}
                           type="button"
                           onClick={() => setClassName(c)}
-                          className={`py-2 px-3 rounded-xl border text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                          className={`py-2 px-3 rounded-full border text-xs sm:text-sm font-medium transition-all cursor-pointer ${
                             className === c
-                              ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
-                              : 'bg-white text-slate-700 border-slate-300 hover:border-slate-400'
+                              ? 'bg-zinc-900 text-white border-zinc-900 shadow-xs'
+                              : 'bg-white text-zinc-700 border-zinc-300 hover:border-zinc-400'
                           }`}
                         >
                           {c}
@@ -462,7 +462,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                    <label className="block text-xs font-medium text-zinc-800 mb-1.5">
                       Nomes completos dos integrantes da equipe *
                     </label>
                     <textarea
@@ -471,25 +471,25 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                       placeholder="Ex: Ana Clara Martins, Gabriel Santos, Lucas Silveira, Mariana Ramos"
                       value={members}
                       onChange={(e) => setMembers(e.target.value)}
-                      className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-medium leading-relaxed"
+                      className="w-full px-3.5 py-2 text-sm bg-white border border-zinc-300 rounded-xl text-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900 font-normal leading-relaxed"
                     />
-                    <p className="text-[11px] text-slate-500 mt-1">Separe os nomes por vírgula</p>
+                    <p className="text-[11px] text-zinc-500 mt-1">Separe os nomes por vírgula</p>
                   </div>
                 </div>
               </div>
 
               {/* Bloco 3: Dados da Empresa */}
               <div className="space-y-4">
-                <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
-                  <Building2 className="w-4 h-4 text-emerald-700" />
-                  <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                <div className="flex items-center gap-2 pb-2 border-b border-zinc-200">
+                  <Building2 className="w-4 h-4 text-zinc-700" />
+                  <h3 className="text-xs font-medium text-zinc-800 uppercase tracking-wider">
                     3. Dados da empresa fictícia
                   </h3>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                    <label className="block text-xs font-medium text-zinc-800 mb-1.5">
                       Nome da empresa *
                     </label>
                     <input
@@ -498,12 +498,12 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                       placeholder="Ex: Alfa Logística e Distribuição"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
-                      className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-semibold"
+                      className="w-full px-3.5 py-2 text-sm bg-white border border-zinc-300 rounded-xl text-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900 font-medium"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                    <label className="block text-xs font-medium text-zinc-800 mb-1.5">
                       Ramo de atuação *
                     </label>
                     <input
@@ -512,14 +512,14 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                       placeholder="Ex: Comércio, Alimentação, Logística..."
                       value={businessSector}
                       onChange={(e) => setBusinessSector(e.target.value)}
-                      className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-medium"
+                      className="w-full px-3.5 py-2 text-sm bg-white border border-zinc-300 rounded-xl text-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900 font-normal"
                     />
                   </div>
                 </div>
 
                 {/* Sugestões de Ramo em tags */}
                 <div>
-                  <span className="block text-xs font-medium text-slate-600 mb-1.5">
+                  <span className="block text-xs font-medium text-zinc-600 mb-1.5">
                     Sugestões de setor:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
@@ -528,10 +528,10 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                         key={sector}
                         type="button"
                         onClick={() => setBusinessSector(sector)}
-                        className={`text-xs px-2.5 py-1 rounded-lg border transition-colors cursor-pointer ${
+                        className={`text-xs px-3 py-1 rounded-full border transition-colors cursor-pointer ${
                           businessSector === sector
-                            ? 'bg-slate-900 text-white border-slate-900 font-semibold'
-                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
+                            ? 'bg-zinc-900 text-white border-zinc-900 font-medium'
+                            : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:border-zinc-300'
                         }`}
                       >
                         {sector}
@@ -541,7 +541,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                  <label className="block text-xs font-medium text-zinc-800 mb-1.5">
                     Breve descrição da empresa *
                   </label>
                   <textarea
@@ -551,9 +551,9 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                     placeholder="Descreva o que a sua empresa faz, qual produto ou serviço ela oferece e qual o seu público principal..."
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 leading-relaxed font-normal"
+                    className="w-full px-3.5 py-2 text-sm bg-white border border-zinc-300 rounded-xl text-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:border-zinc-900 leading-relaxed font-normal"
                   />
-                  <div className="flex justify-between items-center text-[11px] text-slate-500 mt-1">
+                  <div className="flex justify-between items-center text-[11px] text-zinc-500 mt-1">
                     <span>Escreva um resumo claro e objetivo.</span>
                     <span>{description.length}/300 caracteres</span>
                   </div>
@@ -568,11 +568,11 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
               />
 
               {/* Botão de Envio do Cadastro */}
-              <div className="pt-4 border-t border-slate-200">
+              <div className="pt-4 border-t border-zinc-200">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3.5 px-6 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shadow-sm"
+                  className="w-full py-3.5 px-6 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shadow-sm hover:shadow"
                 >
                   {loading ? (
                     <span>Cadastrando empresa...</span>
@@ -584,12 +584,12 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                   )}
                 </button>
 
-                <p className="text-center text-xs text-slate-600 mt-4">
+                <p className="text-center text-xs text-zinc-600 mt-4">
                   Já possui uma empresa cadastrada?{' '}
                   <button
                     type="button"
                     onClick={() => setActiveTab('signin')}
-                    className="font-semibold text-emerald-800 hover:text-emerald-950 underline cursor-pointer"
+                    className="font-medium text-zinc-900 underline cursor-pointer"
                   >
                     Fazer login
                   </button>
@@ -602,41 +602,41 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
 
       {/* Modal de Recuperação de Senha */}
       {isForgotModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs">
-          <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-md w-full p-6 sm:p-7 space-y-5 animate-in fade-in zoom-in-95 duration-150 text-slate-900">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/40 backdrop-blur-md">
+          <div className="liquid-glass rounded-3xl max-w-md w-full p-6 sm:p-7 space-y-5 animate-in fade-in zoom-in-95 duration-150 text-zinc-900">
+            <div className="flex items-center justify-between pb-3 border-b border-zinc-200">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center">
                   <KeyRound className="w-4 h-4" />
                 </div>
-                <h3 className="text-base font-semibold text-slate-900">
+                <h3 className="text-base font-serif font-normal text-zinc-900">
                   Recuperação de Senha
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setIsForgotModalOpen(false)}
-                className="w-8 h-8 rounded-lg border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full border border-zinc-200 hover:bg-zinc-100 flex items-center justify-center text-zinc-500 hover:text-zinc-800 transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="space-y-3 text-xs text-slate-700 leading-relaxed">
+            <div className="space-y-3 text-xs text-zinc-600 leading-relaxed">
               <p>
                 Informe o e-mail da sua empresa cadastrado pelo grupo. Se o projeto estiver conectado ao Supabase com envio de e-mails ativado, você receberá um link para criar uma nova senha.
               </p>
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2 text-slate-600">
-                <HelpCircle className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+              <div className="p-3 bg-zinc-50 rounded-xl border border-zinc-200 flex items-start gap-2 text-zinc-600">
+                <HelpCircle className="w-4 h-4 text-zinc-700 shrink-0 mt-0.5" />
                 <span>
-                  <strong>Aviso para a turma:</strong> Em ambiente de sala de aula, o professor também pode resetar ou conferir as contas diretamente pelo painel do professor.
+                  <strong className="text-zinc-900 font-medium">Aviso para a turma:</strong> Em ambiente de sala de aula, o professor também pode resetar ou conferir as contas diretamente pelo painel do professor.
                 </span>
               </div>
             </div>
 
             <form onSubmit={handleRequestReset} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-800 mb-1">
+                <label className="block text-xs font-medium text-zinc-800 mb-1">
                   E-mail da empresa *
                 </label>
                 <input
@@ -645,22 +645,22 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                   placeholder="ex: grupo@escola.com"
                   value={forgotEmail}
                   onChange={(e) => setForgotEmail(e.target.value)}
-                  className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 font-medium"
+                  className="w-full px-4 py-2 text-sm bg-white border border-zinc-300 rounded-full text-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 font-normal"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-200">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-zinc-200">
                 <button
                   type="button"
                   onClick={() => setIsForgotModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-full text-xs font-medium text-zinc-600 hover:bg-zinc-100 transition-colors cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={sendingReset}
-                  className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition-colors cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-medium transition-colors cursor-pointer disabled:opacity-50 shadow-sm"
                 >
                   {sendingReset ? 'Enviando...' : 'Enviar link'}
                 </button>

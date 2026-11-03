@@ -37,26 +37,26 @@ const ToastItem: React.FC<{ toast: ToastMessage; onDismiss: (id: string) => void
   }, [toast.id, onDismiss]);
 
   const icons = {
-    success: <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />,
+    success: <CheckCircle2 className="w-5 h-5 text-zinc-800 shrink-0 mt-0.5" />,
     error: <AlertCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />,
     info: <Info className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />,
   };
 
   const borders = {
-    success: 'border-emerald-200 bg-white/95 shadow-emerald-500/10',
+    success: 'border-zinc-200/80 bg-white/95 shadow-zinc-900/10',
     error: 'border-rose-200 bg-white/95 shadow-rose-500/10',
     info: 'border-blue-200 bg-white/95 shadow-blue-500/10',
   };
 
   return (
     <div
-      className={`pointer-events-auto flex items-start justify-between gap-3 p-4 rounded-xl border shadow-lg backdrop-blur-md transition-all duration-300 animate-in fade-in slide-in-from-bottom-3 ${borders[toast.type]}`}
+      className={`pointer-events-auto flex items-start justify-between gap-3 p-4 rounded-2xl border shadow-lg backdrop-blur-md transition-all duration-300 animate-in fade-in slide-in-from-bottom-3 ${borders[toast.type]}`}
       role="alert"
     >
       <div className="flex items-start gap-3">
         {icons[toast.type]}
         <div>
-          <h4 className="text-sm font-semibold text-slate-800">{toast.title}</h4>
+          <h4 className="text-sm font-medium text-zinc-900">{toast.title}</h4>
           {toast.message && <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">{toast.message}</p>}
         </div>
       </div>

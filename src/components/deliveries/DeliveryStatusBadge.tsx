@@ -15,8 +15,8 @@ const CONFIG: Record<DeliveryStatus, { label: string; className: string; icon: R
   },
   corrigida: {
     label: 'Corrigida',
-    className: 'bg-emerald-100 text-emerald-900 border-emerald-400',
-    icon: <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />,
+    className: 'bg-zinc-100 text-zinc-900 border-zinc-300',
+    icon: <CheckCircle2 className="w-3.5 h-3.5 text-zinc-900" />,
   },
 };
 
@@ -25,13 +25,13 @@ export const DeliveryStatusBadge: React.FC<{ status: DeliveryStatus; late?: bool
   return (
     <span className="inline-flex items-center gap-1.5 flex-wrap">
       <span
-        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-bold ${cfg.className}`}
+        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-medium ${cfg.className}`}
       >
         {cfg.icon}
         {cfg.label}
       </span>
       {late && (
-        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border text-[11px] font-bold bg-rose-50 text-rose-800 border-rose-300">
+        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border text-[11px] font-medium bg-rose-50 text-rose-800 border-rose-200">
           <Clock className="w-3 h-3" />
           Fora do prazo
         </span>

@@ -87,19 +87,19 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
   // ---------- Estados sem conexão ----------
   if (!isConnected) {
     return (
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 max-w-5xl mx-auto py-2">
+      <div className="liquid-glass rounded-2xl p-6 sm:p-8 max-w-5xl mx-auto py-2">
         <div className="flex items-start gap-3.5">
           <div className="p-2.5 rounded-xl bg-amber-50 text-amber-700 border border-amber-200 shrink-0">
             <WifiOff className="w-5 h-5" />
           </div>
           <div>
             <h2
-              className="text-xl font-serif font-semibold text-slate-900"
+              className="text-xl font-serif font-normal text-zinc-900"
               style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               Central de Entregas indisponível
             </h2>
-            <p className="text-sm text-slate-700 mt-1 leading-relaxed">
+            <p className="text-sm text-zinc-600 mt-1 leading-relaxed">
               Esta sessão está operando em modo demonstração local. O envio de arquivos requer conexão ativa com o servidor.
             </p>
           </div>
@@ -110,27 +110,27 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto py-2">
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-4">
+      <div className="liquid-glass rounded-2xl p-6 sm:p-8 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider block mb-1">
+            <span className="text-xs font-medium text-zinc-500 uppercase tracking-wider block mb-1">
               Central de entregas • ONLYOFFICE
             </span>
             <h2
-              className="text-2xl sm:text-3xl font-serif font-semibold text-slate-900 tracking-tight"
+              className="text-2xl sm:text-3xl font-serif font-normal text-zinc-900 tracking-tight"
               style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               Minhas entregas
             </h2>
-            <p className="text-xs sm:text-sm text-slate-700 mt-1 max-w-2xl leading-relaxed">
-              Envie aqui as planilhas da sua empresa no formato <strong className="text-slate-900">.xlsx</strong> e acompanhe em tempo real a nota e os comentários pedagógicos do professor.
+            <p className="text-xs sm:text-sm text-zinc-600 mt-1 max-w-2xl leading-relaxed">
+              Envie aqui as planilhas da sua empresa no formato <strong className="text-zinc-900 font-medium">.xlsx</strong> e acompanhe em tempo real a nota e os comentários pedagógicos do professor.
             </p>
           </div>
           <button
             type="button"
             onClick={load}
             disabled={loading}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold border border-slate-200 transition-colors cursor-pointer disabled:opacity-50 self-start sm:self-auto shrink-0"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-medium border border-zinc-200 transition-colors cursor-pointer disabled:opacity-50 self-start sm:self-auto shrink-0"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
             <span>Atualizar</span>
@@ -139,22 +139,22 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
       </div>
 
       {loading && (
-        <div className="flex items-center justify-center gap-2 text-sm text-slate-700 py-10 font-medium">
-          <Loader2 className="w-4 h-4 animate-spin text-emerald-700" /> Carregando atividades...
+        <div className="flex items-center justify-center gap-2 text-sm text-zinc-600 py-10 font-medium">
+          <Loader2 className="w-4 h-4 animate-spin text-zinc-900" /> Carregando atividades...
         </div>
       )}
 
       {!loading && loadError && (
-        <div className="bg-white rounded-2xl border border-rose-200 shadow-sm p-5 bg-rose-50/50 flex items-start gap-3" role="alert">
+        <div className="liquid-glass rounded-2xl border-rose-200/80 p-5 bg-rose-50/40 flex items-start gap-3" role="alert">
           <WifiOff className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
           <div className="flex-1">
-            <p className="text-sm font-semibold text-rose-900">Não foi possível carregar suas entregas</p>
-            <p className="text-xs text-rose-800 mt-0.5">{loadError}</p>
+            <p className="text-sm font-medium text-rose-900">Não foi possível carregar suas entregas</p>
+            <p className="text-xs text-rose-700 mt-0.5">{loadError}</p>
           </div>
           <button
             type="button"
             onClick={load}
-            className="px-3.5 py-1.5 rounded-lg text-xs font-semibold border border-rose-300 text-rose-900 bg-white hover:bg-rose-50 cursor-pointer"
+            className="px-3.5 py-1.5 rounded-full text-xs font-medium border border-rose-200 text-rose-900 bg-white hover:bg-rose-50 cursor-pointer"
           >
             Tentar novamente
           </button>
@@ -162,15 +162,15 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
       )}
 
       {!loading && !loadError && activities.length === 0 && (
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-10 text-center space-y-2">
-          <Inbox className="w-10 h-10 text-slate-400 mx-auto" />
+        <div className="liquid-glass rounded-2xl p-10 text-center space-y-2">
+          <Inbox className="w-10 h-10 text-zinc-400 mx-auto" />
           <p
-            className="text-base font-serif font-semibold text-slate-900"
-            style={{ fontFamily: "'Newsreader', serif" }}
+            className="text-base font-serif font-normal text-zinc-900"
+            style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
           >
             Nenhuma atividade disponível no momento
           </p>
-          <p className="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
+          <p className="text-xs text-zinc-600 max-w-md mx-auto leading-relaxed">
             Assim que o professor publicar uma atividade para a turma {group.class_name}, o prazo e o botão de envio aparecerão aqui.
           </p>
         </div>
@@ -186,26 +186,26 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
           const historyOpen = !!openHistory[activity.id];
 
           return (
-            <article key={activity.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-4">
+            <article key={activity.id} className="liquid-glass rounded-2xl p-5 sm:p-6 space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                 <div className="space-y-1.5">
                   <h3
-                    className="text-lg sm:text-xl font-serif font-semibold text-slate-900"
+                    className="text-lg sm:text-xl font-serif font-normal text-zinc-900"
                     style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
                   >
                     {activity.title}
                   </h3>
-                  <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-slate-700">
+                  <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-zinc-600">
                     <span
-                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md border ${
-                        overdue ? 'bg-rose-50 border-rose-300 text-rose-900' : 'bg-slate-100 border-slate-200 text-slate-800'
+                      className={`inline-flex items-center gap-1 px-3 py-1 rounded-full border ${
+                        overdue ? 'bg-rose-50 border-rose-200 text-rose-800' : 'bg-zinc-100 border-zinc-200 text-zinc-800'
                       }`}
                     >
-                      <CalendarClock className="w-3.5 h-3.5 text-emerald-700" />
+                      <CalendarClock className="w-3.5 h-3.5 text-zinc-600" />
                       {activity.due_at ? `Prazo: ${formatDateTime(activity.due_at)}` : 'Sem prazo definido'}
                       {overdue && ' (encerrado)'}
                     </span>
-                    <span className="px-2.5 py-0.5 rounded-md border border-slate-200 bg-slate-100 text-slate-800 font-semibold">
+                    <span className="px-3 py-1 rounded-full border border-zinc-200 bg-zinc-100 text-zinc-800 font-medium">
                       Vale {formatScore(activity.max_score)} pts
                     </span>
                   </div>
@@ -214,38 +214,38 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
               </div>
 
               {activity.instructions && (
-                <div className="text-xs sm:text-sm text-slate-700 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-200 whitespace-pre-line font-normal">
+                <div className="text-xs sm:text-sm text-zinc-700 leading-relaxed bg-zinc-50/80 p-4 rounded-xl border border-zinc-200/80 whitespace-pre-line font-normal">
                   {activity.instructions}
                 </div>
               )}
 
               {current && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/70 space-y-1">
-                    <p className="font-bold text-slate-900">Entrega Atual — Versão {current.version}</p>
-                    <p className="text-slate-700 break-all font-normal">
-                      Arquivo: <strong className="text-slate-900 font-semibold">{current.original_filename}</strong> ({formatBytes(current.file_size)})
+                  <div className="p-3.5 rounded-xl border border-zinc-200 bg-zinc-50/70 space-y-1">
+                    <p className="font-medium text-zinc-900">Entrega Atual — Versão {current.version}</p>
+                    <p className="text-zinc-600 break-all font-normal">
+                      Arquivo: <strong className="text-zinc-900 font-medium">{current.original_filename}</strong> ({formatBytes(current.file_size)})
                     </p>
-                    <p className="text-slate-700 font-normal">
-                      Enviado por: <strong className="text-slate-900 font-semibold">{current.responsible_member_name}</strong> em {formatDateTime(current.submitted_at)}
+                    <p className="text-zinc-600 font-normal">
+                      Enviado por: <strong className="text-zinc-900 font-medium">{current.responsible_member_name}</strong> em {formatDateTime(current.submitted_at)}
                     </p>
                   </div>
                   {current.status === 'corrigida' ? (
-                    <div className="p-3.5 rounded-xl border border-emerald-300 bg-emerald-50 space-y-1.5">
-                      <p className="font-bold text-emerald-950 text-sm">
+                    <div className="p-3.5 rounded-xl border border-zinc-300 bg-zinc-100/80 space-y-1.5">
+                      <p className="font-medium text-zinc-900 text-sm">
                         Nota: {formatScore(current.score)} / {formatScore(activity.max_score)} pts
                       </p>
                       {current.feedback ? (
-                        <p className="text-emerald-900 whitespace-pre-line flex gap-1.5 text-xs font-normal">
-                          <MessageSquareText className="w-4 h-4 shrink-0 mt-0.5 text-emerald-700" />
+                        <p className="text-zinc-800 whitespace-pre-line flex gap-1.5 text-xs font-normal">
+                          <MessageSquareText className="w-4 h-4 shrink-0 mt-0.5 text-zinc-600" />
                           <span>{current.feedback}</span>
                         </p>
                       ) : (
-                        <p className="text-emerald-800 text-xs font-medium">Sem comentários do professor.</p>
+                        <p className="text-zinc-600 text-xs font-normal">Sem comentários do professor.</p>
                       )}
                     </div>
                   ) : (
-                    <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 flex items-center font-medium">
+                    <div className="p-3.5 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-600 flex items-center font-medium">
                       Aguardando avaliação do professor.
                     </div>
                   )}
@@ -257,13 +257,13 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
                   <button
                     type="button"
                     onClick={() => setModalActivity(activity)}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition-all cursor-pointer shadow-sm"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs transition-all cursor-pointer shadow-sm hover:shadow"
                   >
                     <Upload className="w-3.5 h-3.5" />
                     {current ? 'Substituir entrega' : 'Enviar arquivo da planilha'}
                   </button>
                 ) : (
-                  <span className="text-xs font-semibold text-slate-600 px-3 py-1.5 rounded-md bg-slate-100 border border-slate-200">
+                  <span className="text-xs font-medium text-zinc-600 px-3 py-1.5 rounded-full bg-zinc-100 border border-zinc-200">
                     Entregas encerradas pelo professor
                   </span>
                 )}
@@ -272,9 +272,9 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
                     type="button"
                     onClick={() => handleDownload(current)}
                     disabled={downloadingId === current.id}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-800 font-semibold text-xs border border-slate-300 transition-colors cursor-pointer disabled:opacity-50 shadow-xs"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white hover:bg-zinc-50 text-zinc-800 font-medium text-xs border border-zinc-200 transition-colors cursor-pointer disabled:opacity-50"
                   >
-                    <Download className="w-3.5 h-3.5 text-emerald-700" /> Baixar meu arquivo
+                    <Download className="w-3.5 h-3.5 text-zinc-700" /> Baixar meu arquivo
                   </button>
                 )}
                 {versions.length > 0 && (
@@ -282,31 +282,31 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
                     type="button"
                     aria-expanded={historyOpen}
                     onClick={() => setOpenHistory((h) => ({ ...h, [activity.id]: !h[activity.id] }))}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold text-slate-700 hover:text-slate-900 cursor-pointer transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 cursor-pointer transition-colors"
                   >
-                    <History className="w-3.5 h-3.5 text-emerald-700" /> Histórico ({versions.length})
+                    <History className="w-3.5 h-3.5 text-zinc-600" /> Histórico ({versions.length})
                     <ChevronDown className={`w-3.5 h-3.5 transition-transform ${historyOpen ? 'rotate-180' : ''}`} />
                   </button>
                 )}
               </div>
 
               {historyOpen && (
-                <ol className="border-t border-slate-200 pt-3 space-y-2">
+                <ol className="border-t border-zinc-200/80 pt-3 space-y-2">
                   {versions.map((v) => (
-                    <li key={v.id} className="flex flex-wrap items-center justify-between gap-2 text-xs p-2.5 rounded-lg bg-slate-50 border border-slate-200">
-                      <div className="text-slate-700 font-normal">
-                        <span className="font-bold text-slate-900">v{v.version}</span>
-                        {v.is_current && <span className="ml-1.5 text-emerald-800 font-bold">(atual)</span>} •{' '}
+                    <li key={v.id} className="flex flex-wrap items-center justify-between gap-2 text-xs p-2.5 rounded-xl bg-zinc-50/70 border border-zinc-200">
+                      <div className="text-zinc-700 font-normal">
+                        <span className="font-medium text-zinc-900">v{v.version}</span>
+                        {v.is_current && <span className="ml-1.5 text-zinc-900 font-medium">(atual)</span>} •{' '}
                         {formatDateTime(v.submitted_at)} • {v.responsible_member_name} •{' '}
                         <span className="break-all">{v.original_filename}</span>
                         {v.status === 'corrigida' && <> • nota {formatScore(v.score)}</>}
-                        {v.is_late && <span className="text-rose-700 font-semibold"> • fora do prazo</span>}
+                        {v.is_late && <span className="text-rose-700 font-medium"> • fora do prazo</span>}
                       </div>
                       <button
                         type="button"
                         onClick={() => handleDownload(v)}
                         disabled={downloadingId === v.id}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-semibold cursor-pointer disabled:opacity-50"
+                        className="inline-flex items-center gap-1 px-3 py-1 rounded-full border border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-800 font-medium cursor-pointer disabled:opacity-50"
                       >
                         <Download className="w-3 h-3" /> Baixar
                       </button>

@@ -26,15 +26,15 @@ export const SelfChecklist: React.FC<SelfChecklistProps> = ({
               onClick={() => onToggleItem(idx)}
               className={`flex items-start gap-3 p-3 rounded-lg border text-xs cursor-pointer transition-colors ${
                 checked
-                  ? 'bg-emerald-50/60 border-emerald-300 text-emerald-950 font-medium'
-                  : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+                  ? 'bg-zinc-100/90 border-zinc-300 text-zinc-900 font-medium'
+                  : 'bg-white border-zinc-200 text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50'
               }`}
             >
               <div
                 className={`w-4 h-4 rounded-md border mt-0.5 flex items-center justify-center shrink-0 transition-colors ${
                   checked
-                    ? 'bg-emerald-600 border-emerald-600 text-white'
-                    : 'border-slate-300 bg-white'
+                    ? 'bg-zinc-900 border-zinc-900 text-white'
+                    : 'border-zinc-300 bg-white'
                 }`}
               >
                 {checked && <Check className="w-3 h-3 stroke-[3]" />}

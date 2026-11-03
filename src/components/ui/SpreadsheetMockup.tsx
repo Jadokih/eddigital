@@ -27,7 +27,7 @@ export const SpreadsheetMockup: React.FC<SpreadsheetMockupProps> = ({
   const getHighlightClass = (highlight?: SpreadsheetCellData['highlight']) => {
     switch (highlight) {
       case 'emerald':
-        return 'bg-emerald-50 text-emerald-900 font-semibold border-emerald-300';
+        return 'bg-zinc-100 text-zinc-900 font-medium border-zinc-300';
       case 'rose':
         return 'bg-rose-50 text-rose-900 font-semibold border-rose-300';
       case 'amber':
@@ -46,22 +46,22 @@ export const SpreadsheetMockup: React.FC<SpreadsheetMockupProps> = ({
       {/* Topo do Arquivo ONLYOFFICE */}
       <div className="bg-slate-900 text-white px-3.5 py-2 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <FileSpreadsheet className="w-4 h-4 text-emerald-400" />
-          <span className="font-medium text-xs tracking-tight text-slate-200">
+          <FileSpreadsheet className="w-4 h-4 text-zinc-300" />
+          <span className="font-medium text-xs tracking-tight text-zinc-200">
             {title || 'ONLYOFFICE Planilha — Exemplo Prático'}
           </span>
         </div>
-        <span className="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded-md border border-slate-700">
+        <span className="text-xs font-mono text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded-md border border-zinc-700">
           ONLYOFFICE
         </span>
       </div>
 
       {/* Barra de Fórmula */}
       {formulaBar && (
-        <div className="bg-slate-50 border-b border-slate-200 px-3 py-1.5 flex items-center gap-2 font-mono text-[11px]">
-          <span className="text-slate-500 font-bold italic select-none">fx</span>
-          <div className="w-px h-3.5 bg-slate-300" />
-          <span className="text-emerald-700 font-bold bg-white px-2 py-0.5 rounded border border-slate-200 shadow-2xs">
+        <div className="bg-zinc-50 border-b border-zinc-200 px-3 py-1.5 flex items-center gap-2 font-mono text-[11px]">
+          <span className="text-zinc-500 font-medium italic select-none">fx</span>
+          <div className="w-px h-3.5 bg-zinc-300" />
+          <span className="text-zinc-900 font-medium bg-white px-2 py-0.5 rounded border border-zinc-200 shadow-2xs">
             {formulaBar}
           </span>
         </div>

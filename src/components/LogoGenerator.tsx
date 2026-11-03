@@ -136,7 +136,7 @@ export const LogoGenerator: React.FC<LogoGeneratorProps> = ({
                 </div>
               )}
             </div>
-            <div className="absolute -bottom-1 -right-1 bg-emerald-500 text-white p-1 rounded-full border border-white shadow-2xs">
+            <div className="absolute -bottom-1 -right-1 bg-zinc-900 text-white p-1 rounded-full border border-white shadow-2xs">
               <Check className="w-3 h-3" />
             </div>
           </div>

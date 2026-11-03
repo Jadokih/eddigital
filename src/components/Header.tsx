@@ -19,8 +19,8 @@ export const Header: React.FC<HeaderProps> = ({
   const hasSelectedProblem = !!currentGroup?.selected_problem_id;
 
   return (
-    <header className="sticky top-3 z-50 px-3 sm:px-6">
-      <div className="max-w-6xl mx-auto bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-xl px-4 sm:px-6 py-2.5 shadow-2xs flex items-center justify-between gap-4 transition-colors">
+    <header className="sticky top-4 z-50 px-4 sm:px-6">
+      <div className="max-w-5xl mx-auto bg-white/75 backdrop-blur-xl border border-zinc-900/8 rounded-full px-5 sm:px-6 py-2.5 shadow-[0_4px_24px_-4px_rgba(24,24,27,0.04)] flex items-center justify-between gap-4 transition-colors">
         {/* Marca / Nova Logo Autoral Prisma Grid */}
         <div
           onClick={() => onNavigate && onNavigate('dashboard')}
@@ -29,16 +29,16 @@ export const Header: React.FC<HeaderProps> = ({
           <BrandLogo size="md" variant="full" theme="light" />
         </div>
 
-        {/* Links Centrais de Navegação (Desktop) */}
+        {/* Links Centrais de Navegação em Liquid Glass Suave (Desktop) */}
         {currentGroup && onNavigate && (
-          <nav className="hidden md:flex items-center gap-1 bg-slate-100/80 p-1 rounded-lg border border-slate-200/60 text-xs font-medium text-slate-600">
+          <nav className="hidden md:flex items-center gap-1 bg-zinc-100/70 p-1 rounded-full border border-zinc-200/60 text-xs text-zinc-600 font-normal">
             <button
               type="button"
               onClick={() => onNavigate('dashboard')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-all cursor-pointer ${
                 activeSection === 'dashboard'
-                  ? 'bg-slate-900 text-white font-medium shadow-2xs'
-                  : 'hover:text-slate-900 hover:bg-white'
+                  ? 'bg-zinc-900 text-white font-medium shadow-xs'
+                  : 'hover:text-zinc-900 hover:bg-white/90'
               }`}
             >
               <LayoutDashboard className="w-3.5 h-3.5" />
@@ -50,10 +50,10 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => onNavigate('problems')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-all cursor-pointer ${
                   activeSection === 'problems'
-                    ? 'bg-slate-900 text-white font-medium shadow-2xs'
-                    : 'hover:text-slate-900 hover:bg-white'
+                    ? 'bg-zinc-900 text-white font-medium shadow-xs'
+                    : 'hover:text-zinc-900 hover:bg-white/90'
                 }`}
               >
                 <Compass className="w-3.5 h-3.5" />
@@ -65,13 +65,13 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => onNavigate('plan')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-all cursor-pointer ${
                   activeSection === 'plan'
-                    ? 'bg-slate-900 text-white font-medium shadow-2xs'
-                    : 'hover:text-slate-900 hover:bg-white'
+                    ? 'bg-zinc-900 text-white font-medium shadow-xs'
+                    : 'hover:text-zinc-900 hover:bg-white/90'
                 }`}
               >
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-zinc-400" />
                 <span>Trilha de Aulas</span>
               </button>
             )}
@@ -79,13 +79,13 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={() => onNavigate('deliveries')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-all cursor-pointer ${
                 activeSection === 'deliveries'
-                  ? 'bg-slate-900 text-white font-medium shadow-2xs'
-                  : 'hover:text-slate-900 hover:bg-white'
+                  ? 'bg-zinc-900 text-white font-medium shadow-xs'
+                  : 'hover:text-zinc-900 hover:bg-white/90'
               }`}
             >
-              <UploadCloud className="w-3.5 h-3.5 text-emerald-600" />
+              <UploadCloud className="w-3.5 h-3.5 text-zinc-400" />
               <span>Entregas</span>
             </button>
           </nav>
@@ -95,16 +95,16 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-2">
           {currentGroup ? (
             <div className="flex items-center gap-2">
-              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200 text-xs font-medium text-slate-800">
-                <Building2 className="w-3.5 h-3.5 text-emerald-600" />
+              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100/70 border border-zinc-200/80 text-xs font-normal text-zinc-800">
+                <Building2 className="w-3.5 h-3.5 text-zinc-500" />
                 <span className="max-w-[130px] truncate">{currentGroup.company_name}</span>
-                <span className="text-xs font-mono text-slate-500">({currentGroup.class_name})</span>
+                <span className="text-[11px] font-mono text-zinc-400">({currentGroup.class_name})</span>
               </div>
 
               <button
                 type="button"
                 onClick={onLogout}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer border border-transparent hover:border-slate-200"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-normal text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-colors cursor-pointer"
                 title="Sair da sessão"
               >
                 <LogOut className="w-3.5 h-3.5" />
@@ -113,12 +113,12 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           ) : (
             <div className="flex items-center gap-1.5">
-              <span className="text-xs text-slate-500 hidden sm:inline-block mr-1">
+              <span className="text-xs text-zinc-400 hidden sm:inline-block mr-1">
                 Turmas 2º2 e 2º3
               </span>
               <a
                 href="#auth-section"
-                className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition-colors"
+                className="px-4 py-1.5 rounded-full text-xs font-medium bg-zinc-900 hover:bg-zinc-800 text-white transition-colors"
               >
                 Acessar Plataforma
               </a>

@@ -23,27 +23,27 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 
   return (
     <div className={`inline-flex items-center gap-2.5 select-none ${className}`}>
-      {/* Símbolo Autoral: O Prisma Grid */}
+      {/* Símbolo Autoral: O Prisma Grid em Grafite Minimalista */}
       <svg
         width={pixelSizes.box}
         height={pixelSizes.box}
         viewBox="0 0 64 64"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="shrink-0 transition-transform duration-300 hover:scale-105"
+        className="shrink-0 transition-transform duration-200 hover:scale-105"
         aria-hidden="true"
       >
         <rect
           width="64"
           height="64"
           rx="16"
-          fill={isLight ? '#0B1726' : '#070B14'}
+          fill={isLight ? '#18181B' : '#09090B'}
         />
         <rect
           width="64"
           height="64"
           rx="16"
-          stroke="rgba(255, 255, 255, 0.08)"
+          stroke="rgba(255, 255, 255, 0.12)"
           strokeWidth="1"
         />
 
@@ -51,7 +51,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         <path
           d="M32 12L16 22V38L32 28V12Z"
           fill="url(#prism-left)"
-          stroke="#0E2338"
+          stroke="rgba(255, 255, 255, 0.08)"
           strokeWidth="0.75"
         />
 
@@ -59,7 +59,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         <path
           d="M32 12L48 22V38L32 28V12Z"
           fill="url(#prism-right)"
-          stroke="#0E2338"
+          stroke="rgba(255, 255, 255, 0.08)"
           strokeWidth="0.75"
         />
 
@@ -67,70 +67,70 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         <path
           d="M16 38L32 48L48 38L32 28L16 38Z"
           fill="url(#prism-base)"
-          stroke="rgba(16, 231, 157, 0.25)"
+          stroke="rgba(255, 255, 255, 0.15)"
           strokeWidth="0.75"
         />
 
         {/* Linhas Conectoras do Grid de Construção */}
         <path
           d="M24 33L40 43"
-          stroke="rgba(16, 231, 157, 0.4)"
+          stroke="rgba(255, 255, 255, 0.25)"
           strokeWidth="1"
           strokeLinecap="round"
         />
         <path
           d="M40 33L24 43"
-          stroke="rgba(16, 231, 157, 0.4)"
+          stroke="rgba(255, 255, 255, 0.25)"
           strokeWidth="1"
           strokeLinecap="round"
         />
 
-        {/* Vértice Central Luminoso (Nó de Criação) */}
-        <circle cx="32" cy="28" r="3" fill="#10E79D" />
-        <circle cx="32" cy="28" r="7" stroke="rgba(16, 231, 157, 0.35)" strokeWidth="1" />
+        {/* Vértice Central Luminoso (Nó de Criação em Grafite Prateado) */}
+        <circle cx="32" cy="28" r="3" fill="#E4E4E7" />
+        <circle cx="32" cy="28" r="6" stroke="rgba(255, 255, 255, 0.35)" strokeWidth="1" />
 
         <defs>
           <linearGradient id="prism-left" x1="16" y1="12" x2="32" y2="38" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#10253B" />
-            <stop offset="1" stopColor="#081420" />
+            <stop stopColor="#27272A" />
+            <stop offset="1" stopColor="#18181B" />
           </linearGradient>
           <linearGradient id="prism-right" x1="48" y1="12" x2="32" y2="38" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#183D5C" />
-            <stop offset="1" stopColor="#0A1D2D" />
+            <stop stopColor="#3F3F46" />
+            <stop offset="1" stopColor="#27272A" />
           </linearGradient>
           <linearGradient id="prism-base" x1="16" y1="28" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#0A2230" />
-            <stop offset="1" stopColor="#06131D" />
+            <stop stopColor="#1F1F23" />
+            <stop offset="1" stopColor="#111113" />
           </linearGradient>
         </defs>
       </svg>
 
-      {/* Lettering Editorial Autoral */}
+      {/* Lettering Editorial Autoral com Tipografia Suave */}
       {variant === 'full' && (
         <div className="flex flex-col leading-none">
-          <div className="flex items-baseline gap-1">
+          <div className="flex items-baseline gap-1.5">
             <span
-              className={`font-serif tracking-tight font-medium ${
-                isLight ? 'text-slate-900' : 'text-slate-100'
+              className={`font-serif tracking-tight font-normal ${
+                isLight ? 'text-zinc-900' : 'text-zinc-100'
               } ${pixelSizes.text}`}
               style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               Founders
             </span>
             <span
-              className={`font-sans font-semibold tracking-wider ${
-                isLight ? 'text-emerald-700' : 'text-emerald-400'
+              className={`font-sans font-medium tracking-wide ${
+                isLight ? 'text-zinc-600' : 'text-zinc-400'
               }`}
-              style={{ fontSize: size === 'lg' ? '1.25rem' : size === 'md' ? '0.95rem' : '0.85rem' }}
+              style={{ fontSize: size === 'lg' ? '1.15rem' : size === 'md' ? '0.9rem' : '0.8rem' }}
             >
               Grid
             </span>
           </div>
           <span
             className={`tracking-widest uppercase font-mono ${
-              isLight ? 'text-slate-400' : 'text-slate-500'
+              isLight ? 'text-zinc-500' : 'text-zinc-400'
             } ${pixelSizes.sub} mt-0.5`}
-            style={{ letterSpacing: '0.14em' }}
+            style={{ letterSpacing: '0.12em' }}
           >
             Educação Digital
           </span>
@@ -139,4 +139,3 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     </div>
   );
 };
-

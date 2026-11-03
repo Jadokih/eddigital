@@ -9,7 +9,7 @@
 
   body {
     font-family: var(--font-sans);
-    color: #0f172a;
+    color: #18181b;
     background-color: #FAF9F5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -17,6 +17,7 @@
 
   h1, h2, h3, h4, .font-serif {
     font-family: var(--font-serif);
+    font-weight: 400;
     letter-spacing: -0.015em;
   }
 }
@@ -27,87 +28,99 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #E4E4E7;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #A1A1AA;
 }
 
 /* ==========================================================================
-   TEMA CLARO EDITORIAL & CINEMATOGRÁFICO — FOUNDERS GRID
-   Superfícies brancas puras, fundo off-white nobre, serifas e verde-esmeralda
+   TEMA MINIMALISTA — MODERN GRAPHITE & LIQUID GLASS
+   Superfícies translúcidas, grafite nobre e tipografia suave
    ========================================================================== */
 
-/* Superfície Principal: Branca editorial com hairline suave */
+/* Superfície Liquid Glass Principal (Clara) */
+.liquid-glass,
 .cinematic-panel,
 .ed-card,
 .neo-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 16px;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(24, 24, 27, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 4px 24px -4px rgba(24, 24, 27, 0.03);
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
+.liquid-glass:hover,
 .cinematic-panel:hover,
 .ed-card:hover,
 .neo-card:hover {
-  border-color: rgba(15, 23, 42, 0.16);
+  border-color: rgba(24, 24, 27, 0.16);
+  box-shadow: 0 8px 30px -4px rgba(24, 24, 27, 0.05);
 }
 
-/* Superfície Secundária Compacta */
+/* Superfície Liquid Glass Secundária / Compacta */
+.liquid-glass-subtle,
 .ed-card-sm,
 .neo-card-sm {
-  background: #FFFFFF;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(24, 24, 27, 0.06);
+  border-radius: 14px;
   transition: border-color 150ms ease;
 }
 
+.liquid-glass-subtle:hover,
 .ed-card-sm:hover,
 .neo-card-sm:hover {
-  border-color: rgba(15, 23, 42, 0.16);
+  border-color: rgba(24, 24, 27, 0.14);
 }
 
-/* Card de Destaque / Foco do Dia: Azul-Petróleo Nobre Instrumental */
+/* Card de Destaque / Foco em Grafite Escuro com Liquid Glass */
+.liquid-glass-dark,
 .ed-card-dark,
 .cinematic-focus {
-  background: linear-gradient(135deg, #091528 0%, #0c1e36 100%) !important;
-  border: 1px solid rgba(16, 231, 157, 0.25) !important;
-  border-radius: 16px;
+  background: rgba(24, 24, 27, 0.88) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 20px;
   color: #FFFFFF !important;
-  box-shadow: 0 10px 25px -5px rgba(9, 21, 40, 0.25);
-  transition: border-color 200ms ease;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.22);
+  transition: border-color 150ms ease;
 }
 
+.liquid-glass-dark:hover,
 .ed-card-dark:hover,
 .cinematic-focus:hover {
-  border-color: rgba(16, 231, 157, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
 }
 
-.ed-card-dark h1,
-.ed-card-dark h2,
-.ed-card-dark h3,
-.ed-card-dark h4 {
+.liquid-glass-dark h1,
+.liquid-glass-dark h2,
+.liquid-glass-dark h3,
+.liquid-glass-dark h4 {
   color: #FFFFFF !important;
 }
 
-/* Botões Instrumentais */
+/* Botões em Grafite Moderno */
 .ed-btn-primary {
-  background-color: #059669;
+  background-color: #18181B;
   color: #FFFFFF;
-  font-weight: 600;
-  border-radius: 8px;
+  font-weight: 500;
+  border-radius: 9999px;
   transition: background-color 150ms ease, transform 100ms ease;
 }
 
 .ed-btn-primary:hover {
-  background-color: #047857;
+  background-color: #27272A;
 }
 
 .ed-btn-primary:active {
@@ -115,14 +128,16 @@
 }
 
 .ed-btn-secondary {
-  background: #FFFFFF;
-  color: #334155;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #27272A;
+  border: 1px solid rgba(24, 24, 27, 0.1);
+  border-radius: 9999px;
   transition: background-color 150ms ease, border-color 150ms ease;
 }
 
 .ed-btn-secondary:hover {
-  background: #F8FAFC;
-  border-color: rgba(15, 23, 42, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(24, 24, 27, 0.18);
 }

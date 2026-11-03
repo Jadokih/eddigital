@@ -60,8 +60,8 @@ export const GradeModal: React.FC<GradeModalProps> = ({
       <div className="bg-white rounded-2xl border border-slate-200 shadow-xl max-w-lg w-full overflow-hidden">
         <div className="flex items-center justify-between p-5 border-b border-slate-100">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-lg bg-slate-900 text-white">
-              <Award className="w-4 h-4 text-emerald-400" />
+            <div className="p-2 rounded-xl bg-zinc-900 text-white">
+              <Award className="w-4 h-4 text-zinc-200" />
             </div>
             <div>
               <h3 className="text-base font-display font-semibold text-slate-900">Corrigir entrega</h3>

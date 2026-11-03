@@ -241,17 +241,17 @@ export const SupabaseConfigModal: React.FC<SupabaseConfigModalProps> = ({
           <div
             className={`p-4 rounded-2xl border flex items-start gap-3 ${
               currentCreds.isConfigured
-                ? 'bg-emerald-50/70 border-emerald-200 text-emerald-900'
+                ? 'bg-zinc-100/90 border-zinc-200 text-zinc-900'
                 : 'bg-amber-50/70 border-amber-200 text-amber-900'
             }`}
           >
             {currentCreds.isConfigured ? (
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+              <CheckCircle2 className="w-5 h-5 text-zinc-900 shrink-0 mt-0.5" />
             ) : (
               <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
             )}
             <div>
-              <h4 className="text-sm font-bold">
+              <h4 className="text-sm font-medium">
                 {currentCreds.isConfigured
                   ? 'Banco de Dados Supabase Ativo'
                   : 'Modo de Demonstração Local Ativo'}
@@ -303,12 +303,12 @@ export const SupabaseConfigModal: React.FC<SupabaseConfigModalProps> = ({
               <div
                 className={`p-3 rounded-xl text-xs font-medium flex items-center gap-2 ${
                   testResult.success
-                    ? 'bg-emerald-100 text-emerald-800'
+                    ? 'bg-zinc-100 text-zinc-900 border border-zinc-200'
                     : 'bg-rose-100 text-rose-800'
                 }`}
               >
                 {testResult.success ? (
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <CheckCircle2 className="w-4 h-4 text-zinc-900" />
                 ) : (
                   <AlertTriangle className="w-4 h-4 text-rose-600" />
                 )}

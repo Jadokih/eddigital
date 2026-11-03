@@ -159,7 +159,7 @@ export const App: React.FC = () => {
 
   // 2. APLICAÇÃO INTERNA PARA EMPRESA LOGADA
   return (
-    <div className="min-h-screen bg-[#FAF9F5] flex flex-col text-slate-900 selection:bg-emerald-500/20 selection:text-emerald-900">
+    <div className="min-h-screen bg-[#FAF9F5] flex flex-col text-zinc-900 selection:bg-zinc-200 selection:text-zinc-900">
       <ToastContainer toasts={toasts} onDismiss={removeToast} />
 
       <Header
@@ -169,66 +169,66 @@ export const App: React.FC = () => {
         onNavigate={(sec) => setActiveSection(sec)}
       />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         <div className="space-y-6">
-            {/* Navegação Mobile em Abas (Aparece apenas em telas pequenas) */}
-            <div className="md:hidden flex items-center justify-between gap-1 p-1 rounded-xl bg-white border border-slate-200/80 shadow-2xs max-w-md mx-auto overflow-x-auto text-xs">
+          {/* Navegação Mobile em Abas (Liquid Glass Suave) */}
+          <div className="md:hidden flex items-center justify-between gap-1 p-1 rounded-full bg-white/70 backdrop-blur-md border border-zinc-900/8 shadow-xs max-w-md mx-auto overflow-x-auto text-xs font-normal">
+            <button
+              type="button"
+              onClick={() => setActiveSection('dashboard')}
+              className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full transition-all ${
+                activeSection === 'dashboard'
+                  ? 'bg-zinc-900 text-white font-medium'
+                  : 'text-zinc-600 hover:text-zinc-900'
+              }`}
+            >
+              <LayoutDashboard className="w-3.5 h-3.5" />
+              <span>Painel</span>
+            </button>
+
+            {!selectedProblem && (
               <button
                 type="button"
-                onClick={() => setActiveSection('dashboard')}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg font-medium transition-colors ${
-                  activeSection === 'dashboard'
-                    ? 'bg-slate-900 text-white font-medium'
-                    : 'text-slate-600 hover:text-slate-900'
+                onClick={() => setActiveSection('problems')}
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full transition-all ${
+                  activeSection === 'problems'
+                    ? 'bg-zinc-900 text-white font-medium'
+                    : 'text-zinc-600 hover:text-zinc-900'
                 }`}
               >
-                <LayoutDashboard className="w-3.5 h-3.5" />
-                <span>Painel</span>
+                <Compass className="w-3.5 h-3.5" />
+                <span>Missões</span>
               </button>
+            )}
 
-              {!selectedProblem && (
-                <button
-                  type="button"
-                  onClick={() => setActiveSection('problems')}
-                  className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg font-medium transition-colors ${
-                    activeSection === 'problems'
-                      ? 'bg-slate-900 text-white font-medium'
-                      : 'text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  <Compass className="w-3.5 h-3.5" />
-                  <span>Missões</span>
-                </button>
-              )}
-
-              {selectedProblem && (
-                <button
-                  type="button"
-                  onClick={() => setActiveSection('plan')}
-                  className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg font-medium transition-colors ${
-                    activeSection === 'plan'
-                      ? 'bg-slate-900 text-white font-medium'
-                      : 'text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Aulas</span>
-                </button>
-              )}
-
+            {selectedProblem && (
               <button
                 type="button"
-                onClick={() => setActiveSection('deliveries')}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg font-medium transition-colors ${
-                  activeSection === 'deliveries'
-                    ? 'bg-slate-900 text-white font-medium'
-                    : 'text-slate-600 hover:text-slate-900'
+                onClick={() => setActiveSection('plan')}
+                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full transition-all ${
+                  activeSection === 'plan'
+                    ? 'bg-zinc-900 text-white font-medium'
+                    : 'text-zinc-600 hover:text-zinc-900'
                 }`}
               >
-                <UploadCloud className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Entregas</span>
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>Aulas</span>
               </button>
-            </div>
+            )}
+
+            <button
+              type="button"
+              onClick={() => setActiveSection('deliveries')}
+              className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full transition-all ${
+                activeSection === 'deliveries'
+                  ? 'bg-zinc-900 text-white font-medium'
+                  : 'text-zinc-600 hover:text-zinc-900'
+              }`}
+            >
+              <UploadCloud className="w-3.5 h-3.5" />
+              <span>Entregas</span>
+            </button>
+          </div>
 
             {/* Visualização de Abas */}
             {activeSection === 'dashboard' && (
@@ -273,15 +273,15 @@ export const App: React.FC = () => {
           </div>
       </main>
 
-      {/* Rodapé Editorial Limpo */}
-      <footer className="mt-20 border-t border-slate-200 bg-white py-8 text-center text-xs text-slate-600">
-        <div className="max-w-5xl mx-auto px-4 space-y-2">
-          <p className="font-serif font-medium text-slate-900 text-sm" style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}>
-            Founders Grid — Plataforma Educacional de Educação Digital
+      {/* Rodapé Minimalista */}
+      <footer className="mt-20 border-t border-zinc-200/80 bg-white/50 backdrop-blur-xs py-8 text-center text-xs text-zinc-500">
+        <div className="max-w-5xl mx-auto px-4 space-y-1.5">
+          <p className="font-serif font-normal text-zinc-800 text-sm" style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}>
+            Founders Grid — Educação Digital
           </p>
-          <p className="text-xs text-slate-600">
-            Ensino Médio • Turmas 2º2 e 2º3 • Atividades com a Suíte ONLYOFFICE Planilhas •{' '}
-            <a href="#/professor" className="hover:text-slate-900 underline font-medium">
+          <p className="text-xs text-zinc-400 font-light">
+            Turmas 2º2 e 2º3 • Suíte ONLYOFFICE Planilhas •{' '}
+            <a href="#/professor" className="hover:text-zinc-800 underline transition-colors">
               Acesso do Professor
             </a>
           </p>

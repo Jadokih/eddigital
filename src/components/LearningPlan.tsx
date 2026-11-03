@@ -138,50 +138,50 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto py-2">
-      {/* Topo do Plano de Aprendizagem */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+      {/* Topo do Plano de Aprendizagem em Liquid Glass */}
+      <div className="liquid-glass p-6 sm:p-8 space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-200/60">
           <div>
-            <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider block mb-1">
+            <span className="text-xs font-normal text-zinc-500 uppercase tracking-wider block mb-1">
               Trilha de aprendizagem • ONLYOFFICE
             </span>
             <h3
-              className="text-2xl sm:text-3xl font-serif font-semibold text-slate-900 tracking-tight"
+              className="text-2xl sm:text-3xl font-serif font-normal text-zinc-900 tracking-tight"
               style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               Metas de aprendizagem da empresa
             </h3>
-            <p className="text-xs sm:text-sm text-slate-700 mt-1 max-w-2xl leading-relaxed font-normal">
+            <p className="text-xs sm:text-sm text-zinc-600 mt-1 max-w-2xl leading-relaxed font-normal">
               Domine os 6 fundamentos essenciais ensinados em aula com o professor e aplique os 3 desafios práticos na
-              sua empresa fictícia (<strong className="text-slate-900">{problem.shortTitle}</strong>).
+              sua empresa fictícia (<span className="text-zinc-800 font-medium">{problem.shortTitle}</span>).
             </p>
           </div>
 
           <button
             type="button"
             onClick={onChangeProblem}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-800 text-xs font-semibold border border-slate-300 shadow-xs transition-colors cursor-pointer self-start md:self-auto"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/80 hover:bg-white text-zinc-700 text-xs font-normal border border-zinc-200/80 shadow-2xs transition-colors cursor-pointer self-start md:self-auto"
           >
-            <ArrowLeftRight className="w-3.5 h-3.5 text-slate-600" />
+            <ArrowLeftRight className="w-3.5 h-3.5 text-zinc-400" />
             <span>Trocar missão</span>
           </button>
         </div>
 
-        {/* Barra de Ação Rápida: Próxima Aula & Progresso Geral */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center p-5 sm:p-6 rounded-xl bg-slate-900 text-white shadow-sm">
+        {/* Barra de Ação Rápida em Grafite Escuro com Liquid Glass */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center p-6 rounded-2xl liquid-glass-dark text-white">
           <div className="md:col-span-2 space-y-1.5">
-            <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">
+            <span className="text-xs font-normal text-zinc-300 uppercase tracking-wider">
               Próxima ação recomendada
             </span>
             <h4
-              className="text-base sm:text-lg font-serif font-medium text-white tracking-tight"
+              className="text-base sm:text-lg font-serif font-normal text-white tracking-tight"
               style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               {isAllCompleted
                 ? 'Metas concluídas: envie sua planilha do dia'
                 : nextPendingObjective?.title}
             </h4>
-            <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
               {isAllCompleted
                 ? 'Sua equipe completou todas as habilidades e desafios. Salve seu arquivo no formato .xlsx e faça a entrega da atividade.'
                 : 'Abra o passo a passo objetivo com instruções detalhadas de menus e fórmulas no ONLYOFFICE.'}
@@ -193,7 +193,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
               <button
                 type="button"
                 onClick={onNavigateDeliveries}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs sm:text-sm transition-colors cursor-pointer shadow-sm"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-950 font-medium text-xs sm:text-sm transition-colors cursor-pointer shadow-sm"
               >
                 <UploadCloud className="w-4 h-4" />
                 <span>Entregar planilha (.xlsx)</span>
@@ -203,7 +203,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
               <button
                 type="button"
                 onClick={() => setActiveObjectiveId(nextPendingObjective.id)}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs sm:text-sm transition-colors cursor-pointer shadow-sm"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-950 font-medium text-xs sm:text-sm transition-colors cursor-pointer shadow-sm"
               >
                 <PlayCircle className="w-4 h-4" />
                 <span>Continuar aula</span>
@@ -212,13 +212,15 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             ) : null}
 
             <div className="w-full md:w-48 space-y-1">
-              <div className="flex justify-between text-xs text-slate-300">
+              <div className="flex justify-between text-xs text-zinc-300 font-normal">
                 <span>Progresso total</span>
-                <span className="font-bold text-emerald-400 tabular-nums">{percent}%</span>
+                <span className="font-serif text-white tabular-nums font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>
+                  {percent}%
+                </span>
               </div>
-              <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden border border-slate-700">
+              <div className="w-full bg-white/20 h-1.5 rounded-full overflow-hidden border border-white/10">
                 <div
-                  className="bg-emerald-400 h-full rounded-full transition-all duration-300"
+                  className="bg-white h-full rounded-full transition-all duration-300"
                   style={{ width: `${percent}%` }}
                 />
               </div>
@@ -227,16 +229,16 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
         </div>
       </div>
 
-      {/* Navegação Rápida entre Fases da Trilha */}
+      {/* Navegação Rápida entre Fases da Trilha em Liquid Glass */}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl bg-white border border-slate-200 shadow-xs text-xs">
+        <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-full bg-white/70 backdrop-blur-md border border-zinc-200/80 shadow-2xs text-xs font-normal">
           <button
             type="button"
             onClick={() => setFilterPhase('all')}
-            className={`px-3 py-1.5 rounded-lg font-semibold transition-colors cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-full transition-colors cursor-pointer ${
               filterPhase === 'all'
-                ? 'bg-slate-900 text-white'
-                : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-zinc-900 text-white font-medium shadow-xs'
+                : 'text-zinc-600 hover:text-zinc-900 hover:bg-white/80'
             }`}
           >
             Trilha completa ({totalCount + 1})
@@ -244,10 +246,10 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
           <button
             type="button"
             onClick={() => setFilterPhase('common')}
-            className={`px-3 py-1.5 rounded-lg font-semibold transition-colors cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-full transition-colors cursor-pointer ${
               filterPhase === 'common'
-                ? 'bg-slate-900 text-white'
-                : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-zinc-900 text-white font-medium shadow-xs'
+                : 'text-zinc-600 hover:text-zinc-900 hover:bg-white/80'
             }`}
           >
             1. Fundamentos em aula ({commonCompletedCount}/{commonObjectives.length})
@@ -255,10 +257,10 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
           <button
             type="button"
             onClick={() => setFilterPhase('specific')}
-            className={`px-3 py-1.5 rounded-lg font-semibold transition-colors cursor-pointer ${
+            className={`px-3.5 py-1.5 rounded-full transition-colors cursor-pointer ${
               filterPhase === 'specific'
-                ? 'bg-slate-900 text-white'
-                : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-zinc-900 text-white font-medium shadow-xs'
+                : 'text-zinc-600 hover:text-zinc-900 hover:bg-white/80'
             }`}
           >
             2. Desafios da empresa ({specificCompletedCount}/{specificObjectives.length})
@@ -266,18 +268,18 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
           <button
             type="button"
             onClick={() => setFilterPhase('delivery')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition-colors cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full transition-colors cursor-pointer ${
               filterPhase === 'delivery'
-                ? 'bg-slate-900 text-white'
-                : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-zinc-900 text-white font-medium shadow-xs'
+                : 'text-zinc-600 hover:text-zinc-900 hover:bg-white/80'
             }`}
           >
-            <UploadCloud className="w-3.5 h-3.5 text-emerald-600" />
+            <UploadCloud className="w-3.5 h-3.5 text-zinc-400" />
             <span>3. Entrega do dia</span>
           </button>
         </div>
 
-        <div className="text-xs font-semibold text-slate-700">
+        <div className="text-xs text-zinc-500 font-normal">
           Turma {group.class_name} • {completedCount} de {totalCount} habilidades concluídas
         </div>
       </div>
@@ -285,30 +287,30 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
       {/* FASE 1: APRENDENDO O BÁSICO (6 FUNDAMENTOS EM AULA) */}
       {(filterPhase === 'all' || filterPhase === 'common') && (
         <div className="space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-200">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-zinc-200/60">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center text-xs">
+              <div className="w-8 h-8 rounded-full bg-zinc-100 border border-zinc-200/60 text-zinc-600 flex items-center justify-center text-xs">
                 <GraduationCap className="w-4 h-4" />
               </div>
               <div>
                 <h4
-                  className="text-base font-serif font-semibold text-slate-900"
+                  className="text-base font-serif font-normal text-zinc-900"
                   style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
                 >
                   1. Aprendendo o básico
                 </h4>
-                <p className="text-xs text-slate-600">
+                <p className="text-xs text-zinc-500 font-normal">
                   Fundamentos ensinados pelo professor em aula para toda a turma
                 </p>
               </div>
             </div>
 
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-800 self-start sm:self-auto tabular-nums">
+            <span className="text-xs font-normal px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200/60 text-zinc-700 self-start sm:self-auto tabular-nums">
               {commonCompletedCount} de {commonObjectives.length} aulas dominadas
             </span>
           </div>
 
-          <div className="divide-y divide-slate-100 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div className="divide-y divide-zinc-100 liquid-glass overflow-hidden">
             {commonObjectives.map((obj, index) => {
               const isCompleted = completedList.includes(obj.id);
               const isCurrent = !isCompleted && nextPendingObjective?.id === obj.id;
@@ -319,20 +321,20 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                   key={obj.id}
                   className={`p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 transition-colors ${
                     isCompleted
-                      ? 'bg-slate-50/50'
+                      ? 'bg-zinc-50/30'
                       : isCurrent
-                      ? 'bg-emerald-50/70 border-l-4 border-l-emerald-600'
-                      : 'hover:bg-slate-50'
+                      ? 'bg-zinc-100/60 border-l-2 border-l-zinc-900'
+                      : 'hover:bg-zinc-50/50'
                   }`}
                 >
                   <div className="flex items-start gap-3.5">
                     <div
-                      className={`w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 ${
+                      className={`w-7 h-7 rounded-full text-xs font-medium flex items-center justify-center shrink-0 mt-0.5 ${
                         isCompleted
-                          ? 'bg-emerald-600 text-white'
+                          ? 'bg-zinc-900 text-white'
                           : isCurrent
-                          ? 'bg-emerald-600 text-white shadow-xs'
-                          : 'bg-slate-100 text-slate-700 border border-slate-200'
+                          ? 'bg-zinc-900 text-white'
+                          : 'bg-zinc-100 text-zinc-600 border border-zinc-200/80'
                       }`}
                     >
                       {isCompleted ? <CheckCircle2 className="w-4 h-4" /> : index + 1}
@@ -340,26 +342,26 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
 
                     <div className="space-y-1">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-xs font-semibold text-slate-600">
+                        <span className="text-xs text-zinc-400 font-normal">
                           Aula {index + 1} • Fundamento
                         </span>
                         {isCompleted && (
-                          <span className="inline-flex items-center px-2 py-0.5 text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-300 rounded-md">
+                          <span className="inline-flex items-center px-2.5 py-0.5 text-xs font-normal text-zinc-700 bg-zinc-100 border border-zinc-200 rounded-full">
                             Dominada
                           </span>
                         )}
                         {isCurrent && (
-                          <span className="inline-flex items-center px-2 py-0.5 text-xs font-semibold text-white bg-emerald-700 rounded-md">
+                          <span className="inline-flex items-center px-2.5 py-0.5 text-xs font-normal text-white bg-zinc-900 rounded-full">
                             Fazer agora
                           </span>
                         )}
                       </div>
 
-                      <h5 className="font-semibold text-slate-900 text-sm">
+                      <h5 className="font-normal text-zinc-900 text-sm">
                         {lesson?.title || obj.title}
                       </h5>
 
-                      <p className="text-xs text-slate-700 line-clamp-1 max-w-2xl font-normal">
+                      <p className="text-xs text-zinc-500 line-clamp-1 max-w-2xl font-normal">
                         {lesson?.learningGoal || obj.description}
                       </p>
                     </div>
@@ -369,9 +371,9 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                     <button
                       type="button"
                       onClick={() => setActiveObjectiveId(obj.id)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-800 hover:text-slate-950 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-normal text-zinc-700 hover:text-zinc-950 bg-white/80 hover:bg-white border border-zinc-200/80 transition-colors cursor-pointer shadow-2xs"
                     >
-                      <BookOpen className="w-3.5 h-3.5 text-emerald-700" />
+                      <BookOpen className="w-3.5 h-3.5 text-zinc-400" />
                       <span>Abrir aula</span>
                     </button>
 
@@ -380,8 +382,8 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                       onClick={() => handleToggle(obj.id)}
                       className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
                         isCompleted
-                          ? 'bg-emerald-600 border-emerald-600 text-white'
-                          : 'border-slate-300 text-slate-500 hover:border-slate-400 hover:text-slate-800 bg-white'
+                          ? 'bg-zinc-900 border-zinc-900 text-white'
+                          : 'border-zinc-300 text-zinc-400 hover:border-zinc-400 hover:text-zinc-800 bg-white'
                       }`}
                       title={isCompleted ? 'Desmarcar aula' : 'Marcar como dominada'}
                     >
@@ -398,30 +400,30 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
       {/* FASE 2: AGORA É COM VOCÊ (3 DESAFIOS DA EMPRESA) */}
       {(filterPhase === 'all' || filterPhase === 'specific') && (
         <div className="space-y-3 pt-2">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-200">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-zinc-200/60">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center text-xs">
+              <div className="w-8 h-8 rounded-full bg-zinc-100 border border-zinc-200/60 text-zinc-600 flex items-center justify-center text-xs">
                 <Sparkles className="w-4 h-4" />
               </div>
               <div>
                 <h4
-                  className="text-base font-serif font-semibold text-slate-900"
+                  className="text-base font-serif font-normal text-zinc-900"
                   style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
                 >
                   2. Agora é com você (Desafios da empresa)
                 </h4>
-                <p className="text-xs text-slate-600">
+                <p className="text-xs text-zinc-500 font-normal">
                   Aplicação autônoma das fórmulas e planilhas na missão {problem.number} ({problem.shortTitle})
                 </p>
               </div>
             </div>
 
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-300 text-emerald-800 self-start sm:self-auto tabular-nums">
+            <span className="text-xs font-normal px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200/60 text-zinc-700 self-start sm:self-auto tabular-nums">
               {specificCompletedCount} de {specificObjectives.length} desafios concluídos
             </span>
           </div>
 
-          <div className="divide-y divide-slate-100 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div className="divide-y divide-zinc-100 liquid-glass overflow-hidden">
             {specificObjectives.map((obj, index) => {
               const isCompleted = completedList.includes(obj.id);
               const isCurrent = !isCompleted && nextPendingObjective?.id === obj.id;
@@ -432,20 +434,20 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                   key={obj.id}
                   className={`p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 transition-colors ${
                     isCompleted
-                      ? 'bg-slate-50/50'
+                      ? 'bg-zinc-50/30'
                       : isCurrent
-                      ? 'bg-emerald-50/70 border-l-4 border-l-emerald-600'
-                      : 'hover:bg-slate-50'
+                      ? 'bg-zinc-100/60 border-l-2 border-l-zinc-900'
+                      : 'hover:bg-zinc-50/50'
                   }`}
                 >
                   <div className="flex items-start gap-3.5">
                     <div
-                      className={`w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 ${
+                      className={`w-7 h-7 rounded-full text-xs font-medium flex items-center justify-center shrink-0 mt-0.5 ${
                         isCompleted
-                          ? 'bg-emerald-600 text-white'
+                          ? 'bg-zinc-900 text-white'
                           : isCurrent
-                          ? 'bg-emerald-600 text-white shadow-xs'
-                          : 'bg-emerald-50 text-emerald-800 border border-emerald-300'
+                          ? 'bg-zinc-900 text-white'
+                          : 'bg-zinc-100 text-zinc-700 border border-zinc-200/80'
                       }`}
                     >
                       {isCompleted ? <CheckCircle2 className="w-4 h-4" /> : `D${index + 1}`}
@@ -453,26 +455,26 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
 
                     <div className="space-y-1">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-xs font-semibold text-emerald-800">
+                        <span className="text-xs text-zinc-500 font-normal">
                           Desafio {index + 1} • {problem.shortTitle}
                         </span>
                         {isCompleted && (
-                          <span className="inline-flex items-center px-2 py-0.5 text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-300 rounded-md">
+                          <span className="inline-flex items-center px-2.5 py-0.5 text-xs font-normal text-zinc-700 bg-zinc-100 border border-zinc-200 rounded-full">
                             Resolvido
                           </span>
                         )}
                         {isCurrent && (
-                          <span className="inline-flex items-center px-2 py-0.5 text-xs font-semibold text-white bg-emerald-700 rounded-md">
+                          <span className="inline-flex items-center px-2.5 py-0.5 text-xs font-normal text-white bg-zinc-900 rounded-full">
                             Fazer agora
                           </span>
                         )}
                       </div>
 
-                      <h5 className="font-semibold text-slate-900 text-sm">
+                      <h5 className="font-normal text-zinc-900 text-sm">
                         {lesson?.title || obj.title}
                       </h5>
 
-                      <p className="text-xs text-slate-700 line-clamp-1 max-w-2xl font-normal">
+                      <p className="text-xs text-zinc-500 line-clamp-1 max-w-2xl font-normal">
                         {lesson?.learningGoal || obj.description}
                       </p>
                     </div>
@@ -482,9 +484,9 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                     <button
                       type="button"
                       onClick={() => setActiveObjectiveId(obj.id)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-800 hover:text-slate-950 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-normal text-zinc-700 hover:text-zinc-950 bg-white/80 hover:bg-white border border-zinc-200/80 transition-colors cursor-pointer shadow-2xs"
                     >
-                      <BookOpen className="w-3.5 h-3.5 text-emerald-700" />
+                      <BookOpen className="w-3.5 h-3.5 text-zinc-400" />
                       <span>Abrir desafio</span>
                     </button>
 
@@ -493,8 +495,8 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                       onClick={() => handleToggle(obj.id)}
                       className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
                         isCompleted
-                          ? 'bg-emerald-600 border-emerald-600 text-white'
-                          : 'border-slate-300 text-slate-500 hover:border-slate-400 hover:text-slate-800 bg-white'
+                          ? 'bg-zinc-900 border-zinc-900 text-white'
+                          : 'border-zinc-300 text-zinc-400 hover:border-zinc-400 hover:text-zinc-800 bg-white'
                       }`}
                       title={isCompleted ? 'Desmarcar desafio' : 'Marcar como resolvido'}
                     >
@@ -511,37 +513,37 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
       {/* FASE 3: ETAPA DE ENTREGA DA ATIVIDADE DO DIA (MARCO FINAL) */}
       {(filterPhase === 'all' || filterPhase === 'delivery') && (
         <div className="pt-2">
-          <div className="bg-white rounded-2xl border border-emerald-300 shadow-sm p-6 sm:p-7 space-y-4 relative overflow-hidden">
+          <div className="liquid-glass p-6 sm:p-7 space-y-4 relative overflow-hidden">
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
               <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center shrink-0">
-                  <UploadCloud className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-700 flex items-center justify-center shrink-0">
+                  <UploadCloud className="w-5 h-5 text-zinc-600" />
                 </div>
                 <div className="space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 border border-slate-200">
+                    <span className="text-xs font-normal px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-600 border border-zinc-200/60">
                       Etapa final da trilha
                     </span>
                     {latestSubmission ? (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-300 rounded-md">
-                        <CheckCircle2 className="w-3.5 h-3.5" /> Entregue (v{latestSubmission.version})
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 text-xs font-normal text-zinc-800 bg-zinc-100 border border-zinc-200 rounded-full">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-zinc-600" /> Entregue (v{latestSubmission.version})
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold text-amber-900 bg-amber-50 border border-amber-300 rounded-md">
-                        <Clock className="w-3 h-3 text-amber-700" /> Aguardando envio
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 text-xs font-normal text-zinc-600 bg-zinc-100 border border-zinc-200/80 rounded-full">
+                        <Clock className="w-3 h-3 text-zinc-400" /> Aguardando envio
                       </span>
                     )}
                   </div>
 
                   <h4
-                    className="text-lg sm:text-xl font-serif font-semibold text-slate-900"
+                    className="text-lg sm:text-xl font-serif font-normal text-zinc-900"
                     style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
                   >
                     Etapa de entrega da atividade do dia
                   </h4>
-                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed max-w-2xl font-normal">
+                  <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed max-w-2xl font-normal">
                     Após concluir os fundamentos e resolver os desafios da empresa, salve a planilha no ONLYOFFICE
-                    em formato <strong className="text-slate-900">.xlsx</strong> e envie o arquivo para correção do professor.
+                    em formato <strong className="text-zinc-900 font-medium">.xlsx</strong> e envie o arquivo para correção do professor.
                   </p>
                 </div>
               </div>
@@ -550,7 +552,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
                 <button
                   type="button"
                   onClick={onNavigateDeliveries}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm transition-colors cursor-pointer shrink-0 self-start sm:self-auto shadow-sm"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs sm:text-sm transition-colors cursor-pointer shrink-0 self-start sm:self-auto shadow-sm"
                 >
                   <UploadCloud className="w-4 h-4" />
                   <span>{latestSubmission ? 'Ver minhas entregas' : 'Fazer entrega da planilha'}</span>
@@ -560,21 +562,21 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             </div>
 
             {/* Checklist / Instruções Rápidas de Entrega */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-slate-200 text-xs">
-              <div className="flex items-start gap-2 text-slate-700">
-                <FileSpreadsheet className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
-                <span>Formato obrigatório: <strong className="text-slate-900">.xlsx</strong> (do ONLYOFFICE)</span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-zinc-200/60 text-xs">
+              <div className="flex items-start gap-2 text-zinc-600 font-normal">
+                <FileSpreadsheet className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" />
+                <span>Formato: <strong className="text-zinc-800 font-medium">.xlsx</strong> (ONLYOFFICE)</span>
               </div>
-              <div className="flex items-start gap-2 text-slate-700">
-                <Calendar className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2 text-zinc-600 font-normal">
+                <Calendar className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" />
                 <span>
                   {activeActivity?.due_at
                     ? `Prazo: ${formatDateTime(activeActivity.due_at)}`
                     : 'Prazo: até o final da aula'}
                 </span>
               </div>
-              <div className="flex items-start gap-2 text-slate-700">
-                <Award className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2 text-zinc-600 font-normal">
+                <Award className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" />
                 <span>
                   {activeActivity?.max_score
                     ? `Pontuação: até ${formatScore(activeActivity.max_score)} pts`

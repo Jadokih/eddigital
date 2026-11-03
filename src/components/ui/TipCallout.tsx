@@ -10,8 +10,8 @@ interface TipCalloutProps {
 export const TipCallout: React.FC<TipCalloutProps> = ({ type, title, children }) => {
   const configs = {
     tip: {
-      bg: 'bg-emerald-50/80 border-emerald-200 text-emerald-950',
-      iconBg: 'bg-emerald-100 text-emerald-800',
+      bg: 'bg-zinc-50 border-zinc-200 text-zinc-900',
+      iconBg: 'bg-zinc-200 text-zinc-800',
       icon: <Lightbulb className="w-4 h-4" />,
     },
     warning: {
