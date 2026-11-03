@@ -2,18 +2,24 @@ import React, { useState } from 'react';
 import {
   Building2,
   Users,
-  Lock,
   Mail,
   ArrowRight,
   Eye,
   EyeOff,
   GraduationCap,
+  ArrowLeft,
+  KeyRound,
+  X,
+  HelpCircle,
 } from 'lucide-react';
 import type { ClassName, CreateGroupInput, Group } from '../types';
 import { LogoGenerator } from './LogoGenerator';
-import { signUpGroup, signInGroup, isValidEmail } from '../lib/supabase';
+import { signUpGroup, signInGroup, isValidEmail, requestPasswordReset } from '../lib/supabase';
+import { BrandLogo } from './ui/BrandLogo';
 
 interface AuthScreenProps {
+  initialTab?: 'signin' | 'signup';
+  onBackToHero?: () => void;
   onAuthSuccess: (group: Group) => void;
   showToast: (type: 'success' | 'error' | 'info', title: string, message?: string) => void;
 }
@@ -30,12 +36,19 @@ const COMMON_SECTORS = [
 ];
 
 export const AuthScreen: React.FC<AuthScreenProps> = ({
+  initialTab = 'signup',
+  onBackToHero,
   onAuthSuccess,
   showToast,
 }) => {
-  const [activeTab, setActiveTab] = useState<'signup' | 'signin'>('signup');
+  const [activeTab, setActiveTab] = useState<'signup' | 'signin'>(initialTab);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  // Modal de Recuperação de Senha
+  const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState('');
+  const [sendingReset, setSendingReset] = useState(false);
 
   // Estados do Cadastro
   const [email, setEmail] = useState('');
@@ -61,7 +74,6 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validações
     const cleanEmail = email.trim().toLowerCase();
     if (!cleanEmail) {
       showToast('error', 'Campo obrigatório', 'Informe o e-mail do grupo.');
@@ -146,354 +158,521 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
     }
   };
 
+  const handleRequestReset = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!forgotEmail || !isValidEmail(forgotEmail)) {
+      showToast('error', 'E-mail inválido', 'Informe um e-mail válido para recuperação.');
+      return;
+    }
+
+    setSendingReset(true);
+    try {
+      await requestPasswordReset(forgotEmail);
+      showToast(
+        'success',
+        'Solicitação registrada',
+        'Se o e-mail estiver cadastrado, as instruções de redefinição serão enviadas. O professor também pode redefinir o acesso da equipe.'
+      );
+      setIsForgotModalOpen(false);
+      setForgotEmail('');
+    } catch (err: any) {
+      showToast('error', 'Falha na solicitação', err.message || 'Não foi possível solicitar a recuperação.');
+    } finally {
+      setSendingReset(false);
+    }
+  };
+
   return (
-    <div className="py-6 sm:py-10 px-4 max-w-4xl mx-auto" id="auth-section">
-      {/* Header Institucional com destaque verde da Image 1 */}
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white border border-slate-900/10 shadow-xs mb-4">
-          <GraduationCap className="w-4 h-4 text-slate-700" />
-          <span>Educação Digital • Turmas 2º2 e 2º3</span>
-        </div>
-
-        <h1 className="text-3xl sm:text-5xl font-display font-bold text-slate-900 tracking-tight leading-tight">
-          Crie a sua{' '}
-          <span className="highlight-anchor">
-            empresa
-          </span>{' '}
-          e inicie a Etapa 1.
-        </h1>
-
-        <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-xl mx-auto font-normal leading-relaxed">
-          Cadastre seu grupo, registre sua identidade visual e escolha qual situação-problema real vocês irão solucionar com planilhas digitais.
-        </p>
-
-        {/* Alternador de Abas */}
-        <div className="mt-6 inline-flex p-1 rounded-lg bg-slate-100 border border-slate-200">
+    <div className="min-h-screen bg-[#FAF9F5] text-slate-900 py-6 sm:py-12 px-4 sm:px-6 flex flex-col justify-between">
+      {/* Barra Superior Discreta de Navegação */}
+      <div className="max-w-4xl w-full mx-auto flex items-center justify-between pb-6">
+        {onBackToHero ? (
           <button
             type="button"
-            onClick={() => setActiveTab('signup')}
-            className={`py-1.5 px-4 rounded-md text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
-              activeTab === 'signup'
-                ? 'bg-white text-slate-900 shadow-2xs'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
+            onClick={onBackToHero}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-200/60 transition-colors cursor-pointer"
           >
-            Cadastrar nova empresa
+            <ArrowLeft className="w-4 h-4" />
+            <span>Voltar ao início</span>
           </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab('signin')}
-            className={`py-1.5 px-4 rounded-md text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
-              activeTab === 'signin'
-                ? 'bg-white text-slate-900 shadow-2xs'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            Acessar empresa existente
-          </button>
-        </div>
+        ) : (
+          <div />
+        )}
+
+        <BrandLogo size="sm" variant="full" theme="light" />
+
+        <a
+          href="#/professor"
+          className="text-xs font-mono text-slate-500 hover:text-slate-800 transition-colors"
+        >
+          Acesso do Professor
+        </a>
       </div>
 
-      {/* Caixa Principal */}
-      <div className="ed-card p-6 sm:p-8">
-        {activeTab === 'signup' ? (
-          <form onSubmit={handleSignUp} className="space-y-6">
-            {/* Bloco 1: Acesso do Grupo */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <Mail className="w-4 h-4 text-slate-500" />
-                <h3 className="text-xs font-semibold text-slate-700">
-                  1. Dados de acesso do grupo
-                </h3>
-              </div>
+      {/* Conteúdo Central Acolhedor e Branco */}
+      <div className="max-w-2xl w-full mx-auto my-auto py-4">
+        {/* Alternador Suave de Abas */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex p-1 rounded-xl bg-slate-200/70 border border-slate-300/80">
+            <button
+              type="button"
+              onClick={() => setActiveTab('signin')}
+              className={`py-2 px-5 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                activeTab === 'signin'
+                  ? 'bg-white text-slate-900 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Já tenho uma empresa
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('signup')}
+              className={`py-2 px-5 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                activeTab === 'signup'
+                  ? 'bg-white text-slate-900 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Criar Nova Empresa
+            </button>
+          </div>
+        </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="sm:col-span-1">
-                  <label className="block text-xs font-medium text-slate-700 mb-1">
-                    E-mail do grupo *
-                  </label>
+        {/* ========================================================
+            MODO 1: LOGIN (AMBIENTE BRANCO E ACOLHEDOR)
+            ======================================================== */}
+        {activeTab === 'signin' ? (
+          <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 sm:p-10 space-y-6 animate-in fade-in zoom-in-98 duration-200">
+            <div className="text-center space-y-2">
+              <h2
+                className="text-3xl sm:text-4xl font-serif font-normal text-slate-900 tracking-tight"
+                style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
+              >
+                Que bom ter você de volta!
+              </h2>
+              <p className="text-sm text-slate-600 font-normal max-w-md mx-auto">
+                Acesse a conta da sua empresa para continuar desenvolvendo suas habilidades no ONLYOFFICE.
+              </p>
+            </div>
+
+            <form onSubmit={handleSignIn} className="space-y-4 max-w-md mx-auto pt-2">
+              <div>
+                <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                  E-mail cadastrado da empresa *
+                </label>
+                <div className="relative">
                   <input
                     type="email"
                     required
                     placeholder="ex: grupo@escola.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 font-medium"
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-medium placeholder:text-slate-400"
                   />
-                  <p className="text-[11px] text-slate-500 mt-1">E-mail para login no sistema</p>
+                  <Mail className="w-4 h-4 text-slate-400 absolute right-3.5 top-3 pointer-events-none" />
                 </div>
+              </div>
 
-                <div className="sm:col-span-1">
-                  <label className="block text-xs font-medium text-slate-700 mb-1">
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-800">
                     Senha de acesso *
                   </label>
-                  <div className="relative">
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      required
-                      placeholder="Mínimo 6 caracteres"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 pr-9"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-700 cursor-pointer"
-                    >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setForgotEmail(loginEmail);
+                      setIsForgotModalOpen(true);
+                    }}
+                    className="text-xs font-medium text-emerald-800 hover:text-emerald-950 underline cursor-pointer"
+                  >
+                    Esqueceu a senha?
+                  </button>
                 </div>
 
-                <div className="sm:col-span-1">
-                  <label className="block text-xs font-medium text-slate-700 mb-1">
-                    Confirmar senha *
-                  </label>
+                <div className="relative">
                   <input
                     type={showPassword ? 'text' : 'password'}
                     required
-                    placeholder="Repita a senha"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900"
+                    placeholder="Sua senha de acesso"
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 pr-10 font-medium placeholder:text-slate-400"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3.5 top-3 text-slate-400 hover:text-slate-700 cursor-pointer"
+                    aria-label={showPassword ? 'Ocultar senha' : 'Exibir senha'}
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
                 </div>
               </div>
-            </div>
 
-            {/* Bloco 2: Turma e Integrantes */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <Users className="w-4 h-4 text-slate-500" />
-                <h3 className="text-xs font-semibold text-slate-700">
-                  2. Turma e integrantes da equipe
-                </h3>
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-3 px-5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shadow-sm"
+                >
+                  {loading ? (
+                    <span>Acessando...</span>
+                  ) : (
+                    <>
+                      <span>Entrar na empresa</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
+                </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-xs font-medium text-slate-700 mb-1">
-                    Turma escolar *
-                  </label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {(['2º2', '2º3'] as ClassName[]).map((c) => (
+              <div className="pt-4 text-center border-t border-slate-100">
+                <p className="text-xs text-slate-600 font-normal">
+                  Sua equipe ainda não tem cadastro?{' '}
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab('signup')}
+                    className="font-semibold text-emerald-800 hover:text-emerald-950 underline cursor-pointer"
+                  >
+                    Criar nova empresa
+                  </button>
+                </p>
+              </div>
+            </form>
+          </div>
+        ) : (
+          /* ========================================================
+             MODO 2: CADASTRO (ORGANIZADO, DIDÁTICO E AMIGÁVEL)
+             ======================================================== */
+          <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-10 space-y-8 animate-in fade-in zoom-in-98 duration-200">
+            <div className="text-center space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-900 mb-2">
+                <GraduationCap className="w-4 h-4 text-emerald-700" />
+                <span>Educação Digital • Turmas 2º2 e 2º3</span>
+              </div>
+
+              <h2
+                className="text-3xl sm:text-4xl font-serif font-normal text-slate-900 tracking-tight"
+                style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
+              >
+                Cadastre sua nova empresa
+              </h2>
+              <p className="text-sm text-slate-600 font-normal max-w-lg mx-auto">
+                Registre a identidade da sua equipe fictícia para resolver desafios práticos com planilhas.
+              </p>
+            </div>
+
+            <form onSubmit={handleSignUp} className="space-y-6">
+              {/* Bloco 1: Acesso do Grupo */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
+                  <Mail className="w-4 h-4 text-emerald-700" />
+                  <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                    1. Dados de acesso do grupo
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="sm:col-span-1">
+                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                      E-mail do grupo *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="ex: grupo@escola.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-medium"
+                    />
+                    <p className="text-[11px] text-slate-500 mt-1">E-mail compartilhado para login</p>
+                  </div>
+
+                  <div className="sm:col-span-1">
+                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                      Senha de acesso *
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        required
+                        placeholder="Mínimo 6 caracteres"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 pr-9 font-medium"
+                      />
                       <button
-                        key={c}
                         type="button"
-                        onClick={() => setClassName(c)}
-                        className={`py-2 px-3 rounded-lg border text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
-                          className === c
-                            ? 'bg-slate-900 text-white border-slate-900'
-                            : 'bg-white text-slate-700 border-slate-300 hover:border-slate-400'
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-700 cursor-pointer"
+                      >
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-1">
+                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                      Confirmar senha *
+                    </label>
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      required
+                      placeholder="Repita a senha"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-medium"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Bloco 2: Turma e Integrantes */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
+                  <Users className="w-4 h-4 text-emerald-700" />
+                  <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                    2. Turma e integrantes da equipe
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                      Turma escolar *
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {(['2º2', '2º3'] as ClassName[]).map((c) => (
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setClassName(c)}
+                          className={`py-2 px-3 rounded-xl border text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                            className === c
+                              ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
+                              : 'bg-white text-slate-700 border-slate-300 hover:border-slate-400'
+                          }`}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                      Nomes completos dos integrantes da equipe *
+                    </label>
+                    <textarea
+                      rows={2}
+                      required
+                      placeholder="Ex: Ana Clara Martins, Gabriel Santos, Lucas Silveira, Mariana Ramos"
+                      value={members}
+                      onChange={(e) => setMembers(e.target.value)}
+                      className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-medium leading-relaxed"
+                    />
+                    <p className="text-[11px] text-slate-500 mt-1">Separe os nomes por vírgula</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bloco 3: Dados da Empresa */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
+                  <Building2 className="w-4 h-4 text-emerald-700" />
+                  <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                    3. Dados da empresa fictícia
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                      Nome da empresa *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Ex: Alfa Logística e Distribuição"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                      Ramo de atuação *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Ex: Comércio, Alimentação, Logística..."
+                      value={businessSector}
+                      onChange={(e) => setBusinessSector(e.target.value)}
+                      className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 font-medium"
+                    />
+                  </div>
+                </div>
+
+                {/* Sugestões de Ramo em tags */}
+                <div>
+                  <span className="block text-xs font-medium text-slate-600 mb-1.5">
+                    Sugestões de setor:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {COMMON_SECTORS.map((sector) => (
+                      <button
+                        key={sector}
+                        type="button"
+                        onClick={() => setBusinessSector(sector)}
+                        className={`text-xs px-2.5 py-1 rounded-lg border transition-colors cursor-pointer ${
+                          businessSector === sector
+                            ? 'bg-slate-900 text-white border-slate-900 font-semibold'
+                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
                         }`}
                       >
-                        {c}
+                        {sector}
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <div className="sm:col-span-2">
-                  <label className="block text-xs font-medium text-slate-700 mb-1">
-                    Nomes completos dos integrantes do grupo *
+                <div>
+                  <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                    Breve descrição da empresa *
                   </label>
                   <textarea
-                    rows={2}
+                    rows={3}
                     required
-                    placeholder="Ex: Ana Clara Martins, Gabriel Santos, Lucas Silveira, Mariana Ramos"
-                    value={members}
-                    onChange={(e) => setMembers(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900"
+                    maxLength={300}
+                    placeholder="Descreva o que a sua empresa faz, qual produto ou serviço ela oferece e qual o seu público principal..."
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 leading-relaxed font-normal"
                   />
-                  <p className="text-[11px] text-slate-500 mt-0.5">Separe os nomes por vírgula</p>
+                  <div className="flex justify-between items-center text-[11px] text-slate-500 mt-1">
+                    <span>Escreva um resumo claro e objetivo.</span>
+                    <span>{description.length}/300 caracteres</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Bloco 3: Dados da Empresa */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <Building2 className="w-4 h-4 text-slate-500" />
-                <h3 className="text-xs font-semibold text-slate-700">
-                  3. Dados da empresa fictícia
+              {/* Bloco 4: Logotipo da Empresa */}
+              <LogoGenerator
+                companyName={companyName}
+                currentLogoUrl={logoUrl}
+                onLogoChange={handleLogoChange}
+              />
+
+              {/* Botão de Envio do Cadastro */}
+              <div className="pt-4 border-t border-slate-200">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-3.5 px-6 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shadow-sm"
+                >
+                  {loading ? (
+                    <span>Cadastrando empresa...</span>
+                  ) : (
+                    <>
+                      <span>Cadastrar empresa e selecionar missão</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
+                </button>
+
+                <p className="text-center text-xs text-slate-600 mt-4">
+                  Já possui uma empresa cadastrada?{' '}
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab('signin')}
+                    className="font-semibold text-emerald-800 hover:text-emerald-950 underline cursor-pointer"
+                  >
+                    Fazer login
+                  </button>
+                </p>
+              </div>
+            </form>
+          </div>
+        )}
+      </div>
+
+      {/* Modal de Recuperação de Senha */}
+      {isForgotModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs">
+          <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-md w-full p-6 sm:p-7 space-y-5 animate-in fade-in zoom-in-95 duration-150 text-slate-900">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+                  <KeyRound className="w-4 h-4" />
+                </div>
+                <h3 className="text-base font-semibold text-slate-900">
+                  Recuperação de Senha
                 </h3>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-medium text-slate-700 mb-1">
-                    Nome da empresa *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Ex: Alfa Logística e Distribuição"
-                    value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 font-medium"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-medium text-slate-700 mb-1">
-                    Ramo de atuação *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Ex: Comércio, Alimentação, Logística..."
-                    value={businessSector}
-                    onChange={(e) => setBusinessSector(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900"
-                  />
-                </div>
-              </div>
-
-              {/* Sugestões de Ramo em tags */}
-              <div>
-                <span className="block text-xs font-medium text-slate-500 mb-1.5">
-                  Sugestões de setor:
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {COMMON_SECTORS.map((sector) => (
-                    <button
-                      key={sector}
-                      type="button"
-                      onClick={() => setBusinessSector(sector)}
-                      className={`text-xs px-2.5 py-1 rounded-md border transition-colors cursor-pointer ${
-                        businessSector === sector
-                          ? 'bg-slate-900 text-white border-slate-900 font-medium'
-                          : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
-                      }`}
-                    >
-                      {sector}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-slate-700 mb-1">
-                  Breve descrição da empresa *
-                </label>
-                <textarea
-                  rows={3}
-                  required
-                  maxLength={300}
-                  placeholder="Descreva o que a sua empresa faz, qual produto ou serviço ela oferece e qual o seu público principal..."
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 leading-relaxed"
-                />
-                <div className="flex justify-between items-center text-[11px] text-slate-500 mt-1">
-                  <span>Escreva um resumo claro e objetivo.</span>
-                  <span>{description.length}/300 caracteres</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Bloco 4: Logotipo da Empresa */}
-            <LogoGenerator
-              companyName={companyName}
-              currentLogoUrl={logoUrl}
-              onLogoChange={handleLogoChange}
-            />
-
-            {/* Botão de Envio */}
-            <div className="pt-4 border-t border-slate-100">
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-3 px-5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-              >
-                {loading ? (
-                  <span>Cadastrando empresa...</span>
-                ) : (
-                  <>
-                    <span>Cadastrar empresa e selecionar missão</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </>
-                )}
-              </button>
-            </div>
-          </form>
-        ) : (
-          /* CONTEÚDO: ENTRAR / LOGIN */
-          <form onSubmit={handleSignIn} className="p-4 sm:p-6 max-w-sm mx-auto space-y-4">
-            <div className="text-center mb-5">
-              <div className="w-10 h-10 rounded-lg bg-slate-100 text-slate-900 flex items-center justify-center mx-auto mb-2.5">
-                <Lock className="w-5 h-5 text-slate-700" />
-              </div>
-              <h3 className="text-xl font-display font-semibold text-slate-900">Acessar empresa</h3>
-              <p className="text-xs text-slate-500 mt-0.5">
-                Insira o e-mail e a senha cadastrados pelo grupo.
-              </p>
-            </div>
-
-            <div>
-              <label className="block text-xs font-medium text-slate-700 mb-1">
-                E-mail da empresa
-              </label>
-              <input
-                type="email"
-                required
-                placeholder="ex: grupo@escola.com"
-                value={loginEmail}
-                onChange={(e) => setLoginEmail(e.target.value)}
-                className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 font-medium"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-medium text-slate-700 mb-1">
-                Senha de acesso
-              </label>
-              <div className="relative">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                  placeholder="Sua senha de acesso"
-                  value={loginPassword}
-                  onChange={(e) => setLoginPassword(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs sm:text-sm bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 pr-9"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-2.5 text-slate-400 hover:text-slate-700 cursor-pointer"
-                >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-2.5 px-4 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-            >
-              {loading ? (
-                <span>Acessando...</span>
-              ) : (
-                <>
-                  <span>Entrar no painel</span>
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
-
-            <div className="pt-2 text-center">
               <button
                 type="button"
-                onClick={() => setActiveTab('signup')}
-                className="text-xs text-slate-600 hover:text-slate-900 font-semibold cursor-pointer"
+                onClick={() => setIsForgotModalOpen(false)}
+                className="w-8 h-8 rounded-lg border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
               >
-                Ainda não cadastrou o grupo? <span className="underline">Clique aqui</span>.
+                <X className="w-4 h-4" />
               </button>
             </div>
-          </form>
-        )}
+
+            <div className="space-y-3 text-xs text-slate-700 leading-relaxed">
+              <p>
+                Informe o e-mail da sua empresa cadastrado pelo grupo. Se o projeto estiver conectado ao Supabase com envio de e-mails ativado, você receberá um link para criar uma nova senha.
+              </p>
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start gap-2 text-slate-600">
+                <HelpCircle className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                <span>
+                  <strong>Aviso para a turma:</strong> Em ambiente de sala de aula, o professor também pode resetar ou conferir as contas diretamente pelo painel do professor.
+                </span>
+              </div>
+            </div>
+
+            <form onSubmit={handleRequestReset} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-800 mb-1">
+                  E-mail da empresa *
+                </label>
+                <input
+                  type="email"
+                  required
+                  placeholder="ex: grupo@escola.com"
+                  value={forgotEmail}
+                  onChange={(e) => setForgotEmail(e.target.value)}
+                  className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 font-medium"
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-200">
+                <button
+                  type="button"
+                  onClick={() => setIsForgotModalOpen(false)}
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  disabled={sendingReset}
+                  className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition-colors cursor-pointer disabled:opacity-50"
+                >
+                  {sendingReset ? 'Enviando...' : 'Enviar link'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Rodapé Discreto */}
+      <div className="max-w-4xl w-full mx-auto text-center pt-8 text-xs text-slate-500">
+        <p>Founders Grid • Educação Digital • Ensino Médio</p>
       </div>
     </div>
   );

@@ -315,6 +315,32 @@ export const signInGroup = async (email: string, password: string): Promise<{ gr
   }
 };
 
+// Solicitação de recuperação de senha por e-mail
+export const requestPasswordReset = async (email: string): Promise<void> => {
+  const client = getSupabaseClient();
+  const cleanEmail = email.trim().toLowerCase();
+
+  if (!cleanEmail || !isValidEmail(cleanEmail)) {
+    throw new Error('Informe um endereço de e-mail válido.');
+  }
+
+  if (client) {
+    const { error } = await client.auth.resetPasswordForEmail(cleanEmail, {
+      redirectTo: window.location.origin,
+    });
+    if (error) {
+      throw new Error(`Não foi possível enviar a recuperação: ${error.message}`);
+    }
+  } else {
+    // Modo demonstração
+    const demoGroups = getDemoStore();
+    const found = demoGroups.some((g) => g.email.toLowerCase() === cleanEmail);
+    if (!found) {
+      throw new Error('Nenhuma empresa encontrada com este e-mail no modo demonstração.');
+    }
+  }
+};
+
 // Recuperar sessão ativa do grupo
 export const getCurrentSession = async (): Promise<{ group: Group | null }> => {
   const client = getSupabaseClient();

@@ -95,7 +95,7 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
           <div>
             <h2
               className="text-xl font-serif font-semibold text-slate-900"
-              style={{ fontFamily: "'Newsreader', serif" }}
+              style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               Central de Entregas indisponível
             </h2>
@@ -118,7 +118,7 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
             </span>
             <h2
               className="text-2xl sm:text-3xl font-serif font-semibold text-slate-900 tracking-tight"
-              style={{ fontFamily: "'Newsreader', serif" }}
+              style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               Minhas entregas
             </h2>
@@ -191,7 +191,7 @@ export const MyDeliveries: React.FC<MyDeliveriesProps> = ({ group, showToast }) 
                 <div className="space-y-1.5">
                   <h3
                     className="text-lg sm:text-xl font-serif font-semibold text-slate-900"
-                    style={{ fontFamily: "'Newsreader', serif" }}
+                    style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
                   >
                     {activity.title}
                   </h3>

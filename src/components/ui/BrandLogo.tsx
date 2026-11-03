@@ -113,7 +113,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
               className={`font-serif tracking-tight font-medium ${
                 isLight ? 'text-slate-900' : 'text-slate-100'
               } ${pixelSizes.text}`}
-              style={{ fontFamily: "'Newsreader', serif" }}
+              style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               Founders
             </span>

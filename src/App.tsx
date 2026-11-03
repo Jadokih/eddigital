@@ -9,6 +9,7 @@ import {
   updateGroupProfile,
 } from './lib/supabase';
 import { Header } from './components/Header';
+import { HeroLanding } from './components/HeroLanding';
 import { AuthScreen } from './components/AuthScreen';
 import { Dashboard } from './components/Dashboard';
 import { ProblemSelection } from './components/ProblemSelection';
@@ -31,6 +32,7 @@ export const App: React.FC = () => {
   const [loadingSession, setLoadingSession] = useState(true);
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [authView, setAuthView] = useState<'landing' | 'signin' | 'signup'>('landing');
   const [activeSection, setActiveSection] = useState<'dashboard' | 'problems' | 'plan' | 'deliveries'>('dashboard');
   const [isTeacherRoute, setIsTeacherRoute] = useState(
     typeof window !== 'undefined' && window.location.hash.startsWith('#/professor')
@@ -74,6 +76,7 @@ export const App: React.FC = () => {
     try {
       await signOutGroup();
       setCurrentGroup(null);
+      setAuthView('landing');
       setActiveSection('dashboard');
       showToast('info', 'Sessão encerrada', 'Você saiu da conta da sua empresa.');
     } catch (err: any) {
@@ -124,6 +127,37 @@ export const App: React.FC = () => {
     return <TeacherApp />;
   }
 
+  // 1. TELA INICIAL CINEMATOGRÁFICA OU TELA DE LOGIN/CADASTRO BRANCA
+  if (!currentGroup) {
+    if (authView === 'landing') {
+      return (
+        <>
+          <ToastContainer toasts={toasts} onDismiss={removeToast} />
+          <HeroLanding
+            onOpenSignIn={() => setAuthView('signin')}
+            onOpenSignUp={() => setAuthView('signup')}
+          />
+        </>
+      );
+    }
+
+    return (
+      <>
+        <ToastContainer toasts={toasts} onDismiss={removeToast} />
+        <AuthScreen
+          initialTab={authView}
+          onBackToHero={() => setAuthView('landing')}
+          onAuthSuccess={(group) => {
+            setCurrentGroup(group);
+            setActiveSection(group.selected_problem_id ? 'plan' : 'dashboard');
+          }}
+          showToast={showToast}
+        />
+      </>
+    );
+  }
+
+  // 2. APLICAÇÃO INTERNA PARA EMPRESA LOGADA
   return (
     <div className="min-h-screen bg-[#FAF9F5] flex flex-col text-slate-900 selection:bg-emerald-500/20 selection:text-emerald-900">
       <ToastContainer toasts={toasts} onDismiss={removeToast} />
@@ -136,16 +170,7 @@ export const App: React.FC = () => {
       />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
-        {!currentGroup ? (
-          <AuthScreen
-            onAuthSuccess={(group) => {
-              setCurrentGroup(group);
-              setActiveSection(group.selected_problem_id ? 'plan' : 'dashboard');
-            }}
-            showToast={showToast}
-          />
-        ) : (
-          <div className="space-y-6">
+        <div className="space-y-6">
             {/* Navegação Mobile em Abas (Aparece apenas em telas pequenas) */}
             <div className="md:hidden flex items-center justify-between gap-1 p-1 rounded-xl bg-white border border-slate-200/80 shadow-2xs max-w-md mx-auto overflow-x-auto text-xs">
               <button
@@ -246,13 +271,12 @@ export const App: React.FC = () => {
               <MyDeliveries group={currentGroup} showToast={showToast} />
             )}
           </div>
-        )}
       </main>
 
       {/* Rodapé Editorial Limpo */}
       <footer className="mt-20 border-t border-slate-200 bg-white py-8 text-center text-xs text-slate-600">
         <div className="max-w-5xl mx-auto px-4 space-y-2">
-          <p className="font-serif font-medium text-slate-900 text-sm" style={{ fontFamily: "'Newsreader', serif" }}>
+          <p className="font-serif font-medium text-slate-900 text-sm" style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}>
             Founders Grid — Plataforma Educacional de Educação Digital
           </p>
           <p className="text-xs text-slate-600">

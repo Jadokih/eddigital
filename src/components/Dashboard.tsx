@@ -62,7 +62,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
               ) : (
                 <span
                   className="font-serif font-medium text-2xl tracking-wider text-emerald-400"
-                  style={{ fontFamily: "'Newsreader', serif" }}
+                  style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
                 >
                   {group.company_name.slice(0, 2).toUpperCase()}
                 </span>
@@ -86,7 +86,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
               <h2
                 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900 tracking-tight font-semibold"
-                style={{ fontFamily: "'Newsreader', serif" }}
+                style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
               >
                 {group.company_name}
               </h2>
@@ -135,7 +135,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
             <h3
               className="text-xl sm:text-2xl font-serif text-slate-900 tracking-tight font-semibold leading-snug"
-              style={{ fontFamily: "'Newsreader', serif" }}
+              style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               {selectedProblem
                 ? progressPercent === 100

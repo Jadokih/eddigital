@@ -87,7 +87,7 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
             </span>
             <h2
               className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900 tracking-tight font-semibold"
-              style={{ fontFamily: "'Newsreader', serif" }}
+              style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               Escolha a missão prática da sua empresa
             </h2>
@@ -114,7 +114,7 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
             <div>
               <h4
                 className="text-base font-serif font-semibold text-slate-900"
-                style={{ fontFamily: "'Newsreader', serif" }}
+                style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
               >
                 1. Aprendendo o básico (Compartilhado com toda a turma)
               </h4>
@@ -154,7 +154,7 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
             </span>
             <h3
               className="text-xl sm:text-2xl font-serif font-semibold text-slate-900"
-              style={{ fontFamily: "'Newsreader', serif" }}
+              style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               2. Agora é com você (Escolha da missão)
             </h3>
@@ -208,7 +208,7 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
                       </span>
                       <h4
                         className="text-lg font-serif font-semibold text-white leading-snug line-clamp-1"
-                        style={{ fontFamily: "'Newsreader', serif" }}
+                        style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
                       >
                         {problem.title}
                       </h4>
@@ -286,7 +286,7 @@ export const ProblemSelection: React.FC<ProblemSelectionProps> = ({
                 </span>
                 <h3
                   className="text-xl font-serif font-semibold text-slate-900"
-                  style={{ fontFamily: "'Newsreader', serif" }}
+                  style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
                 >
                   {modalProblem.title}
                 </h3>

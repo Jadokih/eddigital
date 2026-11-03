@@ -147,7 +147,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             </span>
             <h3
               className="text-2xl sm:text-3xl font-serif font-semibold text-slate-900 tracking-tight"
-              style={{ fontFamily: "'Newsreader', serif" }}
+              style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               Metas de aprendizagem da empresa
             </h3>
@@ -175,7 +175,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
             </span>
             <h4
               className="text-base sm:text-lg font-serif font-medium text-white tracking-tight"
-              style={{ fontFamily: "'Newsreader', serif" }}
+              style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
             >
               {isAllCompleted
                 ? 'Metas concluídas: envie sua planilha do dia'
@@ -293,7 +293,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
               <div>
                 <h4
                   className="text-base font-serif font-semibold text-slate-900"
-                  style={{ fontFamily: "'Newsreader', serif" }}
+                  style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
                 >
                   1. Aprendendo o básico
                 </h4>
@@ -406,7 +406,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
               <div>
                 <h4
                   className="text-base font-serif font-semibold text-slate-900"
-                  style={{ fontFamily: "'Newsreader', serif" }}
+                  style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
                 >
                   2. Agora é com você (Desafios da empresa)
                 </h4>
@@ -535,7 +535,7 @@ export const LearningPlan: React.FC<LearningPlanProps> = ({
 
                   <h4
                     className="text-lg sm:text-xl font-serif font-semibold text-slate-900"
-                    style={{ fontFamily: "'Newsreader', serif" }}
+                    style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
                   >
                     Etapa de entrega da atividade do dia
                   </h4>
