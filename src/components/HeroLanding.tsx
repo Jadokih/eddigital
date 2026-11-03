@@ -44,20 +44,20 @@ export const HeroLanding: React.FC<HeroLandingProps> = ({
 
   return (
     <div className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-[#060B14] text-white selection:bg-emerald-500/30 selection:text-emerald-200">
-      {/* 1. FUNDO CINEMATOGRÁFICO: VÍDEO ATMOSFÉRICO COM FALLBACK */}
+      {/* 1. FUNDO CINEMATOGRÁFICO: VÍDEO DIRETO E NÍTIDO (SEM CAMADA DE SOBREPOSIÇÃO ESCURA) */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Imagem estática de fallback / poster com luz difusa azul-petróleo */}
+        {/* Imagem estática de fallback caso o vídeo não carregue ou falhe */}
         <div
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ${
             videoLoaded && !prefersReducedMotion && !videoFailed ? 'opacity-0' : 'opacity-100'
           }`}
           style={{
             backgroundImage:
-              'radial-gradient(circle at 50% 30%, rgba(16, 231, 157, 0.08) 0%, rgba(10, 29, 55, 0.6) 45%, #060B14 85%)',
+              'radial-gradient(circle at 50% 30%, rgba(16, 231, 157, 0.12) 0%, rgba(10, 29, 55, 0.7) 45%, #060B14 85%)',
           }}
         />
 
-        {/* Vídeo Cinematográfico de Fundo */}
+        {/* Vídeo em brilho total e nitidez original, sem overlay escuro */}
         {!prefersReducedMotion && !videoFailed && (
           <video
             ref={videoRef}
@@ -69,63 +69,51 @@ export const HeroLanding: React.FC<HeroLandingProps> = ({
             preload="metadata"
             onLoadedData={() => setVideoLoaded(true)}
             onError={() => setVideoFailed(true)}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-              videoLoaded ? 'opacity-40' : 'opacity-0'
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+              videoLoaded ? 'opacity-100' : 'opacity-0'
             }`}
           />
         )}
-
-        {/* Camada de Gradiente Noturno para Máximo Contraste e Legibilidade */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#060B14]/85 via-[#060B14]/65 to-[#060B14]/95" />
-
-        {/* Efeito sutil de iluminação esmeralda ambiente */}
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
       </div>
 
-      {/* 2. BARRA SUPERIOR DISCRETA (LIQUID GLASS) */}
-      <header className="relative z-20 w-full px-6 sm:px-10 py-5 flex items-center justify-between border-b border-white/10 bg-[#060B14]/40 backdrop-blur-md">
+      {/* 2. BARRA SUPERIOR TRANSLÚCIDA E DISCRETA (FLUTUANDO DIRETAMENTE NO CÉU) */}
+      <header className="relative z-20 w-full px-6 sm:px-12 py-6 flex items-center justify-between">
         <BrandLogo size="md" variant="full" theme="dark" />
 
         <div className="flex items-center gap-4">
           <a
             href="#/professor"
-            className="text-xs font-mono text-slate-400 hover:text-slate-200 transition-colors px-3 py-1.5 rounded-lg border border-white/5 hover:border-white/15 bg-white/[0.02]"
+            className="text-xs font-mono text-white/80 hover:text-white transition-colors px-4 py-1.5 rounded-full border border-white/20 bg-white/5 hover:bg-white/15 backdrop-blur-xs"
           >
             Acesso do Professor
           </a>
         </div>
       </header>
 
-      {/* 3. CONTEÚDO PRINCIPAL: APRESENTAÇÃO EDITORIAL CINEMATOGRÁFICA */}
-      <main className="relative z-20 max-w-4xl mx-auto px-6 sm:px-8 py-16 sm:py-24 text-center flex-1 flex flex-col justify-center items-center">
-        {/* Badge Institucional Minimalista */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs font-medium text-slate-300 mb-6 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-700">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span>Educação Digital • Ensino Médio</span>
-        </div>
-
-        {/* Título com Instrument Serif */}
+      {/* 3. CONTEÚDO PRINCIPAL INSPIRADO NA REFERÊNCIA VELORAH */}
+      <main className="relative z-20 max-w-4xl mx-auto px-6 sm:px-8 py-10 text-center flex-1 flex flex-col justify-center items-center">
+        {/* Título com Instrument Serif elegante e tamanho reduzido e proporcional */}
         <h1
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif text-white font-normal tracking-tight leading-[1.08] mb-6 drop-shadow-md animate-in fade-in slide-in-from-bottom-3 duration-700"
+          className="text-3xl sm:text-5xl md:text-6xl font-serif text-white font-normal tracking-tight leading-[1.15] mb-5 drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]"
           style={{ fontFamily: "'Instrument Serif', 'Newsreader', serif" }}
         >
-          Bem-vindo ao Founders Grid.
+          Bem-vindo ao <span className="italic font-normal">Founders Grid</span>.
         </h1>
 
-        {/* Subtítulo Editorial */}
-        <p className="text-base sm:text-xl text-slate-300 max-w-2xl font-light leading-relaxed mb-10 sm:mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        {/* Subtítulo Editorial suave e delicado */}
+        <p className="text-xs sm:text-sm md:text-base text-white/85 max-w-xl font-light leading-relaxed mb-8 drop-shadow-[0_1px_8px_rgba(0,0,0,0.8)]">
           Transforme ideias em empresas, explore desafios reais e desenvolva suas habilidades digitais.
         </p>
 
-        {/* 4. APENAS DOIS BOTÕES DE AÇÃO (GRANDES, EQUILIBRADOS E CLAROS) */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-5 duration-700">
+        {/* 4. OS DOIS BOTÕES DE AÇÃO EM ESTILO PILL TRANSLÚCIDO (IGUAL À REFERÊNCIA) */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto">
           {/* Botão 1: Já tenho uma empresa */}
           <button
             type="button"
             onClick={onOpenSignIn}
-            className="w-full sm:w-auto min-w-[220px] py-4 px-8 rounded-xl bg-white hover:bg-slate-100 text-slate-950 font-semibold text-sm sm:text-base transition-all duration-200 cursor-pointer shadow-xl hover:shadow-2xl flex items-center justify-center gap-2.5 group"
+            className="w-full sm:w-auto px-7 py-2.5 sm:py-3 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 hover:border-white/50 text-white font-medium text-xs sm:text-sm transition-all duration-200 cursor-pointer shadow-lg flex items-center justify-center gap-2 group"
           >
-            <LogIn className="w-4 h-4 text-slate-800 transition-transform group-hover:-translate-x-0.5" />
+            <LogIn className="w-3.5 h-3.5 text-white/90 transition-transform group-hover:-translate-x-0.5" />
             <span>Já tenho uma empresa</span>
           </button>
 
@@ -133,18 +121,18 @@ export const HeroLanding: React.FC<HeroLandingProps> = ({
           <button
             type="button"
             onClick={onOpenSignUp}
-            className="w-full sm:w-auto min-w-[220px] py-4 px-8 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-sm sm:text-base transition-all duration-200 cursor-pointer shadow-xl hover:shadow-emerald-500/20 flex items-center justify-center gap-2.5 group"
+            className="w-full sm:w-auto px-7 py-2.5 sm:py-3 rounded-full bg-emerald-500/25 hover:bg-emerald-500/35 backdrop-blur-md border border-emerald-400/40 hover:border-emerald-400/70 text-emerald-100 font-medium text-xs sm:text-sm transition-all duration-200 cursor-pointer shadow-lg shadow-emerald-500/10 flex items-center justify-center gap-2 group"
           >
-            <Building2 className="w-4 h-4 text-slate-950 transition-transform group-hover:scale-110" />
+            <Building2 className="w-3.5 h-3.5 text-emerald-300 transition-transform group-hover:scale-110" />
             <span>Criar Nova Empresa</span>
-            <ArrowRight className="w-4 h-4 text-slate-950 transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight className="w-3.5 h-3.5 text-emerald-300 transition-transform group-hover:translate-x-0.5" />
           </button>
         </div>
       </main>
 
-      {/* 5. RODAPÉ CINEMATOGRÁFICO: CRÉDITO DISCRETO E ELEGANTE */}
-      <footer className="relative z-20 w-full px-6 py-6 text-center border-t border-white/5 bg-[#060B14]/30 backdrop-blur-xs">
-        <p className="text-xs sm:text-sm text-slate-400 font-light tracking-wide">
+      {/* 5. RODAPÉ DISCRETO FLUTUANTE */}
+      <footer className="relative z-20 w-full px-6 py-6 text-center">
+        <p className="text-xs text-white/60 font-light tracking-wide drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
           Feito com 🤍 por Jade Pereira
         </p>
       </footer>
