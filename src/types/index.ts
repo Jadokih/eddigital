@@ -81,3 +81,58 @@ export interface SupabaseConfig {
   anonKey: string;
   isCustom: boolean;
 }
+
+// ============================================================================
+// CENTRAL DE ENTREGAS
+// ============================================================================
+
+export interface Activity {
+  id: string;
+  title: string;
+  instructions: string;
+  due_at: string | null;
+  max_score: number;
+  class_names: ClassName[];
+  is_published: boolean;
+  accepts_submissions: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export type SubmissionStatus = 'entregue' | 'corrigida';
+
+/** Status exibido por atividade (pendente é derivado: sem nenhuma versão enviada). */
+export type DeliveryStatus = 'pendente' | SubmissionStatus;
+
+export interface Submission {
+  id: string;
+  group_id: string;
+  activity_id: string;
+  version: number;
+  responsible_member_id: string | null;
+  responsible_member_name: string;
+  original_filename: string;
+  storage_path: string;
+  file_size: number;
+  mime_type: string;
+  submitted_at: string;
+  submitted_by: string;
+  is_late: boolean;
+  client_request_id: string;
+  is_current: boolean;
+  status: SubmissionStatus;
+  score: number | null;
+  feedback: string | null;
+  graded_at: string | null;
+  graded_by: string | null;
+}
+
+export interface ActivityInput {
+  title: string;
+  instructions: string;
+  due_at: string | null;
+  max_score: number;
+  class_names: ClassName[];
+  is_published: boolean;
+  accepts_submissions: boolean;
+}

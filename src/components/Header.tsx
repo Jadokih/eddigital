@@ -5,8 +5,8 @@ import { LogOut, Building2 } from 'lucide-react';
 interface HeaderProps {
   currentGroup: Group | null;
   onLogout: () => void;
-  activeSection?: 'dashboard' | 'problems' | 'plan';
-  onNavigate?: (section: 'dashboard' | 'problems' | 'plan') => void;
+  activeSection?: 'dashboard' | 'problems' | 'plan' | 'deliveries';
+  onNavigate?: (section: 'dashboard' | 'problems' | 'plan' | 'deliveries') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -74,6 +74,17 @@ export const Header: React.FC<HeaderProps> = ({
                 Plano de Metas
               </button>
             )}
+            <button
+              type="button"
+              onClick={() => onNavigate('deliveries')}
+              className={`px-3 py-1.5 rounded-full transition-colors cursor-pointer ${
+                activeSection === 'deliveries'
+                  ? 'bg-slate-900 text-white font-bold'
+                  : 'hover:text-slate-900 hover:bg-slate-100'
+              }`}
+            >
+              Entregas
+            </button>
           </nav>
         )}
 

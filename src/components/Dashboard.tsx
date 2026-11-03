@@ -12,6 +12,7 @@ import {
   AlertCircle,
   ArrowRight,
   Layers,
+  UploadCloud,
 } from 'lucide-react';
 
 interface DashboardProps {
@@ -19,6 +20,7 @@ interface DashboardProps {
   selectedProblem: Problem | null;
   onContinueActivity: () => void;
   onEditCompany: () => void;
+  onNavigateDeliveries?: () => void;
   onLogout: () => void;
 }
 
@@ -27,6 +29,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   selectedProblem,
   onContinueActivity,
   onEditCompany,
+  onNavigateDeliveries,
   onLogout,
 }) => {
   const membersList = group.members
@@ -216,6 +219,17 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 <Edit3 className="w-4 h-4 text-slate-600" />
                 <span>Editar dados da empresa</span>
               </button>
+
+              {onNavigateDeliveries && (
+                <button
+                  type="button"
+                  onClick={onNavigateDeliveries}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-950 font-bold text-xs sm:text-sm border-2 border-emerald-600 shadow-[2px_2px_0px_#059669] transition-all cursor-pointer"
+                >
+                  <UploadCloud className="w-4 h-4 text-emerald-700" />
+                  <span>Minhas Entregas</span>
+                </button>
+              )}
             </div>
 
             <button

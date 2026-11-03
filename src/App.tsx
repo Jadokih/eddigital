@@ -16,11 +16,14 @@ import { LearningPlan } from './components/LearningPlan';
 import { EditCompanyModal } from './components/EditCompanyModal';
 import { ToastContainer } from './components/Toast';
 import type { ToastMessage, ToastType } from './components/Toast';
+import { MyDeliveries } from './components/deliveries/MyDeliveries';
+import { TeacherApp } from './components/teacher/TeacherApp';
 import {
   GraduationCap,
   LayoutDashboard,
   CheckCircle2,
   FileSpreadsheet,
+  UploadCloud,
 } from 'lucide-react';
 
 export const App: React.FC = () => {
@@ -28,7 +31,18 @@ export const App: React.FC = () => {
   const [loadingSession, setLoadingSession] = useState(true);
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<'dashboard' | 'problems' | 'plan'>('dashboard');
+  const [activeSection, setActiveSection] = useState<'dashboard' | 'problems' | 'plan' | 'deliveries'>('dashboard');
+  const [isTeacherRoute, setIsTeacherRoute] = useState(
+    typeof window !== 'undefined' && window.location.hash.startsWith('#/professor')
+  );
+
+  useEffect(() => {
+    const handleHash = () => {
+      setIsTeacherRoute(window.location.hash.startsWith('#/professor'));
+    };
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
   const showToast = (type: ToastType, title: string, message?: string) => {
     const id = `${Date.now()}-${Math.random()}`;
@@ -106,6 +120,10 @@ export const App: React.FC = () => {
     );
   }
 
+  if (isTeacherRoute) {
+    return <TeacherApp />;
+  }
+
   return (
     <div className="min-h-screen bg-[#F8F8F5] flex flex-col text-slate-900 selection:bg-emerald-200 selection:text-slate-900">
       <ToastContainer toasts={toasts} onDismiss={removeToast} />
@@ -178,6 +196,19 @@ export const App: React.FC = () => {
                     </span>
                   </button>
                 )}
+
+                <button
+                  type="button"
+                  onClick={() => setActiveSection('deliveries')}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                    activeSection === 'deliveries'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  }`}
+                >
+                  <UploadCloud className="w-4 h-4" />
+                  Minhas Entregas
+                </button>
               </div>
 
               <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-600 pr-3 hidden sm:flex">
@@ -199,6 +230,7 @@ export const App: React.FC = () => {
                   }
                 }}
                 onEditCompany={() => setIsEditModalOpen(true)}
+                onNavigateDeliveries={() => setActiveSection('deliveries')}
                 onLogout={handleLogout}
               />
             )}
@@ -219,6 +251,10 @@ export const App: React.FC = () => {
                 onChangeProblem={() => setActiveSection('problems')}
                 showToast={showToast}
               />
+            )}
+
+            {activeSection === 'deliveries' && (
+              <MyDeliveries group={currentGroup} showToast={showToast} />
             )}
 
             {/* Se estiver no Dashboard e já tiver problema escolhido, exibe preview do plano abaixo */}
@@ -255,7 +291,10 @@ export const App: React.FC = () => {
             Founders Grid — Plataforma Educacional de Educação Digital
           </p>
           <p className="text-xs text-slate-500">
-            Ensino Médio • Turmas 2º2 e 2º3 • Atividades com a Suíte ONLYOFFICE Planilhas
+            Ensino Médio • Turmas 2º2 e 2º3 • Atividades com a Suíte ONLYOFFICE Planilhas •{' '}
+            <a href="#/professor" className="hover:text-slate-900 underline">
+              Acesso do Professor
+            </a>
           </p>
         </div>
       </footer>
